@@ -6195,7 +6195,6 @@ namespace CelestialTools
                     SRSSGraphic.DrawString(TStr, new Font("Arial", 8.25f, System.Drawing.FontStyle.Bold), Brushes.Blue, XTD1, YTD1);
                 }
             }
-
             double SRDeg = AMSunRise * 180d / Pi;
             if (SRDeg > 360d)
             {
