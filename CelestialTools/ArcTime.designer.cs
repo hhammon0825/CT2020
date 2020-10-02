@@ -336,562 +336,565 @@ namespace CelestialTools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormArcTime));
-            ToolTip1 = new ToolTip(components);
-            _txtLoMin = new TextBox();
-            _txtLoMin.TextChanged += new EventHandler(txtLoMin_TextChanged);
-            _txtLoMin.KeyPress += new KeyPressEventHandler(txtLoMin_KeyPress);
-            _txtLoMin.Validating += new System.ComponentModel.CancelEventHandler(txtLoMin_Validating);
-            _txtLoMin.Enter += new EventHandler(txtLoMin_Enter);
-            _txtLoDeg = new TextBox();
-            _txtLoDeg.TextChanged += new EventHandler(txtLoDeg_TextChanged);
-            _txtLoDeg.KeyPress += new KeyPressEventHandler(txtLoDeg_KeyPress);
-            _txtLoDeg.Validating += new System.ComponentModel.CancelEventHandler(txtLoDeg_Validating);
-            _txtLoDeg.Enter += new EventHandler(txtLoDeg_Enter);
-            _cmdPrint = new Button();
-            _cmdPrint.Click += new EventHandler(cmdPrint_Click);
-            _txtDeg = new TextBox();
-            _txtDeg.TextChanged += new EventHandler(txtDeg_TextChanged);
-            _txtDeg.KeyPress += new KeyPressEventHandler(txtDeg_KeyPress);
-            _txtDeg.Validating += new System.ComponentModel.CancelEventHandler(txtDeg_Validating);
-            _txtDeg.Enter += new EventHandler(txtDeg_Enter);
-            _txtMin = new TextBox();
-            _txtMin.TextChanged += new EventHandler(txtMin_TextChanged);
-            _txtMin.KeyPress += new KeyPressEventHandler(txtMin_KeyPress);
-            _txtMin.Validating += new System.ComponentModel.CancelEventHandler(txtMin_Validating);
-            _txtMin.Enter += new EventHandler(txtMin_Enter);
-            lblArc = new Label();
-            lblTime = new Label();
-            cboLo = new ComboBox();
-            Frame2 = new GroupBox();
-            _optZTtoLMT = new RadioButton();
-            _optZTtoLMT.CheckedChanged += new EventHandler(optZTtoLMT_CheckedChanged);
-            _optLMTtoZT = new RadioButton();
-            _optLMTtoZT.CheckedChanged += new EventHandler(optLMTtoZT_CheckedChanged);
-            _cmdConvert = new Button();
-            _cmdConvert.Click += new EventHandler(cmdConvert_Click);
-            Frame1 = new GroupBox();
-            _optTimeToArc = new RadioButton();
-            _optTimeToArc.CheckedChanged += new EventHandler(optTimeToArc_CheckedChanged);
-            _optArcToTime = new RadioButton();
-            _optArcToTime.CheckedChanged += new EventHandler(optArcToTime_CheckedChanged);
-            lblZT = new Label();
-            lblLMT = new Label();
-            lblLoMin = new Label();
-            lblLoDeg = new Label();
-            Label1 = new Label();
-            lblDeg = new Label();
-            lblMin = new Label();
-            txtArcTime = new TextBox();
-            txtLMTZT = new TextBox();
-            _ExitBtn = new Button();
-            _ExitBtn.Click += new EventHandler(ExitBtn_Click);
-            _ClearBtn = new Button();
-            _ClearBtn.Click += new EventHandler(ClearBtn_Click);
-            PictureBox1 = new PictureBox();
-            TabControl1 = new TabControl();
-            ArcTime = new TabPage();
-            DTTime = new DateTimePicker();
-            LMTZT = new TabPage();
-            DTLMT = new DateTimePicker();
-            Frame2.SuspendLayout();
-            Frame1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
-            TabControl1.SuspendLayout();
-            ArcTime.SuspendLayout();
-            LMTZT.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormArcTime));
+            this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this._txtLoMin = new System.Windows.Forms.TextBox();
+            this._txtLoDeg = new System.Windows.Forms.TextBox();
+            this._cmdPrint = new System.Windows.Forms.Button();
+            this._txtDeg = new System.Windows.Forms.TextBox();
+            this._txtMin = new System.Windows.Forms.TextBox();
+            this.lblArc = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.cboLo = new System.Windows.Forms.ComboBox();
+            this.Frame2 = new System.Windows.Forms.GroupBox();
+            this._optZTtoLMT = new System.Windows.Forms.RadioButton();
+            this._optLMTtoZT = new System.Windows.Forms.RadioButton();
+            this._cmdConvert = new System.Windows.Forms.Button();
+            this.Frame1 = new System.Windows.Forms.GroupBox();
+            this._optTimeToArc = new System.Windows.Forms.RadioButton();
+            this._optArcToTime = new System.Windows.Forms.RadioButton();
+            this.lblZT = new System.Windows.Forms.Label();
+            this.lblLMT = new System.Windows.Forms.Label();
+            this.lblLoMin = new System.Windows.Forms.Label();
+            this.lblLoDeg = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.lblDeg = new System.Windows.Forms.Label();
+            this.lblMin = new System.Windows.Forms.Label();
+            this.txtArcTime = new System.Windows.Forms.TextBox();
+            this.txtLMTZT = new System.Windows.Forms.TextBox();
+            this._ExitBtn = new System.Windows.Forms.Button();
+            this._ClearBtn = new System.Windows.Forms.Button();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TabControl1 = new System.Windows.Forms.TabControl();
+            this.ArcTime = new System.Windows.Forms.TabPage();
+            this.DTTime = new System.Windows.Forms.DateTimePicker();
+            this.LMTZT = new System.Windows.Forms.TabPage();
+            this.DTLMT = new System.Windows.Forms.DateTimePicker();
+            this.Frame2.SuspendLayout();
+            this.Frame1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            this.TabControl1.SuspendLayout();
+            this.ArcTime.SuspendLayout();
+            this.LMTZT.SuspendLayout();
+            this.SuspendLayout();
             // 
-            // txtLoMin
+            // _txtLoMin
             // 
-            _txtLoMin.AcceptsReturn = true;
-            _txtLoMin.BackColor = SystemColors.Window;
-            _txtLoMin.Cursor = Cursors.IBeam;
-            _txtLoMin.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _txtLoMin.ForeColor = SystemColors.WindowText;
-            _txtLoMin.Location = new Point(216, 71);
-            _txtLoMin.MaxLength = 4;
-            _txtLoMin.Name = "_txtLoMin";
-            _txtLoMin.RightToLeft = RightToLeft.No;
-            _txtLoMin.Size = new Size(33, 20);
-            _txtLoMin.TabIndex = 15;
-            ToolTip1.SetToolTip(_txtLoMin, "Range 0 to 59.9");
+            this._txtLoMin.AcceptsReturn = true;
+            this._txtLoMin.BackColor = System.Drawing.SystemColors.Window;
+            this._txtLoMin.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this._txtLoMin.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtLoMin.ForeColor = System.Drawing.SystemColors.WindowText;
+            this._txtLoMin.Location = new System.Drawing.Point(216, 71);
+            this._txtLoMin.MaxLength = 4;
+            this._txtLoMin.Name = "_txtLoMin";
+            this._txtLoMin.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._txtLoMin.Size = new System.Drawing.Size(33, 20);
+            this._txtLoMin.TabIndex = 15;
+            this.ToolTip1.SetToolTip(this._txtLoMin, "Range 0 to 59.9");
+            this._txtLoMin.TextChanged += new System.EventHandler(this.txtLoMin_TextChanged);
+            this._txtLoMin.Enter += new System.EventHandler(this.txtLoMin_Enter);
+            this._txtLoMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLoMin_KeyPress);
+            this._txtLoMin.Validating += new System.ComponentModel.CancelEventHandler(this.txtLoMin_Validating);
             // 
-            // txtLoDeg
+            // _txtLoDeg
             // 
-            _txtLoDeg.AcceptsReturn = true;
-            _txtLoDeg.BackColor = SystemColors.Window;
-            _txtLoDeg.Cursor = Cursors.IBeam;
-            _txtLoDeg.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _txtLoDeg.ForeColor = SystemColors.WindowText;
-            _txtLoDeg.Location = new Point(173, 71);
-            _txtLoDeg.MaxLength = 3;
-            _txtLoDeg.Name = "_txtLoDeg";
-            _txtLoDeg.RightToLeft = RightToLeft.No;
-            _txtLoDeg.Size = new Size(33, 20);
-            _txtLoDeg.TabIndex = 14;
-            ToolTip1.SetToolTip(_txtLoDeg, "Range 0 to 180");
+            this._txtLoDeg.AcceptsReturn = true;
+            this._txtLoDeg.BackColor = System.Drawing.SystemColors.Window;
+            this._txtLoDeg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this._txtLoDeg.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtLoDeg.ForeColor = System.Drawing.SystemColors.WindowText;
+            this._txtLoDeg.Location = new System.Drawing.Point(173, 71);
+            this._txtLoDeg.MaxLength = 3;
+            this._txtLoDeg.Name = "_txtLoDeg";
+            this._txtLoDeg.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._txtLoDeg.Size = new System.Drawing.Size(33, 20);
+            this._txtLoDeg.TabIndex = 14;
+            this.ToolTip1.SetToolTip(this._txtLoDeg, "Range 0 to 180");
+            this._txtLoDeg.TextChanged += new System.EventHandler(this.txtLoDeg_TextChanged);
+            this._txtLoDeg.Enter += new System.EventHandler(this.txtLoDeg_Enter);
+            this._txtLoDeg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLoDeg_KeyPress);
+            this._txtLoDeg.Validating += new System.ComponentModel.CancelEventHandler(this.txtLoDeg_Validating);
             // 
-            // cmdPrint
+            // _cmdPrint
             // 
-            _cmdPrint.BackColor = SystemColors.Control;
-            _cmdPrint.Cursor = Cursors.Default;
-            _cmdPrint.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _cmdPrint.ForeColor = SystemColors.ControlText;
-            _cmdPrint.Image = (Image)resources.GetObject("cmdPrint.Image");
-            _cmdPrint.Location = new Point(440, 0);
-            _cmdPrint.Name = "_cmdPrint";
-            _cmdPrint.RightToLeft = RightToLeft.No;
-            _cmdPrint.Size = new Size(21, 21);
-            _cmdPrint.TabIndex = 23;
-            _cmdPrint.TextAlign = ContentAlignment.BottomCenter;
-            ToolTip1.SetToolTip(_cmdPrint, "Print window");
-            _cmdPrint.UseVisualStyleBackColor = false;
+            this._cmdPrint.BackColor = System.Drawing.SystemColors.Control;
+            this._cmdPrint.Cursor = System.Windows.Forms.Cursors.Default;
+            this._cmdPrint.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._cmdPrint.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._cmdPrint.Image = ((System.Drawing.Image)(resources.GetObject("_cmdPrint.Image")));
+            this._cmdPrint.Location = new System.Drawing.Point(440, 0);
+            this._cmdPrint.Name = "_cmdPrint";
+            this._cmdPrint.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._cmdPrint.Size = new System.Drawing.Size(21, 21);
+            this._cmdPrint.TabIndex = 23;
+            this._cmdPrint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ToolTip1.SetToolTip(this._cmdPrint, "Print window");
+            this._cmdPrint.UseVisualStyleBackColor = false;
+            this._cmdPrint.Click += new System.EventHandler(this.cmdPrint_Click);
             // 
-            // txtDeg
+            // _txtDeg
             // 
-            _txtDeg.AcceptsReturn = true;
-            _txtDeg.BackColor = SystemColors.Window;
-            _txtDeg.Cursor = Cursors.IBeam;
-            _txtDeg.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _txtDeg.ForeColor = SystemColors.WindowText;
-            _txtDeg.Location = new Point(198, 66);
-            _txtDeg.MaxLength = 3;
-            _txtDeg.Name = "_txtDeg";
-            _txtDeg.RightToLeft = RightToLeft.No;
-            _txtDeg.Size = new Size(33, 20);
-            _txtDeg.TabIndex = 3;
-            ToolTip1.SetToolTip(_txtDeg, "Range 0 to 359");
+            this._txtDeg.AcceptsReturn = true;
+            this._txtDeg.BackColor = System.Drawing.SystemColors.Window;
+            this._txtDeg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this._txtDeg.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtDeg.ForeColor = System.Drawing.SystemColors.WindowText;
+            this._txtDeg.Location = new System.Drawing.Point(198, 66);
+            this._txtDeg.MaxLength = 3;
+            this._txtDeg.Name = "_txtDeg";
+            this._txtDeg.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._txtDeg.Size = new System.Drawing.Size(33, 20);
+            this._txtDeg.TabIndex = 3;
+            this.ToolTip1.SetToolTip(this._txtDeg, "Range 0 to 359");
+            this._txtDeg.TextChanged += new System.EventHandler(this.txtDeg_TextChanged);
+            this._txtDeg.Enter += new System.EventHandler(this.txtDeg_Enter);
+            this._txtDeg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDeg_KeyPress);
+            this._txtDeg.Validating += new System.ComponentModel.CancelEventHandler(this.txtDeg_Validating);
             // 
-            // txtMin
+            // _txtMin
             // 
-            _txtMin.AcceptsReturn = true;
-            _txtMin.BackColor = SystemColors.Window;
-            _txtMin.Cursor = Cursors.IBeam;
-            _txtMin.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _txtMin.ForeColor = SystemColors.WindowText;
-            _txtMin.Location = new Point(244, 66);
-            _txtMin.MaxLength = 4;
-            _txtMin.Name = "_txtMin";
-            _txtMin.RightToLeft = RightToLeft.No;
-            _txtMin.Size = new Size(33, 20);
-            _txtMin.TabIndex = 4;
-            ToolTip1.SetToolTip(_txtMin, "Range 0 to 59.9");
+            this._txtMin.AcceptsReturn = true;
+            this._txtMin.BackColor = System.Drawing.SystemColors.Window;
+            this._txtMin.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this._txtMin.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._txtMin.ForeColor = System.Drawing.SystemColors.WindowText;
+            this._txtMin.Location = new System.Drawing.Point(244, 66);
+            this._txtMin.MaxLength = 4;
+            this._txtMin.Name = "_txtMin";
+            this._txtMin.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._txtMin.Size = new System.Drawing.Size(33, 20);
+            this._txtMin.TabIndex = 4;
+            this.ToolTip1.SetToolTip(this._txtMin, "Range 0 to 59.9");
+            this._txtMin.TextChanged += new System.EventHandler(this.txtMin_TextChanged);
+            this._txtMin.Enter += new System.EventHandler(this.txtMin_Enter);
+            this._txtMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMin_KeyPress);
+            this._txtMin.Validating += new System.ComponentModel.CancelEventHandler(this.txtMin_Validating);
             // 
             // lblArc
             // 
-            lblArc.BackColor = SystemColors.Window;
-            lblArc.Cursor = Cursors.Default;
-            lblArc.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblArc.ForeColor = SystemColors.ControlText;
-            lblArc.Location = new Point(155, 66);
-            lblArc.Name = "lblArc";
-            lblArc.RightToLeft = RightToLeft.No;
-            lblArc.Size = new Size(26, 22);
-            lblArc.TabIndex = 9;
-            lblArc.Text = "Arc";
-            lblArc.TextAlign = ContentAlignment.MiddleCenter;
-            ToolTip1.SetToolTip(lblArc, "Sextant Altitude");
+            this.lblArc.BackColor = System.Drawing.SystemColors.Window;
+            this.lblArc.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblArc.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArc.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblArc.Location = new System.Drawing.Point(155, 66);
+            this.lblArc.Name = "lblArc";
+            this.lblArc.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblArc.Size = new System.Drawing.Size(26, 22);
+            this.lblArc.TabIndex = 9;
+            this.lblArc.Text = "Arc";
+            this.lblArc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip1.SetToolTip(this.lblArc, "Sextant Altitude");
             // 
             // lblTime
             // 
-            lblTime.BackColor = SystemColors.Window;
-            lblTime.Cursor = Cursors.Default;
-            lblTime.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblTime.ForeColor = SystemColors.ControlText;
-            lblTime.Location = new Point(108, 92);
-            lblTime.Name = "lblTime";
-            lblTime.RightToLeft = RightToLeft.No;
-            lblTime.Size = new Size(89, 20);
-            lblTime.TabIndex = 6;
-            lblTime.Text = "Time (hh:mm:ss)";
-            lblTime.TextAlign = ContentAlignment.MiddleCenter;
-            ToolTip1.SetToolTip(lblTime, "Watch Time");
-            lblTime.Visible = false;
+            this.lblTime.BackColor = System.Drawing.SystemColors.Window;
+            this.lblTime.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblTime.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblTime.Location = new System.Drawing.Point(108, 92);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblTime.Size = new System.Drawing.Size(89, 20);
+            this.lblTime.TabIndex = 6;
+            this.lblTime.Text = "Time (hh:mm:ss)";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip1.SetToolTip(this.lblTime, "Watch Time");
+            this.lblTime.Visible = false;
             // 
             // cboLo
             // 
-            cboLo.BackColor = SystemColors.Window;
-            cboLo.Cursor = Cursors.Default;
-            cboLo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboLo.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            cboLo.ForeColor = SystemColors.WindowText;
-            cboLo.Items.AddRange(new object[] { "W", "E" });
-            cboLo.Location = new Point(258, 70);
-            cboLo.Name = "cboLo";
-            cboLo.RightToLeft = RightToLeft.No;
-            cboLo.Size = new Size(41, 22);
-            cboLo.TabIndex = 17;
+            this.cboLo.BackColor = System.Drawing.SystemColors.Window;
+            this.cboLo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cboLo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLo.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboLo.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cboLo.Items.AddRange(new object[] {
+            "W",
+            "E"});
+            this.cboLo.Location = new System.Drawing.Point(258, 70);
+            this.cboLo.Name = "cboLo";
+            this.cboLo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cboLo.Size = new System.Drawing.Size(41, 22);
+            this.cboLo.TabIndex = 17;
             // 
             // Frame2
             // 
-            Frame2.BackColor = SystemColors.Window;
-            Frame2.Controls.Add(_optZTtoLMT);
-            Frame2.Controls.Add(_optLMTtoZT);
-            Frame2.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            Frame2.ForeColor = SystemColors.ControlText;
-            Frame2.Location = new Point(128, 23);
-            Frame2.Name = "Frame2";
-            Frame2.Padding = new Padding(0);
-            Frame2.RightToLeft = RightToLeft.No;
-            Frame2.Size = new Size(185, 41);
-            Frame2.TabIndex = 10;
-            Frame2.TabStop = false;
-            Frame2.Text = "Convert";
+            this.Frame2.BackColor = System.Drawing.SystemColors.Window;
+            this.Frame2.Controls.Add(this._optZTtoLMT);
+            this.Frame2.Controls.Add(this._optLMTtoZT);
+            this.Frame2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Frame2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Frame2.Location = new System.Drawing.Point(128, 23);
+            this.Frame2.Name = "Frame2";
+            this.Frame2.Padding = new System.Windows.Forms.Padding(0);
+            this.Frame2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Frame2.Size = new System.Drawing.Size(185, 41);
+            this.Frame2.TabIndex = 10;
+            this.Frame2.TabStop = false;
+            this.Frame2.Text = "Convert";
             // 
-            // optZTtoLMT
+            // _optZTtoLMT
             // 
-            _optZTtoLMT.BackColor = SystemColors.Window;
-            _optZTtoLMT.Cursor = Cursors.Default;
-            _optZTtoLMT.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _optZTtoLMT.ForeColor = SystemColors.ControlText;
-            _optZTtoLMT.Location = new Point(96, 16);
-            _optZTtoLMT.Name = "_optZTtoLMT";
-            _optZTtoLMT.RightToLeft = RightToLeft.No;
-            _optZTtoLMT.Size = new Size(73, 17);
-            _optZTtoLMT.TabIndex = 12;
-            _optZTtoLMT.TabStop = true;
-            _optZTtoLMT.Text = "ZT to LMT";
-            _optZTtoLMT.UseVisualStyleBackColor = false;
+            this._optZTtoLMT.BackColor = System.Drawing.SystemColors.Window;
+            this._optZTtoLMT.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optZTtoLMT.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._optZTtoLMT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optZTtoLMT.Location = new System.Drawing.Point(96, 16);
+            this._optZTtoLMT.Name = "_optZTtoLMT";
+            this._optZTtoLMT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optZTtoLMT.Size = new System.Drawing.Size(73, 17);
+            this._optZTtoLMT.TabIndex = 12;
+            this._optZTtoLMT.TabStop = true;
+            this._optZTtoLMT.Text = "ZT to LMT";
+            this._optZTtoLMT.UseVisualStyleBackColor = false;
+            this._optZTtoLMT.CheckedChanged += new System.EventHandler(this.optZTtoLMT_CheckedChanged);
             // 
-            // optLMTtoZT
+            // _optLMTtoZT
             // 
-            _optLMTtoZT.BackColor = SystemColors.Window;
-            _optLMTtoZT.Checked = true;
-            _optLMTtoZT.Cursor = Cursors.Default;
-            _optLMTtoZT.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _optLMTtoZT.ForeColor = SystemColors.ControlText;
-            _optLMTtoZT.Location = new Point(8, 16);
-            _optLMTtoZT.Name = "_optLMTtoZT";
-            _optLMTtoZT.RightToLeft = RightToLeft.No;
-            _optLMTtoZT.Size = new Size(73, 17);
-            _optLMTtoZT.TabIndex = 11;
-            _optLMTtoZT.TabStop = true;
-            _optLMTtoZT.Text = "LMT to ZT";
-            _optLMTtoZT.UseVisualStyleBackColor = false;
+            this._optLMTtoZT.BackColor = System.Drawing.SystemColors.Window;
+            this._optLMTtoZT.Checked = true;
+            this._optLMTtoZT.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optLMTtoZT.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._optLMTtoZT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optLMTtoZT.Location = new System.Drawing.Point(8, 16);
+            this._optLMTtoZT.Name = "_optLMTtoZT";
+            this._optLMTtoZT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optLMTtoZT.Size = new System.Drawing.Size(73, 17);
+            this._optLMTtoZT.TabIndex = 11;
+            this._optLMTtoZT.TabStop = true;
+            this._optLMTtoZT.Text = "LMT to ZT";
+            this._optLMTtoZT.UseVisualStyleBackColor = false;
+            this._optLMTtoZT.CheckedChanged += new System.EventHandler(this.optLMTtoZT_CheckedChanged);
             // 
-            // cmdConvert
+            // _cmdConvert
             // 
-            _cmdConvert.BackColor = SystemColors.Control;
-            _cmdConvert.Cursor = Cursors.Default;
-            _cmdConvert.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _cmdConvert.ForeColor = SystemColors.ControlText;
-            _cmdConvert.Location = new Point(186, 241);
-            _cmdConvert.Name = "_cmdConvert";
-            _cmdConvert.RightToLeft = RightToLeft.No;
-            _cmdConvert.Size = new Size(92, 25);
-            _cmdConvert.TabIndex = 22;
-            _cmdConvert.Text = "&Convert";
-            _cmdConvert.UseVisualStyleBackColor = false;
+            this._cmdConvert.BackColor = System.Drawing.SystemColors.Control;
+            this._cmdConvert.Cursor = System.Windows.Forms.Cursors.Default;
+            this._cmdConvert.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._cmdConvert.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._cmdConvert.Location = new System.Drawing.Point(186, 241);
+            this._cmdConvert.Name = "_cmdConvert";
+            this._cmdConvert.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._cmdConvert.Size = new System.Drawing.Size(92, 25);
+            this._cmdConvert.TabIndex = 22;
+            this._cmdConvert.Text = "&Convert";
+            this._cmdConvert.UseVisualStyleBackColor = false;
+            this._cmdConvert.Click += new System.EventHandler(this.cmdConvert_Click);
             // 
             // Frame1
             // 
-            Frame1.BackColor = SystemColors.Window;
-            Frame1.Controls.Add(_optTimeToArc);
-            Frame1.Controls.Add(_optArcToTime);
-            Frame1.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            Frame1.ForeColor = SystemColors.ControlText;
-            Frame1.Location = new Point(113, 18);
-            Frame1.Name = "Frame1";
-            Frame1.Padding = new Padding(0);
-            Frame1.RightToLeft = RightToLeft.No;
-            Frame1.Size = new Size(185, 41);
-            Frame1.TabIndex = 0;
-            Frame1.TabStop = false;
-            Frame1.Text = "Convert";
+            this.Frame1.BackColor = System.Drawing.SystemColors.Window;
+            this.Frame1.Controls.Add(this._optTimeToArc);
+            this.Frame1.Controls.Add(this._optArcToTime);
+            this.Frame1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Frame1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Frame1.Location = new System.Drawing.Point(113, 18);
+            this.Frame1.Name = "Frame1";
+            this.Frame1.Padding = new System.Windows.Forms.Padding(0);
+            this.Frame1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Frame1.Size = new System.Drawing.Size(185, 41);
+            this.Frame1.TabIndex = 0;
+            this.Frame1.TabStop = false;
+            this.Frame1.Text = "Convert";
             // 
-            // optTimeToArc
+            // _optTimeToArc
             // 
-            _optTimeToArc.BackColor = SystemColors.Window;
-            _optTimeToArc.Cursor = Cursors.Default;
-            _optTimeToArc.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _optTimeToArc.ForeColor = SystemColors.ControlText;
-            _optTimeToArc.Location = new Point(96, 16);
-            _optTimeToArc.Name = "_optTimeToArc";
-            _optTimeToArc.RightToLeft = RightToLeft.No;
-            _optTimeToArc.Size = new Size(81, 17);
-            _optTimeToArc.TabIndex = 2;
-            _optTimeToArc.TabStop = true;
-            _optTimeToArc.Text = "Time to Arc";
-            _optTimeToArc.UseVisualStyleBackColor = false;
+            this._optTimeToArc.BackColor = System.Drawing.SystemColors.Window;
+            this._optTimeToArc.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optTimeToArc.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._optTimeToArc.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optTimeToArc.Location = new System.Drawing.Point(96, 16);
+            this._optTimeToArc.Name = "_optTimeToArc";
+            this._optTimeToArc.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optTimeToArc.Size = new System.Drawing.Size(81, 17);
+            this._optTimeToArc.TabIndex = 2;
+            this._optTimeToArc.TabStop = true;
+            this._optTimeToArc.Text = "Time to Arc";
+            this._optTimeToArc.UseVisualStyleBackColor = false;
+            this._optTimeToArc.CheckedChanged += new System.EventHandler(this.optTimeToArc_CheckedChanged);
             // 
-            // optArcToTime
+            // _optArcToTime
             // 
-            _optArcToTime.BackColor = SystemColors.Window;
-            _optArcToTime.Checked = true;
-            _optArcToTime.Cursor = Cursors.Default;
-            _optArcToTime.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _optArcToTime.ForeColor = SystemColors.ControlText;
-            _optArcToTime.Location = new Point(8, 16);
-            _optArcToTime.Name = "_optArcToTime";
-            _optArcToTime.RightToLeft = RightToLeft.No;
-            _optArcToTime.Size = new Size(81, 17);
-            _optArcToTime.TabIndex = 1;
-            _optArcToTime.TabStop = true;
-            _optArcToTime.Text = "Arc to Time";
-            _optArcToTime.UseVisualStyleBackColor = false;
+            this._optArcToTime.BackColor = System.Drawing.SystemColors.Window;
+            this._optArcToTime.Checked = true;
+            this._optArcToTime.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optArcToTime.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._optArcToTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optArcToTime.Location = new System.Drawing.Point(8, 16);
+            this._optArcToTime.Name = "_optArcToTime";
+            this._optArcToTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optArcToTime.Size = new System.Drawing.Size(81, 17);
+            this._optArcToTime.TabIndex = 1;
+            this._optArcToTime.TabStop = true;
+            this._optArcToTime.Text = "Arc to Time";
+            this._optArcToTime.UseVisualStyleBackColor = false;
+            this._optArcToTime.CheckedChanged += new System.EventHandler(this.optArcToTime_CheckedChanged);
             // 
             // lblZT
             // 
-            lblZT.BackColor = SystemColors.Window;
-            lblZT.Cursor = Cursors.Default;
-            lblZT.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblZT.ForeColor = SystemColors.ControlText;
-            lblZT.Location = new Point(147, 98);
-            lblZT.Name = "lblZT";
-            lblZT.RightToLeft = RightToLeft.No;
-            lblZT.Size = new Size(90, 17);
-            lblZT.TabIndex = 21;
-            lblZT.Text = "ZT (hh:mm:ss)";
-            lblZT.Visible = false;
+            this.lblZT.BackColor = System.Drawing.SystemColors.Window;
+            this.lblZT.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblZT.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblZT.Location = new System.Drawing.Point(147, 98);
+            this.lblZT.Name = "lblZT";
+            this.lblZT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblZT.Size = new System.Drawing.Size(90, 17);
+            this.lblZT.TabIndex = 21;
+            this.lblZT.Text = "ZT (hh:mm:ss)";
+            this.lblZT.Visible = false;
             // 
             // lblLMT
             // 
-            lblLMT.BackColor = SystemColors.Window;
-            lblLMT.Cursor = Cursors.Default;
-            lblLMT.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblLMT.ForeColor = SystemColors.ControlText;
-            lblLMT.Location = new Point(147, 98);
-            lblLMT.Name = "lblLMT";
-            lblLMT.RightToLeft = RightToLeft.No;
-            lblLMT.Size = new Size(90, 17);
-            lblLMT.TabIndex = 20;
-            lblLMT.Text = "LMT (hh:mm:ss)";
-            lblLMT.TextAlign = ContentAlignment.MiddleCenter;
+            this.lblLMT.BackColor = System.Drawing.SystemColors.Window;
+            this.lblLMT.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblLMT.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLMT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblLMT.Location = new System.Drawing.Point(147, 98);
+            this.lblLMT.Name = "lblLMT";
+            this.lblLMT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblLMT.Size = new System.Drawing.Size(90, 17);
+            this.lblLMT.TabIndex = 20;
+            this.lblLMT.Text = "LMT (hh:mm:ss)";
+            this.lblLMT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblLoMin
             // 
-            lblLoMin.BackColor = SystemColors.Window;
-            lblLoMin.Cursor = Cursors.Default;
-            lblLoMin.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblLoMin.ForeColor = SystemColors.ControlText;
-            lblLoMin.Location = new Point(249, 71);
-            lblLoMin.Name = "lblLoMin";
-            lblLoMin.RightToLeft = RightToLeft.No;
-            lblLoMin.Size = new Size(9, 17);
-            lblLoMin.TabIndex = 18;
-            lblLoMin.Text = "'";
+            this.lblLoMin.BackColor = System.Drawing.SystemColors.Window;
+            this.lblLoMin.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblLoMin.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoMin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblLoMin.Location = new System.Drawing.Point(249, 71);
+            this.lblLoMin.Name = "lblLoMin";
+            this.lblLoMin.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblLoMin.Size = new System.Drawing.Size(9, 17);
+            this.lblLoMin.TabIndex = 18;
+            this.lblLoMin.Text = "\'";
             // 
             // lblLoDeg
             // 
-            lblLoDeg.BackColor = SystemColors.Window;
-            lblLoDeg.Cursor = Cursors.Default;
-            lblLoDeg.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblLoDeg.ForeColor = SystemColors.ControlText;
-            lblLoDeg.Location = new Point(207, 71);
-            lblLoDeg.Name = "lblLoDeg";
-            lblLoDeg.RightToLeft = RightToLeft.No;
-            lblLoDeg.Size = new Size(9, 17);
-            lblLoDeg.TabIndex = 16;
-            lblLoDeg.Text = "°";
+            this.lblLoDeg.BackColor = System.Drawing.SystemColors.Window;
+            this.lblLoDeg.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblLoDeg.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoDeg.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblLoDeg.Location = new System.Drawing.Point(207, 71);
+            this.lblLoDeg.Name = "lblLoDeg";
+            this.lblLoDeg.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblLoDeg.Size = new System.Drawing.Size(9, 17);
+            this.lblLoDeg.TabIndex = 16;
+            this.lblLoDeg.Text = "°";
             // 
             // Label1
             // 
-            Label1.BackColor = SystemColors.Window;
-            Label1.Cursor = Cursors.Default;
-            Label1.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            Label1.ForeColor = SystemColors.ControlText;
-            Label1.Location = new Point(144, 71);
-            Label1.Name = "Label1";
-            Label1.RightToLeft = RightToLeft.No;
-            Label1.Size = new Size(26, 22);
-            Label1.TabIndex = 13;
-            Label1.Text = "Lo";
-            Label1.TextAlign = ContentAlignment.MiddleCenter;
+            this.Label1.BackColor = System.Drawing.SystemColors.Window;
+            this.Label1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Label1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Label1.Location = new System.Drawing.Point(144, 71);
+            this.Label1.Name = "Label1";
+            this.Label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Label1.Size = new System.Drawing.Size(26, 22);
+            this.Label1.TabIndex = 13;
+            this.Label1.Text = "Lo";
+            this.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDeg
             // 
-            lblDeg.BackColor = SystemColors.Window;
-            lblDeg.Cursor = Cursors.Default;
-            lblDeg.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblDeg.ForeColor = SystemColors.ControlText;
-            lblDeg.Location = new Point(231, 66);
-            lblDeg.Name = "lblDeg";
-            lblDeg.RightToLeft = RightToLeft.No;
-            lblDeg.Size = new Size(9, 17);
-            lblDeg.TabIndex = 8;
-            lblDeg.Text = "°";
+            this.lblDeg.BackColor = System.Drawing.SystemColors.Window;
+            this.lblDeg.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblDeg.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeg.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDeg.Location = new System.Drawing.Point(231, 66);
+            this.lblDeg.Name = "lblDeg";
+            this.lblDeg.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblDeg.Size = new System.Drawing.Size(9, 17);
+            this.lblDeg.TabIndex = 8;
+            this.lblDeg.Text = "°";
             // 
             // lblMin
             // 
-            lblMin.BackColor = SystemColors.Window;
-            lblMin.Cursor = Cursors.Default;
-            lblMin.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            lblMin.ForeColor = SystemColors.ControlText;
-            lblMin.Location = new Point(279, 68);
-            lblMin.Name = "lblMin";
-            lblMin.RightToLeft = RightToLeft.No;
-            lblMin.Size = new Size(9, 17);
-            lblMin.TabIndex = 7;
-            lblMin.Text = "'";
+            this.lblMin.BackColor = System.Drawing.SystemColors.Window;
+            this.lblMin.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblMin.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblMin.Location = new System.Drawing.Point(279, 68);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblMin.Size = new System.Drawing.Size(9, 17);
+            this.lblMin.TabIndex = 7;
+            this.lblMin.Text = "\'";
             // 
             // txtArcTime
             // 
-            txtArcTime.Font = new Font("Times New Roman", 9.75f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            txtArcTime.Location = new Point(103, 116);
-            txtArcTime.Multiline = true;
-            txtArcTime.Name = "txtArcTime";
-            txtArcTime.ReadOnly = true;
-            txtArcTime.ScrollBars = ScrollBars.Vertical;
-            txtArcTime.Size = new Size(226, 45);
-            txtArcTime.TabIndex = 25;
-            txtArcTime.TextAlign = HorizontalAlignment.Center;
+            this.txtArcTime.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtArcTime.Location = new System.Drawing.Point(103, 121);
+            this.txtArcTime.Multiline = true;
+            this.txtArcTime.Name = "txtArcTime";
+            this.txtArcTime.ReadOnly = true;
+            this.txtArcTime.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtArcTime.Size = new System.Drawing.Size(226, 45);
+            this.txtArcTime.TabIndex = 25;
+            this.txtArcTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtLMTZT
             // 
-            txtLMTZT.Font = new Font("Times New Roman", 9.75f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            txtLMTZT.Location = new Point(109, 122);
-            txtLMTZT.Multiline = true;
-            txtLMTZT.Name = "txtLMTZT";
-            txtLMTZT.ReadOnly = true;
-            txtLMTZT.ScrollBars = ScrollBars.Vertical;
-            txtLMTZT.Size = new Size(226, 45);
-            txtLMTZT.TabIndex = 26;
-            txtLMTZT.TextAlign = HorizontalAlignment.Center;
+            this.txtLMTZT.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLMTZT.Location = new System.Drawing.Point(109, 122);
+            this.txtLMTZT.Multiline = true;
+            this.txtLMTZT.Name = "txtLMTZT";
+            this.txtLMTZT.ReadOnly = true;
+            this.txtLMTZT.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtLMTZT.Size = new System.Drawing.Size(226, 45);
+            this.txtLMTZT.TabIndex = 26;
+            this.txtLMTZT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // ExitBtn
+            // _ExitBtn
             // 
-            _ExitBtn.BackColor = Color.Red;
-            _ExitBtn.Cursor = Cursors.Default;
-            _ExitBtn.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _ExitBtn.ForeColor = SystemColors.ControlLightLight;
-            _ExitBtn.Location = new Point(394, 241);
-            _ExitBtn.Name = "_ExitBtn";
-            _ExitBtn.RightToLeft = RightToLeft.No;
-            _ExitBtn.Size = new Size(60, 25);
-            _ExitBtn.TabIndex = 27;
-            _ExitBtn.Text = "Exit";
-            _ExitBtn.UseVisualStyleBackColor = false;
+            this._ExitBtn.BackColor = System.Drawing.Color.Red;
+            this._ExitBtn.Cursor = System.Windows.Forms.Cursors.Default;
+            this._ExitBtn.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._ExitBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this._ExitBtn.Location = new System.Drawing.Point(394, 241);
+            this._ExitBtn.Name = "_ExitBtn";
+            this._ExitBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._ExitBtn.Size = new System.Drawing.Size(60, 25);
+            this._ExitBtn.TabIndex = 27;
+            this._ExitBtn.Text = "Exit";
+            this._ExitBtn.UseVisualStyleBackColor = false;
+            this._ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
-            // ClearBtn
+            // _ClearBtn
             // 
-            _ClearBtn.BackColor = SystemColors.Control;
-            _ClearBtn.Cursor = Cursors.Default;
-            _ClearBtn.Font = new Font("Arial", 8.0f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            _ClearBtn.ForeColor = SystemColors.ControlText;
-            _ClearBtn.Location = new Point(4, 241);
-            _ClearBtn.Name = "_ClearBtn";
-            _ClearBtn.RightToLeft = RightToLeft.No;
-            _ClearBtn.Size = new Size(92, 25);
-            _ClearBtn.TabIndex = 28;
-            _ClearBtn.Text = "Clear";
-            _ClearBtn.UseVisualStyleBackColor = false;
+            this._ClearBtn.BackColor = System.Drawing.SystemColors.Control;
+            this._ClearBtn.Cursor = System.Windows.Forms.Cursors.Default;
+            this._ClearBtn.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._ClearBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._ClearBtn.Location = new System.Drawing.Point(4, 241);
+            this._ClearBtn.Name = "_ClearBtn";
+            this._ClearBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._ClearBtn.Size = new System.Drawing.Size(92, 25);
+            this._ClearBtn.TabIndex = 28;
+            this._ClearBtn.Text = "Clear";
+            this._ClearBtn.UseVisualStyleBackColor = false;
+            this._ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // PictureBox1
             // 
-            PictureBox1.Image = My.Resources.Resources.ABC_white;
-            PictureBox1.Location = new Point(76, 271);
-            PictureBox1.Name = "PictureBox1";
-            PictureBox1.Size = new Size(316, 50);
-            PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            PictureBox1.TabIndex = 102;
-            PictureBox1.TabStop = false;
+            this.PictureBox1.Image = global::CelestialTools.My.Resources.Resources.ABC_white;
+            this.PictureBox1.Location = new System.Drawing.Point(76, 271);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(316, 50);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox1.TabIndex = 102;
+            this.PictureBox1.TabStop = false;
             // 
             // TabControl1
             // 
-            TabControl1.Controls.Add(ArcTime);
-            TabControl1.Controls.Add(LMTZT);
-            TabControl1.Location = new Point(0, 5);
-            TabControl1.Name = "TabControl1";
-            TabControl1.SelectedIndex = 0;
-            TabControl1.Size = new Size(463, 231);
-            TabControl1.TabIndex = 103;
+            this.TabControl1.Controls.Add(this.ArcTime);
+            this.TabControl1.Controls.Add(this.LMTZT);
+            this.TabControl1.Location = new System.Drawing.Point(0, 5);
+            this.TabControl1.Name = "TabControl1";
+            this.TabControl1.SelectedIndex = 0;
+            this.TabControl1.Size = new System.Drawing.Size(463, 231);
+            this.TabControl1.TabIndex = 103;
             // 
             // ArcTime
             // 
-            ArcTime.Controls.Add(DTTime);
-            ArcTime.Controls.Add(txtArcTime);
-            ArcTime.Controls.Add(lblDeg);
-            ArcTime.Controls.Add(lblArc);
-            ArcTime.Controls.Add(Frame1);
-            ArcTime.Controls.Add(_txtMin);
-            ArcTime.Controls.Add(_txtDeg);
-            ArcTime.Controls.Add(lblMin);
-            ArcTime.Controls.Add(lblTime);
-            ArcTime.Location = new Point(4, 22);
-            ArcTime.Name = "ArcTime";
-            ArcTime.Padding = new Padding(3);
-            ArcTime.Size = new Size(455, 205);
-            ArcTime.TabIndex = 0;
-            ArcTime.Text = "Arc-Time";
-            ArcTime.UseVisualStyleBackColor = true;
+            this.ArcTime.Controls.Add(this.DTTime);
+            this.ArcTime.Controls.Add(this.txtArcTime);
+            this.ArcTime.Controls.Add(this.lblDeg);
+            this.ArcTime.Controls.Add(this.lblArc);
+            this.ArcTime.Controls.Add(this.Frame1);
+            this.ArcTime.Controls.Add(this._txtMin);
+            this.ArcTime.Controls.Add(this._txtDeg);
+            this.ArcTime.Controls.Add(this.lblMin);
+            this.ArcTime.Controls.Add(this.lblTime);
+            this.ArcTime.Location = new System.Drawing.Point(4, 22);
+            this.ArcTime.Name = "ArcTime";
+            this.ArcTime.Padding = new System.Windows.Forms.Padding(3);
+            this.ArcTime.Size = new System.Drawing.Size(455, 205);
+            this.ArcTime.TabIndex = 0;
+            this.ArcTime.Text = "Arc-Time";
+            this.ArcTime.UseVisualStyleBackColor = true;
             // 
             // DTTime
             // 
-            DTTime.CustomFormat = "HH:mm:ss";
-            DTTime.Format = DateTimePickerFormat.Custom;
-            DTTime.Location = new Point(198, 91);
-            DTTime.Name = "DTTime";
-            DTTime.ShowUpDown = true;
-            DTTime.Size = new Size(79, 21);
-            DTTime.TabIndex = 26;
-            DTTime.Visible = false;
+            this.DTTime.CustomFormat = "HH:mm:ss";
+            this.DTTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DTTime.Location = new System.Drawing.Point(198, 91);
+            this.DTTime.Name = "DTTime";
+            this.DTTime.ShowUpDown = true;
+            this.DTTime.Size = new System.Drawing.Size(79, 21);
+            this.DTTime.TabIndex = 26;
+            this.DTTime.Visible = false;
             // 
             // LMTZT
             // 
-            LMTZT.Controls.Add(DTLMT);
-            LMTZT.Controls.Add(txtLMTZT);
-            LMTZT.Controls.Add(Label1);
-            LMTZT.Controls.Add(lblLoDeg);
-            LMTZT.Controls.Add(lblLoMin);
-            LMTZT.Controls.Add(lblLMT);
-            LMTZT.Controls.Add(lblZT);
-            LMTZT.Controls.Add(_txtLoMin);
-            LMTZT.Controls.Add(Frame2);
-            LMTZT.Controls.Add(cboLo);
-            LMTZT.Controls.Add(_txtLoDeg);
-            LMTZT.Location = new Point(4, 22);
-            LMTZT.Name = "LMTZT";
-            LMTZT.Padding = new Padding(3);
-            LMTZT.Size = new Size(455, 205);
-            LMTZT.TabIndex = 1;
-            LMTZT.Text = "LMT-ZT";
-            LMTZT.UseVisualStyleBackColor = true;
+            this.LMTZT.Controls.Add(this.DTLMT);
+            this.LMTZT.Controls.Add(this.txtLMTZT);
+            this.LMTZT.Controls.Add(this.Label1);
+            this.LMTZT.Controls.Add(this.lblLoDeg);
+            this.LMTZT.Controls.Add(this.lblLoMin);
+            this.LMTZT.Controls.Add(this.lblLMT);
+            this.LMTZT.Controls.Add(this.lblZT);
+            this.LMTZT.Controls.Add(this._txtLoMin);
+            this.LMTZT.Controls.Add(this.Frame2);
+            this.LMTZT.Controls.Add(this.cboLo);
+            this.LMTZT.Controls.Add(this._txtLoDeg);
+            this.LMTZT.Location = new System.Drawing.Point(4, 22);
+            this.LMTZT.Name = "LMTZT";
+            this.LMTZT.Padding = new System.Windows.Forms.Padding(3);
+            this.LMTZT.Size = new System.Drawing.Size(455, 205);
+            this.LMTZT.TabIndex = 1;
+            this.LMTZT.Text = "LMT-ZT";
+            this.LMTZT.UseVisualStyleBackColor = true;
             // 
             // DTLMT
             // 
-            DTLMT.CustomFormat = "HH:mm:ss";
-            DTLMT.Format = DateTimePickerFormat.Custom;
-            DTLMT.Location = new Point(241, 96);
-            DTLMT.Name = "DTLMT";
-            DTLMT.ShowUpDown = true;
-            DTLMT.Size = new Size(72, 21);
-            DTLMT.TabIndex = 27;
+            this.DTLMT.CustomFormat = "HH:mm:ss";
+            this.DTLMT.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DTLMT.Location = new System.Drawing.Point(241, 96);
+            this.DTLMT.Name = "DTLMT";
+            this.DTLMT.ShowUpDown = true;
+            this.DTLMT.Size = new System.Drawing.Size(72, 21);
+            this.DTLMT.TabIndex = 27;
             // 
             // FormArcTime
             // 
-            AutoScaleDimensions = new SizeF(6.0f, 13.0f);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Window;
-            ClientSize = new Size(466, 323);
-            Controls.Add(PictureBox1);
-            Controls.Add(_ClearBtn);
-            Controls.Add(_ExitBtn);
-            Controls.Add(_cmdPrint);
-            Controls.Add(_cmdConvert);
-            Controls.Add(TabControl1);
-            Cursor = Cursors.Default;
-            Font = new Font("Tahoma", 8.25f, FontStyle.Regular, GraphicsUnit.Point, Conversions.ToByte(0));
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Location = new Point(285, 99);
-            MaximizeBox = false;
-            Name = "FormArcTime";
-            RightToLeft = RightToLeft.No;
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Arc-Time, LMT-ZT Conversion";
-            Frame2.ResumeLayout(false);
-            Frame1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
-            TabControl1.ResumeLayout(false);
-            ArcTime.ResumeLayout(false);
-            ArcTime.PerformLayout();
-            LMTZT.ResumeLayout(false);
-            LMTZT.PerformLayout();
-            Load += new EventHandler(FormArcTime_Load);
-            FormClosed += new FormClosedEventHandler(FormArcTime_FormClosed);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(466, 323);
+            this.Controls.Add(this.PictureBox1);
+            this.Controls.Add(this._ClearBtn);
+            this.Controls.Add(this._ExitBtn);
+            this.Controls.Add(this._cmdPrint);
+            this.Controls.Add(this._cmdConvert);
+            this.Controls.Add(this.TabControl1);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(285, 99);
+            this.MaximizeBox = false;
+            this.Name = "FormArcTime";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Arc-Time, LMT-ZT Conversion";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormArcTime_FormClosed);
+            this.Load += new System.EventHandler(this.FormArcTime_Load);
+            this.Frame2.ResumeLayout(false);
+            this.Frame1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            this.TabControl1.ResumeLayout(false);
+            this.ArcTime.ResumeLayout(false);
+            this.ArcTime.PerformLayout();
+            this.LMTZT.ResumeLayout(false);
+            this.LMTZT.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         internal TextBox txtArcTime;
