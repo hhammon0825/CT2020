@@ -338,32 +338,32 @@ namespace CelestialTools
             }
 
             DesTimeMinutes = (short)(60 * DTTides.Value.Day + DTTides.Value.Minute);
-            LocTimeSlackBeforeFloodHour = (short)Conversion.Int(LocTimeSlackBeforeFloodMinutes / 60d);
-            LocTimeSlackBeforeFloodMin = (short)Conversion.Int(LocTimeSlackBeforeFloodMinutes - LocTimeSlackBeforeFloodHour * 60);
-            LocTimeSlackBeforeEbbHour = (short)Conversion.Int(LocTimeSlackBeforeEbbMinutes / 60d);
-            LocTimeSlackBeforeEbbMin = (short)Conversion.Int(LocTimeSlackBeforeEbbMinutes - LocTimeSlackBeforeEbbHour * 60);
-            LocTimeFloodHour = (short)Conversion.Int(LocTimeFloodMinutes / 60d);
-            LocTimeFloodMin = (short)Conversion.Int(LocTimeFloodMinutes - LocTimeFloodHour * 60);
-            LocTimeEbbHour = (short)Conversion.Int(LocTimeEbbMinutes / 60d);
-            LocTimeEbbMin = (short)Conversion.Int(LocTimeEbbMinutes - LocTimeEbbHour * 60);
+            LocTimeSlackBeforeFloodHour = (short)Convert.ToInt32(LocTimeSlackBeforeFloodMinutes / 60d);
+            LocTimeSlackBeforeFloodMin = (short)Convert.ToInt32(LocTimeSlackBeforeFloodMinutes - LocTimeSlackBeforeFloodHour * 60);
+            LocTimeSlackBeforeEbbHour = (short)Convert.ToInt32(LocTimeSlackBeforeEbbMinutes / 60d);
+            LocTimeSlackBeforeEbbMin = (short)Convert.ToInt32(LocTimeSlackBeforeEbbMinutes - LocTimeSlackBeforeEbbHour * 60);
+            LocTimeFloodHour = (short)Convert.ToInt32(LocTimeFloodMinutes / 60d);
+            LocTimeFloodMin = (short)Convert.ToInt32(LocTimeFloodMinutes - LocTimeFloodHour * 60);
+            LocTimeEbbHour = (short)Convert.ToInt32(LocTimeEbbMinutes / 60d);
+            LocTimeEbbMin = (short)Convert.ToInt32(LocTimeEbbMinutes - LocTimeEbbHour * 60);
             LocVelFlood = (float)(Conversion.Val(txtVelFlood.Text) * Conversion.Val(txtTab2FloodMult.Text));
             if (optRule.Checked == true)
             {
-                LocVelFlood = (float)(Conversion.Int(LocVelFlood * 10f + 0.5d) / 10d);
+                LocVelFlood = (float)(Convert.ToInt32(LocVelFlood * 10f + 0.5d) / 10d);
             }
             else
             {
-                LocVelFlood = (float)(Conversion.Int(LocVelFlood * 100f + 0.5d) / 100d);
+                LocVelFlood = (float)(Convert.ToInt32(LocVelFlood * 100f + 0.5d) / 100d);
             }
 
             LocVelEbb = (float)(Conversion.Val(txtVelEbb.Text) * Conversion.Val(txtTab2EbbMult.Text));
             if (optRule.Checked == true)
             {
-                LocVelEbb = (float)(Conversion.Int(LocVelEbb * 10f + 0.5d) / 10d);
+                LocVelEbb = (float)(Convert.ToInt32(LocVelEbb * 10f + 0.5d) / 10d);
             }
             else
             {
-                LocVelEbb = (float)(Conversion.Int(LocVelEbb * 100f + 0.5d) / 100d);
+                LocVelEbb = (float)(Convert.ToInt32(LocVelEbb * 100f + 0.5d) / 100d);
             }
 
             chkSBF.Visible = true;
@@ -483,10 +483,10 @@ namespace CelestialTools
             TimeIntSlackDesMinutes = Math.Abs((short)(SelectSlack - DesTimeMinutes));
             if (TimeIntSlackDesMinutes > 720)
                 TimeIntSlackDesMinutes = (short)Math.Abs(TimeIntSlackDesMinutes - 1440);
-            TimeIntSlackMaxHour = (short)Conversion.Int(TimeIntSlackMaxMinutes / 60d);
-            TimeIntSlackMaxMin = (short)Conversion.Int(TimeIntSlackMaxMinutes - TimeIntSlackMaxHour * 60);
-            TimeIntSlackDesHour = (short)Conversion.Int(TimeIntSlackDesMinutes / 60d);
-            TimeIntSlackDesMin = (short)Conversion.Int(TimeIntSlackDesMinutes - TimeIntSlackDesHour * 60);
+            TimeIntSlackMaxHour = (short)Convert.ToInt32(TimeIntSlackMaxMinutes / 60d);
+            TimeIntSlackMaxMin = (short)Convert.ToInt32(TimeIntSlackMaxMinutes - TimeIntSlackMaxHour * 60);
+            TimeIntSlackDesHour = (short)Convert.ToInt32(TimeIntSlackDesMinutes / 60d);
+            TimeIntSlackDesMin = (short)Convert.ToInt32(TimeIntSlackDesMinutes - TimeIntSlackDesHour * 60);
             TimeIntDesFlood = Math.Abs((short)(DesTimeMinutes - LocTimeFloodMinutes));
             TimeIntDesEbb = Math.Abs((short)(DesTimeMinutes - LocTimeEbbMinutes));
             if (optA.Checked == true | optB.Checked == true)
@@ -513,7 +513,7 @@ namespace CelestialTools
             if (optCalc.Checked == true | optA.Checked == true | optB.Checked == true)
                 Factor = Math.Sin(Pi / 2d * Ratio);
             if (optCalc.Checked == true | optA.Checked == true | optB.Checked == true)
-                Factor = Conversion.Int(Factor * 10d + 0.5d) / 10d;
+                Factor = Convert.ToInt32(Factor * 10d + 0.5d) / 10d;
             if (optB.Checked == true)
             {
                 switch (Ratio)
@@ -587,7 +587,7 @@ namespace CelestialTools
             if (optRule.Checked == true)
             {
                 DurationStep = (float)((double)TimeIntSlackMaxMinutes / 3d);
-                DurationStep = (float)Conversion.Int((double)DurationStep + 0.5d);
+                DurationStep = (float)Convert.ToInt32((double)DurationStep + 0.5d);
                 if (SelectSlack <= SelectMax)
                     x[0] = (float)SelectSlack;
                 else
@@ -632,32 +632,32 @@ namespace CelestialTools
                     Factor = 0d;
                 // Range = Int(Range + 0.5)
                 // Correction = Range * Factor
-                X0Hour = (short)Conversion.Int(y[0] / 60f);
-                X0Min = (short)Conversion.Int(y[0] - (float)((int)X0Hour * 60));
+                X0Hour = (short)Convert.ToInt32(y[0] / 60f);
+                X0Min = (short)Convert.ToInt32(y[0] - (float)((int)X0Hour * 60));
                 if ((int)X0Min >= 60)
                 {
                     X0Min = (short)((int)X0Min - 60);
                     X0Hour = (short)((int)X0Hour + 1);
                 }
 
-                X1Hour = (short)Conversion.Int(y[1] / 60f);
-                X1Min = (short)Conversion.Int(y[1] - (float)((int)X1Hour * 60));
+                X1Hour = (short)Convert.ToInt32(y[1] / 60f);
+                X1Min = (short)Convert.ToInt32(y[1] - (float)((int)X1Hour * 60));
                 if ((int)X1Min >= 60)
                 {
                     X1Min = (short)((int)X1Min - 60);
                     X1Hour = (short)((int)X1Hour + 1);
                 }
 
-                X2Hour = (short)Conversion.Int(y[2] / 60f);
-                X2Min = (short)Conversion.Int(y[2] - (float)((int)X2Hour * 60));
+                X2Hour = (short)Convert.ToInt32(y[2] / 60f);
+                X2Min = (short)Convert.ToInt32(y[2] - (float)((int)X2Hour * 60));
                 if ((int)X2Min >= 60)
                 {
                     X2Min = (short)((int)X2Min - 60);
                     X2Hour = (short)((int)X2Hour + 1);
                 }
                 // Next two lines added so Time3 is a result of Time2+TimeDiff, rather than the later of the bracketed times
-                X3Hour = (short)Conversion.Int(y[3] / 60f);
-                X3Min = (short)Conversion.Int(y[3] - (float)((int)X3Hour * 60));
+                X3Hour = (short)Convert.ToInt32(y[3] / 60f);
+                X3Min = (short)Convert.ToInt32(y[3] - (float)((int)X3Hour * 60));
                 if ((int)X3Min >= 60)
                 {
                     X3Min = (short)((int)X3Min - 60);

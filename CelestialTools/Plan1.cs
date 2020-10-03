@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -475,11 +476,11 @@ namespace CelestialTools
             FirstTime = 0d;
             LastTime = 0d;
             FT = false;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             // Convert sunrise time to minutes (and round up to nearest five?)
-            StartTime = (int)((60d * Conversion.Val(Strings.Left(C3[4], 2)) + Conversion.Val(Strings.Right(C3[4], 2))) * 60d);
-            EndTime = (int)((60d * Conversion.Val(Strings.Left(C3[5], 2)) + Conversion.Val(Strings.Right(C3[5], 2))) * 60d);
+            StartTime = (int)((60d * Convert.ToInt32(Strings.Left(C3[4], 2)) + Convert.ToInt32(Strings.Right(C3[4], 2))) * 60d);
+            EndTime = (int)((60d * Convert.ToInt32(Strings.Left(C3[5], 2)) + Convert.ToInt32(Strings.Right(C3[5], 2))) * 60d);
             // Increment in five minute intervals (300 seconds)
             var loopTo = EndTime;
             for (ZTinSeconds = StartTime; ZTinSeconds <= loopTo; ZTinSeconds += 300)
@@ -509,14 +510,14 @@ namespace CelestialTools
                     ZNDiff = (short)(ZNDiff - 180);
                 }
 
-                if (FT == false & HoSun >= Conversion.Val(txtMinimumAltitude.Text) & HoMoon >= Conversion.Val(txtMinimumAltitude.Text) & ZNDiff >= 45 & ZNDiff <= 135 & ZNSun >= LowAz & ZNSun <= HighAz & ZNMoon >= LowAz & ZNMoon <= HighAz)
+                if (FT == false & HoSun >= Convert.ToInt32(txtMinimumAltitude.Text) & HoMoon >= Convert.ToInt32(txtMinimumAltitude.Text) & ZNDiff >= 45 & ZNDiff <= 135 & ZNSun >= LowAz & ZNSun <= HighAz & ZNMoon >= LowAz & ZNMoon <= HighAz)
                 {
                     FirstTime = ZTinSeconds;
                     MoonPhaseFirst = KK;
                     FT = true; // And HoSun > 0 And HoMoon > 0 not needed since already determined in AltAz
                 }
 
-                if (HoSun >= Conversion.Val(txtMinimumAltitude.Text) & HoMoon >= Conversion.Val(txtMinimumAltitude.Text) & ZNDiff >= 45 & ZNDiff <= 135 & ZNSun >= LowAz & ZNSun <= HighAz & ZNMoon >= LowAz & ZNMoon <= HighAz)
+                if (HoSun >= Convert.ToInt32(txtMinimumAltitude.Text) & HoMoon >= Convert.ToInt32(txtMinimumAltitude.Text) & ZNDiff >= 45 & ZNDiff <= 135 & ZNSun >= LowAz & ZNSun <= HighAz & ZNMoon >= LowAz & ZNMoon <= HighAz)
                 {
                     LastTime = ZTinSeconds;
                     MoonPhaseLast = KK; // ZTinSeconds = EndTime 'HoSun > 0 And HoMoon > 0 And not needed since already determined in AltAz
@@ -646,7 +647,7 @@ namespace CelestialTools
             Moon();
             MoonPhase();
             KK2 = KKFull;
-            KK0 = (short)Conversion.Int(KK1 * 100d + 0.5d);
+            KK0 = (short)Convert.ToInt32(KK1 * 100d + 0.5d);
             MoonTxtBxRight.SelectionAlignment = (System.Windows.Forms.HorizontalAlignment)System.Windows.HorizontalAlignment.Right;
             MoonTxtBxRight.AppendText("Moon " + KK0 + "% illuminated, ");
             if (KK2 < KK1)
@@ -666,7 +667,7 @@ namespace CelestialTools
             // lowest accuracy version
             PhaseAngle = 180d - MD * 180d / Pi - 6.289d * Math.Sin(MMprime) + 2.1d * Math.Sin(MM) - 1.274d * Math.Sin(2d * MD - MMprime) - 0.658d * Math.Sin(2d * MD) - 0.214d * Math.Sin(2d * MMprime) - 0.11d * Math.Sin(MD); // degrees
             KKFull = (1d + Math.Cos(PhaseAngle * Pi / 180d)) / 2d;
-            KK = (short)Conversion.Int(KKFull * 100d + 0.5d);
+            KK = (short)Convert.ToInt32(KKFull * 100d + 0.5d);
             return;
         }
 
@@ -677,7 +678,7 @@ namespace CelestialTools
             SMoon = 24110.5d + 8640184.813d * T0Moon;
             SMoon = SMoon + 86636.6d * Z0 + 86400.0d * L5;
             SMoon = SMoon / 86400.0d;
-            SMoon = SMoon - Conversion.Int(SMoon);
+            SMoon = SMoon - Convert.ToInt32(SMoon);
             T0Moon = SMoon * 360d * Pi / 180d;
             return;
         }
@@ -731,12 +732,12 @@ namespace CelestialTools
             DMoon = 0.827362d + 0.03386319198d * TMoon;
             NMoon = 0.347343d - 0.00014709391d * TMoon;
             GMoon = 0.993126d + 0.0027377785d * TMoon;
-            LMoon = LMoon - Conversion.Int(LMoon);
-            MMMoon = MMMoon - Conversion.Int(MMMoon);
-            FMoon = FMoon - Conversion.Int(FMoon);
-            DMoon = DMoon - Conversion.Int(DMoon);
-            NMoon = NMoon - Conversion.Int(NMoon);
-            GMoon = GMoon - Conversion.Int(GMoon);
+            LMoon = LMoon - Convert.ToInt32(LMoon);
+            MMMoon = MMMoon - Convert.ToInt32(MMMoon);
+            FMoon = FMoon - Convert.ToInt32(FMoon);
+            DMoon = DMoon - Convert.ToInt32(DMoon);
+            NMoon = NMoon - Convert.ToInt32(NMoon);
+            GMoon = GMoon - Convert.ToInt32(GMoon);
             LMoon = LMoon * 2d * Pi;
             MMMoon = MMMoon * 2d * Pi;
             FMoon = FMoon * 2d * Pi;
@@ -863,7 +864,7 @@ namespace CelestialTools
                 A7 = A7 - 360d;
             }
 
-            A7 = Conversion.Int(A7 * 10d + 0.5d) / 10d;
+            A7 = Convert.ToInt32(A7 * 10d + 0.5d) / 10d;
             if (V0Moon < 0d & V2Moon > 0d)
             {
                 Amp = (Math.Sin(D1Moon) - Math.Sin(Lat * Pi / 180d) * Math.Sin(0.365d * Pi / 180d)) / (Math.Cos(Lat * Pi / 180d) * Math.Cos(0.365d * Pi / 180d));
@@ -872,7 +873,7 @@ namespace CelestialTools
                 Amp = Math.Atan(Amp / (Math.Sqrt(-Amp * Amp + 1d) + 9.999999E-21d)); // arcsin
                 Amp = Amp * 180d / Pi;
                 ZNAmp = 90d - Amp;
-                ZNAmp = Conversion.Int(ZNAmp * 10d + 0.5d) / 10d;
+                ZNAmp = Convert.ToInt32(ZNAmp * 10d + 0.5d) / 10d;
             }
 
             if (V0Moon > 0d & V2Moon < 0d)
@@ -883,7 +884,7 @@ namespace CelestialTools
                 Amp = Math.Atan(Amp / (Math.Sqrt(-Amp * Amp + 1d) + 9.999999E-21d)); // arcsin
                 Amp = Amp * 180d / Pi;
                 ZNAmp = 270d + Amp;
-                ZNAmp = Conversion.Int(ZNAmp * 10d + 0.5d) / 10d;
+                ZNAmp = Convert.ToInt32(ZNAmp * 10d + 0.5d) / 10d;
             }
 
             if (optLimb.Checked == true)
@@ -1763,10 +1764,10 @@ namespace CelestialTools
             {
                 lblAlt.Text = Math.Round(90d - PosY / ((SkyPicBx.Width - 10) / 90d)).ToString();
                 lblAz.Text = (Math.Round(PosX / (SkyPicBx.Width / 180d)) + ShiftAz).ToString();
-                if (Conversion.Val(lblAz.Text) >= 360d)
-                    lblAz.Text = (Conversion.Val(lblAz.Text) - 360d).ToString();
-                if (Conversion.Val(lblAz.Text) < 0d)
-                    lblAz.Text = (Conversion.Val(lblAz.Text) + 360d).ToString();
+                if (Convert.ToInt32(lblAz.Text) >= 360d)
+                    lblAz.Text = (Convert.ToInt32(lblAz.Text) - 360d).ToString();
+                if (Convert.ToInt32(lblAz.Text) < 0d)
+                    lblAz.Text = (Convert.ToInt32(lblAz.Text) + 360d).ToString();
                 bBodyFound = false;
                 var loopTo3 = (short)Information.UBound(VwBody1, 1);
                 for (i = 0; i <= loopTo3; i++)
@@ -1837,7 +1838,7 @@ namespace CelestialTools
         private void txtMinimumAltitude_TextChanged(object eventSender, EventArgs eventArgs)
         {
             txtMinimumAltitude.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtMinimumAltitude.Text) > 90d) // Or Val(txtMinimumAltitude.Text) < 1 Then     90 was 15
+            if (Convert.ToInt32(txtMinimumAltitude.Text) > 90d) // Or Val(txtMinimumAltitude.Text) < 1 Then     90 was 15
             {
                 txtMinimumAltitude.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -1881,7 +1882,7 @@ namespace CelestialTools
         private void txtMinimumAltitude_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtMinimumAltitude.Text) > 90d) // Or Val(txtMinimumAltitude.Text) < 1 Then     90 was 15
+            if (Convert.ToInt32(txtMinimumAltitude.Text) > 90d) // Or Val(txtMinimumAltitude.Text) < 1 Then     90 was 15
             {
                 KeepFocus = true;
                 if (string.IsNullOrEmpty(txtMinimumAltitude.Text))
@@ -1917,12 +1918,12 @@ namespace CelestialTools
 
         private void txtLDeg_TextChanged(object eventSender, EventArgs eventArgs)
         {
-            if (Conversion.Val(txtLDeg.Text) != 90d)
+            if (Convert.ToInt32(txtLDeg.Text) != 90d)
             {
                 txtLMin.Enabled = true;
             }
 
-            if (Conversion.Val(txtLDeg.Text) == 90d)
+            if (Convert.ToInt32(txtLDeg.Text) == 90d)
             {
                 txtLMin.Text = "";
                 txtLMin.Enabled = false;
@@ -1930,13 +1931,13 @@ namespace CelestialTools
             }
 
             txtLDeg.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtLDeg.Text) > 90d)
+            if (Convert.ToInt32(txtLDeg.Text) > 90d)
             {
                 txtLDeg.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
             }
 
-            if (Conversion.Val(txtLDeg.Text) < 90d)
+            if (Convert.ToInt32(txtLDeg.Text) < 90d)
             {
                 txtLMin.BackColor = Control.DefaultBackColor; 
             }
@@ -1977,7 +1978,7 @@ namespace CelestialTools
         private void txtLDeg_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtLDeg.Text) > 90d)
+            if (Convert.ToInt32(txtLDeg.Text) > 90d)
             {
                 KeepFocus = true;
             }
@@ -1995,7 +1996,7 @@ namespace CelestialTools
         private void txtLMin_TextChanged(object eventSender, EventArgs eventArgs)
         {
             txtLMin.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtLMin.Text) > 59.9d)
+            if (Convert.ToInt32(txtLMin.Text) > 59.9d)
             {
                 txtLMin.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -2051,7 +2052,7 @@ namespace CelestialTools
         private void txtLMin_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtLMin.Text) > 59.9d)
+            if (Convert.ToInt32(txtLMin.Text) > 59.9d)
             {
                 KeepFocus = true;
             }
@@ -2068,9 +2069,9 @@ namespace CelestialTools
 
         private void txtLoDeg_TextChanged(object eventSender, EventArgs eventArgs)
         {
-            if (Conversion.Val(txtLoDeg.Text) != 180d)
+            if (Convert.ToInt32(txtLoDeg.Text) != 180d)
                 txtLoMin.Enabled = true;
-            if (Conversion.Val(txtLoDeg.Text) == 180d)
+            if (Convert.ToInt32(txtLoDeg.Text) == 180d)
             {
                 txtLoMin.Text = "";
                 txtLoMin.Enabled = false;
@@ -2078,13 +2079,13 @@ namespace CelestialTools
             }
 
             txtLoDeg.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtLoDeg.Text) > 180d | Conversion.Val(txtLoDeg.Text) == 180d & Conversion.Val(txtLoMin.Text) != 0d)
+            if (Convert.ToInt32(txtLoDeg.Text) > 180d | Convert.ToInt32(txtLoDeg.Text) == 180d & Convert.ToInt32(txtLoMin.Text) != 0d)
             {
                 txtLoDeg.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
             }
 
-            if (Conversion.Val(txtLoDeg.Text) < 180d)
+            if (Convert.ToInt32(txtLoDeg.Text) < 180d)
             {
                 txtLoMin.BackColor = Control.DefaultBackColor; 
             }
@@ -2127,7 +2128,7 @@ namespace CelestialTools
         private void txtLoDeg_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtLoDeg.Text) > 180d)
+            if (Convert.ToInt32(txtLoDeg.Text) > 180d)
             {
                 KeepFocus = true;
             }
@@ -2145,7 +2146,7 @@ namespace CelestialTools
         private void txtLoMin_TextChanged(object eventSender, EventArgs eventArgs)
         {
             txtLoMin.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtLoMin.Text) > 59.9d)
+            if (Convert.ToInt32(txtLoMin.Text) > 59.9d)
             {
                 txtLoMin.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -2204,7 +2205,7 @@ namespace CelestialTools
         private void txtLoMin_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtLoMin.Text) > 59.9d)
+            if (Convert.ToInt32(txtLoMin.Text) > 59.9d)
             {
                 KeepFocus = true;
             }
@@ -2384,7 +2385,7 @@ namespace CelestialTools
             T1 = T0 + ZD + (j * TA + Lo - GR + AR) / 15d;
             if (T1 >= 24d + 2d * 0.008000001d | T1 < 0d)
             {
-                T1 = T1 - Conversion.Int(T1 / 24d) * 24d; // THIS WAS ORIGINALLY 24, THEN CHANGED TO 25, BUT THAT CAUSED THE PROBLEM FIXED IN V3.4.1, FIXED BY CHANGING BACK TO 24 - NO - FIXED(?) BY MAKING IT (24 + 2*0.008000001)
+                T1 = T1 - Convert.ToInt32(T1 / 24d) * 24d; // THIS WAS ORIGINALLY 24, THEN CHANGED TO 25, BUT THAT CAUSED THE PROBLEM FIXED IN V3.4.1, FIXED BY CHANGING BACK TO 24 - NO - FIXED(?) BY MAKING IT (24 + 2*0.008000001)
             }
 
             if (Math.Abs(T1 - T0) > 0.008000001d)
@@ -2439,7 +2440,7 @@ namespace CelestialTools
             GR = GR + NL;
             if (GR >= 360d | GR < 0d)
             {
-                GR = GR - Conversion.Int(GR / 360d) * 360d;
+                GR = GR - Convert.ToInt32(GR / 360d) * 360d;
             }
 
             LR = GR - Lo;
@@ -2464,9 +2465,9 @@ namespace CelestialTools
                 VD[IB] = 0;
             }
 
-            WD = (short)Conversion.Int(GR);
+            WD = (short)Convert.ToInt32(GR);
             WM = (GR - WD) * 60d;
-            WM = Conversion.Int(WM * 10d + 0.5d) / 10d;
+            WM = Convert.ToInt32(WM * 10d + 0.5d) / 10d;
             if (WM == 60d)
             {
                 WM = 0d;
@@ -2479,9 +2480,9 @@ namespace CelestialTools
                 WD = 0;
             }
 
-            QD = (short)Conversion.Int(LR);
+            QD = (short)Convert.ToInt32(LR);
             QM = (LR - QD) * 60d;
-            QM = Conversion.Int(QM * 10d + 0.5d) / 10d;
+            QM = Convert.ToInt32(QM * 10d + 0.5d) / 10d;
             if (QM == 60d)
             {
                 QM = 0d;
@@ -2570,7 +2571,7 @@ namespace CelestialTools
                 txtZDh.BackColor = Color.Gray;
             if (optZDManual.Checked == true)
                 txtZDh.BackColor = Control.DefaultBackColor; 
-            if (optZDManual.Checked == true & (Conversion.Val(txtZDh.Text) < -14 | Conversion.Val(txtZDh.Text) > 12d))
+            if (optZDManual.Checked == true & (Convert.ToInt32(txtZDh.Text) < -14 | Convert.ToInt32(txtZDh.Text) > 12d))
             {
                 txtZDh.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -2661,7 +2662,7 @@ namespace CelestialTools
         private void txtZDh_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtZDh.Text) < -14 | Conversion.Val(txtZDh.Text) > 12d)
+            if (Convert.ToInt32(txtZDh.Text) < -14 | Convert.ToInt32(txtZDh.Text) > 12d)
             {
                 KeepFocus = true;
             }
@@ -2681,8 +2682,8 @@ namespace CelestialTools
             if (optZDAuto.Checked == true)
             {
                 txtZDh.BackColor = Color.Gray;
-                Lo = Conversion.Val(txtLoDeg.Text) + Conversion.Val(txtLoMin.Text) / 60d;
-                ZD = Conversion.Int(Lo / 15d + 0.5d); // ZD = Round(Lo / 15)
+                Lo = Convert.ToInt32(txtLoDeg.Text) + Convert.ToInt32(txtLoMin.Text) / 60d;
+                ZD = Convert.ToInt32(Lo / 15d + 0.5d); // ZD = Round(Lo / 15)
                 if (cboLo.Text == "E")
                 {
                     ZD = -ZD;
@@ -2733,7 +2734,7 @@ namespace CelestialTools
             var argTB = SunTxtBx;
             SetTxtBxBoldOn(ref argTB);
             SunTxtBx = argTB;
-            SunTxtBx.AppendText("Sun Rising and Setting Phenomena and Moon Data for " + DTPlan.Value.ToString("dd MMMM yyyy") + " at L " + Strings.Format(Conversion.Val(txtLDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(LMin), "00.0") + "'" + cboL.Text + ", Lo " + Strings.Format(Conversion.Val(txtLoDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
+            SunTxtBx.AppendText("Sun Rising and Setting Phenomena and Moon Data for " + DTPlan.Value.ToString("dd MMMM yyyy") + " at L " + Strings.Format(Convert.ToInt32(txtLDeg.Text), "0") + '°' + Strings.Format(Convert.ToInt32(LMin), "00.0") + "'" + cboL.Text + ", Lo " + Strings.Format(Convert.ToInt32(txtLoDeg.Text), "0") + '°' + Strings.Format(Convert.ToInt32(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
             SunTxtBx.SelectionAlignment = (System.Windows.Forms.HorizontalAlignment)System.Windows.HorizontalAlignment.Center;
             var argTB1 = SunTxtBx;
             SetTxtBxtoReg(ref argTB1);
@@ -2828,12 +2829,12 @@ namespace CelestialTools
             // Next two lines for problem with commas as decimal points in Europe with Favorite Places, etc.
             LMin = Strings.Replace(txtLMin.Text, ",", ".");
             LoMin = Strings.Replace(txtLoMin.Text, ",", ".");
-            Lat = Conversion.Val(txtLDeg.Text) + Conversion.Val(LMin) / 60d;
+            Lat = Convert.ToInt32(txtLDeg.Text) + Convert.ToInt32(LMin) / 60d;
             if (Lat == 90d)
                 Lat = 89.999999999d;
             if (cboL.Text == "S")
                 Lat = -Lat;
-            Lo = Conversion.Val(txtLoDeg.Text) + Conversion.Val(LoMin) / 60d;
+            Lo = Convert.ToInt32(txtLoDeg.Text) + Convert.ToInt32(LoMin) / 60d;
             if (cboLo.Text == "E")
                 Lo = -Lo;
         }
@@ -2866,13 +2867,13 @@ namespace CelestialTools
             DayNumber = 0; // DTIn.DayOfYear
             var loopTo = (short)(MonthNumber - 1);
             for (i = 1; i <= loopTo; i++)
-                DayNumber = (short)(DayNumber + Conversion.Val(Strings.Mid(MonthDays, 2 * i - 1, 2))); // + DayNumber
+                DayNumber = (short)(DayNumber + Convert.ToInt32(Strings.Mid(MonthDays, 2 * i - 1, 2))); // + DayNumber
                                                                                                        // If MonthNumber >= 3 And LeapYear = True Then DayNumber = DayNumber + 1
             DayNumber = (short)(DayNumber + DTin.Day); // Val(cboDay.Text)
-            ZD = Math.Abs(Conversion.Val(txtZDh.Text));
+            ZD = Math.Abs(Convert.ToInt32(txtZDh.Text));
             if (optZDManual.Checked == true)
             {
-                ZD = Math.Abs(ZD) + Conversion.Val(cboZDm.Text) / 60d;
+                ZD = Math.Abs(ZD) + Convert.ToInt32(cboZDm.Text) / 60d;
             }
             // If Val(txtZDh.Text) < 0 Then ZD = -ZD
             if (Strings.Left(txtZDh.Text, 1) == "-")
@@ -2939,7 +2940,7 @@ namespace CelestialTools
 
             for (i = 1; i <= 12; i++)
             {
-                DayG[i] = (short)(DayG[i - 1] - Conversion.Val(Strings.Mid(MonthDays, 2 * i - 1, 2)));
+                DayG[i] = (short)(DayG[i - 1] - Convert.ToInt32(Strings.Mid(MonthDays, 2 * i - 1, 2)));
                 if (DayG[i] <= 0)
                 {
                     GMonth = i;
@@ -2966,7 +2967,7 @@ namespace CelestialTools
                 GMonth = (short)(GMonth + 12);
             }
 
-            JD = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
+            JD = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
             if (BN == 58)
             {
                 T = (JD - 2451545d) / 36525.0d;
@@ -2996,35 +2997,35 @@ namespace CelestialTools
             NutD = 297.85036d + 445267.11148d * T - 0.0019142d * T * T + T * T * T / 189474d; // mean elongation of moon from sun, degrees
             if (NutD >= 360d | NutD < 0d)
             {
-                NutD = NutD - Conversion.Int(NutD / 360d) * 360d;
+                NutD = NutD - Convert.ToInt32(NutD / 360d) * 360d;
             }
 
             NutD = NutD * Pi / 180d; // radians
             NutM = 357.52772d + 35999.05034d * T - 0.0001603d * T * T - T * T * T / 300000d; // mean anomaly of the sun (Earth), degrees
             if (NutM >= 360d | NutM < 0d)
             {
-                NutM = NutM - Conversion.Int(NutM / 360d) * 360d;
+                NutM = NutM - Convert.ToInt32(NutM / 360d) * 360d;
             }
 
             NutM = NutM * Pi / 180d; // radians
             NutMprime = 134.96298d + 477198.867398d * T + 0.0086972d * T * T + T * T * T / 56250d; // mean anomaly of the moon, degrees
             if (NutMprime >= 360d | NutMprime < 0d)
             {
-                NutMprime = NutMprime - Conversion.Int(NutMprime / 360d) * 360d;
+                NutMprime = NutMprime - Convert.ToInt32(NutMprime / 360d) * 360d;
             }
 
             NutMprime = NutMprime * Pi / 180d; // radians
             NutF = 93.27191d + 483202.017538d * T - 0.0036825d * T * T + T * T * T / 327270d; // moon's argument of latitude, degrees
             if (NutF >= 360d | NutF < 0d)
             {
-                NutF = NutF - Conversion.Int(NutF / 360d) * 360d;
+                NutF = NutF - Convert.ToInt32(NutF / 360d) * 360d;
             }
 
             NutF = NutF * Pi / 180d; // radians
             NutOmega = 125.04452d - 1934.136261d * T + 0.0020708d * T * T + T * T * T / 450000d; // longitude of ascending node of moon..., degrees
             if (NutOmega >= 360d | NutOmega < 0d)
             {
-                NutOmega = NutOmega - Conversion.Int(NutOmega / 360d) * 360d;
+                NutOmega = NutOmega - Convert.ToInt32(NutOmega / 360d) * 360d;
             }
 
             NutOmega = NutOmega * Pi / 180d; // radians
@@ -3046,7 +3047,7 @@ namespace CelestialTools
                                                                      // MS=357.52772 + 35999.05034 * T + 0.0001603 * T * T +T*T*T/30000                   'mean anomaly of Sun, degrees
             if (MS >= 360d | MS < 0d)
             {
-                MS = MS - Conversion.Int(MS / 360d) * 360d;
+                MS = MS - Convert.ToInt32(MS / 360d) * 360d;
             }
 
             C = (1.914602d - 0.004817d * T - 0.000014d * T * T) * Math.Sin(MS * Pi / 180d) + (0.019993d - 0.000101d * T) * Math.Sin(2d * MS * Pi / 180d) + 0.000289d * Math.Sin(3d * MS * Pi / 180d); // center of Sun, degrees
@@ -3055,7 +3056,7 @@ namespace CelestialTools
             L0 = 280.46646d + 36000.76983d * T + 0.0003032d * T * T; // geometric mean longitude of Sun, degrees
             if (L0 >= 360d | L0 < 0d)
             {
-                L0 = L0 - Conversion.Int(L0 / 360d) * 360d;
+                L0 = L0 - Convert.ToInt32(L0 / 360d) * 360d;
             }
 
             LN = L0 + C; // Sun's true longitude, degrees
@@ -3079,7 +3080,7 @@ namespace CelestialTools
             LH = EarthFunctions.Earth_L01(ref T) + EarthFunctions.Earth_L02(ref T) + EarthFunctions.Earth_L11(ref T) + EarthFunctions.Earth_L21(ref T) + EarthFunctions.Earth_L31(ref T) + EarthFunctions.Earth_L41(ref T) + EarthFunctions.Earth_L51(ref T); // radians
             if (Math.Abs(LH) > 2d * Pi)
             {
-                LH = LH - 2d * Pi * Conversion.Int(LH / 2d / Pi);
+                LH = LH - 2d * Pi * Convert.ToInt32(LH / 2d / Pi);
             }
             // Compute heliocentric, ecliptical Latitude B in radians
             B = EarthFunctions.Earth_B01(ref T) + EarthFunctions.Earth_B11(ref T) + EarthFunctions.Earth_B21(ref T) + EarthFunctions.Earth_B31(ref T) + EarthFunctions.Earth_B41(ref T); // radians
@@ -3171,56 +3172,56 @@ namespace CelestialTools
             MLprime = 218.3164477d + 481267.88123421d * T - 0.0015786d * T * T + T * T * T / 538841d - T * T * T * T / 65194000d; // Moon's mean longitude, degrees
             if (MLprime >= 360d | MLprime < 0d)
             {
-                MLprime = MLprime - Conversion.Int(MLprime / 360d) * 360d;
+                MLprime = MLprime - Convert.ToInt32(MLprime / 360d) * 360d;
             }
 
             MLprime = MLprime * Pi / 180d;
             MD = 297.8501921d + 445267.1114034d * T - 0.0018819d * T * T + T * T * T / 545868d - T * T * T * T / 113065000d; // Moon's mean elongation, degrees
             if (MD >= 360d | MD < 0d)
             {
-                MD = MD - Conversion.Int(MD / 360d) * 360d;
+                MD = MD - Convert.ToInt32(MD / 360d) * 360d;
             }
 
             MD = MD * Pi / 180d; // radians
             MM = 357.5291092d + 35999.0502909d * T - 0.0001536d * T * T + T * T * T / 24490000d; // Sun's mean anomaly, degrees
             if (MM >= 360d | MM < 0d)
             {
-                MM = MM - Conversion.Int(MM / 360d) * 360d;
+                MM = MM - Convert.ToInt32(MM / 360d) * 360d;
             }
 
             MM = MM * Pi / 180d; // radians
             MMprime = 134.9633964d + 477198.8675055d * T + 0.0087414d * T * T + T * T * T / 69699d - T * T * T * T / 14712000d; // Moon's mean anomaly, degrees
             if (MMprime >= 360d | MMprime < 0d)
             {
-                MMprime = MMprime - Conversion.Int(MMprime / 360d) * 360d;
+                MMprime = MMprime - Convert.ToInt32(MMprime / 360d) * 360d;
             }
 
             MMprime = MMprime * Pi / 180d; // radians
             MF = 93.272095d + 483202.0175233d * T - 0.0036539d * T * T - T * T * T / 3526000d + T * T * T * T / 863310000d; // Moon's argument of altitude, degrees
             if (MF >= 360d | MF < 0d)
             {
-                MF = MF - Conversion.Int(MF / 360d) * 360d;
+                MF = MF - Convert.ToInt32(MF / 360d) * 360d;
             }
 
             MF = MF * Pi / 180d; // radians
             A1 = 119.75d + 131.849d * T; // degrees
             if (A1 >= 360d | A1 < 0d)
             {
-                A1 = A1 - Conversion.Int(A1 / 360d) * 360d;
+                A1 = A1 - Convert.ToInt32(A1 / 360d) * 360d;
             }
 
             A1 = A1 * Pi / 180d; // radians
             A2 = 53.09d + 479264.29d * T; // degrees
             if (A2 >= 360d | A2 < 0d)
             {
-                A2 = A2 - Conversion.Int(A2 / 360d) * 360d;
+                A2 = A2 - Convert.ToInt32(A2 / 360d) * 360d;
             }
 
             A2 = A2 * Pi / 180d; // radians
             A3 = 313.45d + 481266.484d * T; // degrees
             if (A3 >= 360d | A3 < 0d)
             {
-                A3 = A3 - Conversion.Int(A3 / 360d) * 360d;
+                A3 = A3 - Convert.ToInt32(A3 / 360d) * 360d;
             }
 
             A3 = A3 * Pi / 180d; // radians
@@ -3283,7 +3284,7 @@ namespace CelestialTools
                     L = VenusFunctions.Venus_L01(ref T) + VenusFunctions.Venus_L11(ref T) + VenusFunctions.Venus_L21(ref T) + VenusFunctions.Venus_L31(ref T) + VenusFunctions.Venus_L41(ref T) + VenusFunctions.Venus_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
                     {
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     }
 
                     B = VenusFunctions.Venus_B01(ref T) + VenusFunctions.Venus_B11(ref T) + VenusFunctions.Venus_B21(ref T) + VenusFunctions.Venus_B31(ref T) + VenusFunctions.Venus_B41(ref T) + VenusFunctions.Venus_B51(ref T);
@@ -3295,7 +3296,7 @@ namespace CelestialTools
                     L = MarsFunctions.Mars_L01(ref T) + MarsFunctions.Mars_L02(ref T) + MarsFunctions.Mars_L03(ref T) + MarsFunctions.Mars_L11(ref T) + MarsFunctions.Mars_L12(ref T) + MarsFunctions.Mars_L21(ref T) + MarsFunctions.Mars_L31(ref T) + MarsFunctions.Mars_L41(ref T) + MarsFunctions.Mars_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
                     {
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     }
 
                     B = MarsFunctions.Mars_B01(ref T) + MarsFunctions.Mars_B11(ref T) + MarsFunctions.Mars_B21(ref T) + MarsFunctions.Mars_B31(ref T) + MarsFunctions.Mars_B41(ref T) + MarsFunctions.Mars_B51(ref T);
@@ -3309,7 +3310,7 @@ namespace CelestialTools
                     L = Conversions.ToDouble(Operators.AddObject(JupiterFunctions.Jupiter_L01(ref T) + JupiterFunctions.Jupiter_L02(ref T) + JupiterFunctions.Jupiter_L11(ref T) + JupiterFunctions.Jupiter_L21(ref T) + JupiterFunctions.Jupiter_L31(ref T) + JupiterFunctions.Jupiter_L41(ref T), localJupiter_L51()));
                     if (Math.Abs(L) > 2d * Pi)
                     {
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     }
 
                     object localJupiter_B01() { object argT = T; var ret = JupiterFunctions.Jupiter_B01(ref argT); return ret; }
@@ -3347,7 +3348,7 @@ namespace CelestialTools
                     L = SaturnFunctions.Saturn_L01(ref T) + SaturnFunctions.Saturn_L02(ref T) + SaturnFunctions.Saturn_L03(ref T) + SaturnFunctions.Saturn_L11(ref T) + SaturnFunctions.Saturn_L12(ref T) + SaturnFunctions.Saturn_L21(ref T) + SaturnFunctions.Saturn_L31(ref T) + SaturnFunctions.Saturn_L41(ref T) + SaturnFunctions.Saturn_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
                     {
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     }
 
                     B = SaturnFunctions.Saturn_B01(ref T) + SaturnFunctions.Saturn_B02(ref T) + SaturnFunctions.Saturn_B11(ref T) + SaturnFunctions.Saturn_B21(ref T) + SaturnFunctions.Saturn_B31(ref T) + SaturnFunctions.Saturn_B41(ref T) + SaturnFunctions.Saturn_B51(ref T);
@@ -3360,7 +3361,7 @@ namespace CelestialTools
                     // L0Sun = L0
                     if (Math.Abs(L0) > 2d * Pi)
                     {
-                        L0 = L0 - 2d * Pi * Conversion.Int(L0 / 2d / Pi);
+                        L0 = L0 - 2d * Pi * Convert.ToInt32(L0 / 2d / Pi);
                     }
 
                     B0 = EarthFunctions.Earth_B01(ref T) + EarthFunctions.Earth_B11(ref T) + EarthFunctions.Earth_B21(ref T) + EarthFunctions.Earth_B31(ref T) + EarthFunctions.Earth_B41(ref T);
@@ -3389,7 +3390,7 @@ namespace CelestialTools
 
             if (L1 >= 2d * Pi | L1 < 0d)
             {
-                L1 = L1 - Conversion.Int(L1 / (2d * Pi)) * 2d * Pi;
+                L1 = L1 - Convert.ToInt32(L1 / (2d * Pi)) * 2d * Pi;
             }
 
             B = Math.Atan(Z / Math.Sqrt(x * x + y * y)); // geocentric latitude, radians
@@ -3449,9 +3450,9 @@ namespace CelestialTools
                     Mag[BN] = (-8.68d + 5d * Math.Log(r * Delta) / Math.Log(10d) + 0.044d * PhaseAngle - 2.6d * Math.Sin(17d * Pi / 180d) + 1.25d * Math.Sin(17d * Pi / 180d) * Math.Sin(17d * Pi / 180d)).ToString(); // Gross approximation
             }
 
-            Mag[BN] = (Conversion.Int(Conversions.ToDouble(Mag[BN]) * 10d + 0.5d) / 10d).ToString();
-            SM = Math.Sign(Conversion.Val(Mag[BN]));
-            Mag[BN] = (10.01d + Math.Abs(Conversion.Val(Mag[BN]))).ToString();
+            Mag[BN] = (Convert.ToInt32(Conversions.ToDouble(Mag[BN]) * 10d + 0.5d) / 10d).ToString();
+            SM = Math.Sign(Convert.ToInt32(Mag[BN]));
+            Mag[BN] = (10.01d + Math.Abs(Convert.ToInt32(Mag[BN]))).ToString();
             if (SM == 1)
                 Mag[BN] = " " + Strings.Mid(Conversion.Str(Mag[BN]), 3, 3);
             if (SM == -1)
@@ -3466,20 +3467,20 @@ namespace CelestialTools
             GA[IB] = GR - AR;
             if (GA[IB] >= 360d | GA[IB] < 0d)
             {
-                GA[IB] = GA[IB] - Conversion.Int(GA[IB] / 360d) * 360d;
+                GA[IB] = GA[IB] - Convert.ToInt32(GA[IB] / 360d) * 360d;
             }
 
-            SH[IB] = Conversion.Int(SH[IB] * 10d + 0.5d) / 10d;
-            GRD[IB] = (int)Conversion.Int(AR);
+            SH[IB] = Convert.ToInt32(SH[IB] * 10d + 0.5d) / 10d;
+            GRD[IB] = (int)Convert.ToInt32(AR);
             GRM[IB] = (AR - GRD[IB]) * 60d;
-            GRM[IB] = Conversion.Int(GRM[IB] * 10d + 0.5d) / 10d;
+            GRM[IB] = Convert.ToInt32(GRM[IB] * 10d + 0.5d) / 10d;
             if (GRM[IB] == 60d)
             {
                 GRM[IB] = 0d;
                 GRD[IB] = GRD[IB] + 1;
             }
 
-            RA[IB] = Conversion.Int(AR * 10d + 0.5d) / 10d;
+            RA[IB] = Convert.ToInt32(AR * 10d + 0.5d) / 10d;
             if (DE == 0d)
             {
                 HD[IB] = " ";
@@ -3495,10 +3496,10 @@ namespace CelestialTools
                 HD[IB] = CommonGlobals.g_LatS;
             }
 
-            DF[IB] = Conversion.Int(Math.Abs(DE) * 10d + 0.5d) / 10d;
-            VD[IB] = (int)Conversion.Int(GA[IB]);
+            DF[IB] = Convert.ToInt32(Math.Abs(DE) * 10d + 0.5d) / 10d;
+            VD[IB] = (int)Convert.ToInt32(GA[IB]);
             VM[IB] = (GA[IB] - VD[IB]) * 60d;
-            VM[IB] = Conversion.Int(VM[IB] * 10d + 0.5d) / 10d;
+            VM[IB] = Convert.ToInt32(VM[IB] * 10d + 0.5d) / 10d;
             if (VM[IB] == 60d)
             {
                 VM[IB] = 0d;
@@ -3546,12 +3547,12 @@ namespace CelestialTools
                 PZ = 2d * Pi - PZ;
             ZN = PZ * 180d / Pi;
             Ho = q * 180d / Pi;
-            Ho = Conversion.Int(Ho + 0.5d);
-            ZN1 = Conversion.Int(ZN * 10d + 0.5d) / 10d;
+            Ho = Convert.ToInt32(Ho + 0.5d);
+            ZN1 = Convert.ToInt32(ZN * 10d + 0.5d) / 10d;
             if (FlagSRSS == true)
                 ZN = ZN1;
             else
-                ZN = Conversion.Int(ZN + 0.5d);    // V5.6.2
+                ZN = Convert.ToInt32(ZN + 0.5d);    // V5.6.2
             return true;
         }
 
@@ -3563,7 +3564,7 @@ namespace CelestialTools
             {
                 Stars2();
                 AltAz();
-                MV = (float)Conversion.Val(Mag[BN]);
+                MV = (float)Convert.ToInt32(Mag[BN]);
                 if (Ho > 0d & MV < 1.55d)
                 {
                     First_Mag();
@@ -3746,8 +3747,8 @@ namespace CelestialTools
             DGMag1.Columns[1].MinimumWidth = 15;
             DGMag1.Columns[2].MinimumWidth = 15;
             DGMag1.Columns[3].MinimumWidth = 30;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             if (LowAz > HighAz)
             {
                 HighAz = (short)(HighAz + 360);
@@ -3867,8 +3868,8 @@ namespace CelestialTools
             DGMag2.Columns[1].MinimumWidth = 15;
             DGMag2.Columns[2].MinimumWidth = 15;
             DGMag2.Columns[3].MinimumWidth = 30;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             if (LowAz > HighAz)
             {
                 HighAz = (short)(HighAz + 360);
@@ -3939,8 +3940,8 @@ namespace CelestialTools
             DGMag3.Columns[1].MinimumWidth = 15;
             DGMag3.Columns[2].MinimumWidth = 15;
             DGMag3.Columns[3].MinimumWidth = 30;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             if (LowAz > HighAz)
             {
                 HighAz = (short)(HighAz + 360);
@@ -3986,8 +3987,8 @@ namespace CelestialTools
             ReportTxtBx.Visible = true;
             ReportTxtBx.BringToFront();
             ReportTxtBx.Clear();
-            ReportTxtBx.AppendText("Date" + Constants.vbTab + Constants.vbTab + DTPlan.Value.ToString("dd MMM yyyy") + Constants.vbTab + Constants.vbTab + "DR L" + Strings.Space(5 + (3 - txtLDeg.Text.Length)) + Strings.Format(Conversion.Val(txtLDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(LMin), "00.0") + "'" + cboL.Text + Environment.NewLine);
-            ReportTxtBx.AppendText("ZT" + Constants.vbTab + Constants.vbTab + txtTime.Text + Constants.vbTab + Constants.vbTab + Constants.vbTab + "DR Lo" + Strings.Space(5 + (3 - txtLoDeg.Text.Length)) + Strings.Format(Conversion.Val(txtLoDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
+            ReportTxtBx.AppendText("Date" + Constants.vbTab + Constants.vbTab + DTPlan.Value.ToString("dd MMM yyyy") + Constants.vbTab + Constants.vbTab + "DR L" + Strings.Space(5 + (3 - txtLDeg.Text.Length)) + Strings.Format(Convert.ToInt32(txtLDeg.Text), "0") + '°' + Strings.Format(Convert.ToInt32(LMin), "00.0") + "'" + cboL.Text + Environment.NewLine);
+            ReportTxtBx.AppendText("ZT" + Constants.vbTab + Constants.vbTab + txtTime.Text + Constants.vbTab + Constants.vbTab + Constants.vbTab + "DR Lo" + Strings.Space(5 + (3 - txtLoDeg.Text.Length)) + Strings.Format(Convert.ToInt32(txtLoDeg.Text), "0") + '°' + Strings.Format(Convert.ToInt32(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
             ReportTxtBx.AppendText("ZD" + Constants.vbTab + Constants.vbTab + "(");
             if (Math.Sign(ZD) == 1)
                 ReportTxtBx.AppendText("+");
@@ -4015,7 +4016,7 @@ namespace CelestialTools
                 ReportTxtBx.AppendText("DR Lo       (+)");
             if (Math.Sign(Lo) == 0)
                 ReportTxtBx.AppendText("DR Lo       ( )");
-            ReportTxtBx.AppendText(Constants.vbTab + Strings.Format(Conversion.Val(txtLoDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
+            ReportTxtBx.AppendText(Constants.vbTab + Strings.Format(Convert.ToInt32(txtLoDeg.Text), "0") + '°' + Strings.Format(Convert.ToInt32(LoMin), "00.0") + "'" + cboLo.Text + Environment.NewLine);
             ReportTxtBx.AppendText("LHA Aries     " + Constants.vbTab + Strings.Format(QD, "##0") + '°' + Strings.Format(QM, "00.0") + "' = " + Strings.Format(LR, "##0.0") + '°' + Environment.NewLine);
             ReportTxtBx.AppendText(Environment.NewLine);
             ReportTxtBx.AppendText("GHA Sun       " + Constants.vbTab + Strings.Format(VD[1], "##0") + '°' + Strings.Format(VM[1], "00.0") + "'" + Constants.vbTab + Constants.vbTab + "GHA Moon       " + Strings.Space(4 - Strings.Len(Conversion.Str(VD[2]))) + Strings.Format(VD[2], "##0") + '°' + Strings.Format(VM[2], "00.0") + "'" + Environment.NewLine);
@@ -4071,7 +4072,7 @@ namespace CelestialTools
         {
             // txtLowAz.ForeColor = &H80000008
             txtLowAz.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtLowAz.Text) > 360d)
+            if (Convert.ToInt32(txtLowAz.Text) > 360d)
             {
                 txtLowAz.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -4115,7 +4116,7 @@ namespace CelestialTools
         private void txtLowAz_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtLowAz.Text) > 360d)
+            if (Convert.ToInt32(txtLowAz.Text) > 360d)
             {
                 KeepFocus = true;
             }
@@ -4148,7 +4149,7 @@ namespace CelestialTools
         {
             // txtHighAz.ForeColor = &H80000008
             txtHighAz.BackColor = Control.DefaultBackColor; 
-            if (Conversion.Val(txtHighAz.Text) > 360d)
+            if (Convert.ToInt32(txtHighAz.Text) > 360d)
             {
                 txtHighAz.BackColor = ColorTranslator.FromOle(0xFF);
                 ErrorMsgBox("Out of Range", "Entry Error", MessageBoxButtons.OK);
@@ -4192,7 +4193,7 @@ namespace CelestialTools
         private void txtHighAz_Validating(object eventSender, System.ComponentModel.CancelEventArgs eventArgs)
         {
             bool KeepFocus = eventArgs.Cancel;
-            if (Conversion.Val(txtHighAz.Text) > 360d)
+            if (Convert.ToInt32(txtHighAz.Text) > 360d)
             {
                 KeepFocus = true;
             }
@@ -4349,8 +4350,8 @@ namespace CelestialTools
             // otherwise we are drawwing the visible stars and objects
             DPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             DPen.Brush = Brushes.Black;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             if (LowAz > HighAz)
                 HighAz = (short)(HighAz + 360);
 
@@ -4368,7 +4369,7 @@ namespace CelestialTools
                 for (i = 1f; i <= loopTo1; i++)
                 {
                     rad = (float)(DrawWidth * (1d - H1A[(int)i] / 90d));
-                    Z1[(int)i] = Conversion.Val(Z1[(int)i]);
+                    Z1[(int)i] = Convert.ToInt32(Z1[(int)i]);
                     Z1Temp[(int)i] = Z1[(int)i];
                     if (Z1[(int)i] < LowAz)
                     {
@@ -4462,7 +4463,7 @@ namespace CelestialTools
                 for (i = 1f; i <= loopTo3; i++)
                 {
                     rad = (float)(DrawWidth * (1d - H2A[(int)i] / 90d));
-                    Z2[(int)i] = Conversion.Val(Z2[(int)i]);
+                    Z2[(int)i] = Convert.ToInt32(Z2[(int)i]);
                     Z2Temp[(int)i] = Z2[(int)i];
                     if (Z2[(int)i] < LowAz)
                         Z2Temp[(int)i] = Z2[(int)i] + 360d;
@@ -4519,7 +4520,7 @@ namespace CelestialTools
                 for (i = 1f; i <= loopTo5; i++)
                 {
                     rad = (float)(DrawWidth * (1d - H3A[(int)i] / 90d));
-                    Z3[(int)i] = Conversion.Val(Z3[(int)i]);
+                    Z3[(int)i] = Convert.ToInt32(Z3[(int)i]);
                     Z3Temp[(int)i] = Z3[(int)i];
                     if (Z3[(int)i] < LowAz)
                         Z3Temp[(int)i] = Z3[(int)i] + 360d;
@@ -4893,8 +4894,8 @@ namespace CelestialTools
 
             DPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             DPen.Brush = Brushes.Black;
-            LowAz = (short)Conversion.Val(txtLowAz.Text);
-            HighAz = (short)Conversion.Val(txtHighAz.Text);
+            LowAz = (short)Convert.ToInt32(txtLowAz.Text);
+            HighAz = (short)Convert.ToInt32(txtHighAz.Text);
             if (LowAz > HighAz)
             {
                 HighAz = (short)(HighAz + 360);
@@ -4910,7 +4911,7 @@ namespace CelestialTools
                 var loopTo2 = (float)I1;
                 for (i = 1f; i <= loopTo2; i++)
                 {
-                    Z1[(int)i] = Conversion.Val(Z1[(int)i]);
+                    Z1[(int)i] = Convert.ToInt32(Z1[(int)i]);
                     Z1Temp[(int)i] = Z1[(int)i];
                     if (Z1[(int)i] < LowAz)
                     {
@@ -4992,7 +4993,7 @@ namespace CelestialTools
                 var loopTo4 = (float)I2;
                 for (i = 1f; i <= loopTo4; i++)
                 {
-                    Z2[(int)i] = Conversion.Val(Z2[(int)i]);
+                    Z2[(int)i] = Convert.ToInt32(Z2[(int)i]);
                     Z2Temp[(int)i] = Z2[(int)i];
                     if (Z2[(int)i] < LowAz)
                         Z2Temp[(int)i] = Z2[(int)i] + 360d;
@@ -5054,7 +5055,7 @@ namespace CelestialTools
                 var loopTo6 = (float)I3;
                 for (i = 1f; i <= loopTo6; i++)
                 {
-                    Z3[(int)i] = Conversion.Val(Z3[(int)i]);
+                    Z3[(int)i] = Convert.ToInt32(Z3[(int)i]);
                     Z3Temp[(int)i] = Z3[(int)i];
                     if (Z3[(int)i] < LowAz)
                     {
@@ -5553,18 +5554,18 @@ namespace CelestialTools
 
 
             // Calculate AutoZD
-            AutoZD = Conversion.Int(Lo / 15d + 0.5d);
-            Time = (short)(60d * Conversion.Val(Strings.Left(txtTime.Text, 2)) + Conversion.Val(Strings.Right(txtTime.Text, 2)) - (AutoZD - ZD) * 60d);
+            AutoZD = Convert.ToInt32(Lo / 15d + 0.5d);
+            Time = (short)(60d * Convert.ToInt32(Strings.Left(txtTime.Text, 2)) + Convert.ToInt32(Strings.Right(txtTime.Text, 2)) - (AutoZD - ZD) * 60d);
             if (Time < 0)
                 Time = (short)(Time + 1440);
             if (Time > 1440)
                 Time = (short)(Time - 1440);
-            C32 = (short)(60d * Conversion.Val(Strings.Left(C3[2], 2)) + Conversion.Val(Strings.Right(C3[2], 2)) - (AutoZD - ZD) * 60d);
-            C33 = (short)(60d * Conversion.Val(Strings.Left(C3[3], 2)) + Conversion.Val(Strings.Right(C3[3], 2)) - (AutoZD - ZD) * 60d);
-            C34 = (short)(60d * Conversion.Val(Strings.Left(C3[4], 2)) + Conversion.Val(Strings.Right(C3[4], 2)) - (AutoZD - ZD) * 60d);
-            C35 = (short)(60d * Conversion.Val(Strings.Left(C3[5], 2)) + Conversion.Val(Strings.Right(C3[5], 2)) - (AutoZD - ZD) * 60d);
-            C36 = (short)(60d * Conversion.Val(Strings.Left(C3[6], 2)) + Conversion.Val(Strings.Right(C3[6], 2)) - (AutoZD - ZD) * 60d);
-            C37 = (short)(60d * Conversion.Val(Strings.Left(C3[7], 2)) + Conversion.Val(Strings.Right(C3[7], 2)) - (AutoZD - ZD) * 60d);
+            C32 = (short)(60d * Convert.ToInt32(Strings.Left(C3[2], 2)) + Convert.ToInt32(Strings.Right(C3[2], 2)) - (AutoZD - ZD) * 60d);
+            C33 = (short)(60d * Convert.ToInt32(Strings.Left(C3[3], 2)) + Convert.ToInt32(Strings.Right(C3[3], 2)) - (AutoZD - ZD) * 60d);
+            C34 = (short)(60d * Convert.ToInt32(Strings.Left(C3[4], 2)) + Convert.ToInt32(Strings.Right(C3[4], 2)) - (AutoZD - ZD) * 60d);
+            C35 = (short)(60d * Convert.ToInt32(Strings.Left(C3[5], 2)) + Convert.ToInt32(Strings.Right(C3[5], 2)) - (AutoZD - ZD) * 60d);
+            C36 = (short)(60d * Convert.ToInt32(Strings.Left(C3[6], 2)) + Convert.ToInt32(Strings.Right(C3[6], 2)) - (AutoZD - ZD) * 60d);
+            C37 = (short)(60d * Convert.ToInt32(Strings.Left(C3[7], 2)) + Convert.ToInt32(Strings.Right(C3[7], 2)) - (AutoZD - ZD) * 60d);
             if (C32 > 1440)
                 C32 = (short)(C32 - 1440);
             if (C33 > 1440)
@@ -5665,7 +5666,7 @@ namespace CelestialTools
             if (B < 0d)
                 D = D + Pi;
             if (D >= 2d * Pi | D < 0d)
-                D = D - Conversion.Int(D / (2d * Pi)) * 2d * Pi;
+                D = D - Convert.ToInt32(D / (2d * Pi)) * 2d * Pi;
             AR = D + Pre2; // radians
             DE = Math.Atan(C / (Math.Sqrt(-C * C + 1d) + 9.999999E-21d)); // arcsin(C), radians
                                                                           // AR = AR * 180 / Pi

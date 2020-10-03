@@ -110,7 +110,7 @@ namespace CelestialTools
         private void cmdConvert_Click(object eventSender, EventArgs eventArgs)
         {
             Degrees = Conversion.Val(txtHsDeg.Text) + Conversion.Val(txtHsMin.Text) / 60d + Conversion.Val(txtHsSec.Text) / 3600d;
-            Degrees = Conversion.Int(Degrees * 100000d + 0.5d) / 100000d;
+            Degrees = Convert.ToInt32(Degrees * 100000d + 0.5d) / 100000d;
             // Time = Val(VB.Left(txtTime.Text, 2)) + Val(Mid(txtTime.Text, 3, 2)) / 60 + Val(VB.Right(txtTime.Text, 2)) / 3600
             Time = dtTime.Value.Hour + dtTime.Value.Minute / 60d + dtTime.Value.Second / 3600d;
             DecimalMinutes = dtTime.Value.Minute + dtTime.Value.Second / 60d;
@@ -816,9 +816,9 @@ namespace CelestialTools
                 result = result - 360d;
             while (result < 0d)
                 result = result + 360d;
-            ResultDeg = (short)Conversion.Int(result);
+            ResultDeg = (short)Convert.ToInt32(result);
             ResultMin = (float)((result - ResultDeg) * 60d);
-            ResultMin = (float)(Conversion.Int(ResultMin * 10f + 0.5d) / 10d);
+            ResultMin = (float)(Convert.ToInt32(ResultMin * 10f + 0.5d) / 10d);
             ResultMinute = Strings.Format(ResultMin, "00.0");
             txtResult.Text = Conversion.Str(ResultDeg) + '°' + ResultMinute + "'";
         }
@@ -1714,8 +1714,8 @@ namespace CelestialTools
                 Days = (short)(Days - 1);
             }
 
-            TimeResultHours = (short)Conversion.Int(TimeResult / 3600f);
-            TimeResultMinutes = (short)Conversion.Int((TimeResult - TimeResultHours * 3600f) / 60f);
+            TimeResultHours = (short)Convert.ToInt32(TimeResult / 3600f);
+            TimeResultMinutes = (short)Convert.ToInt32((TimeResult - TimeResultHours * 3600f) / 60f);
             txtTimeResult.Text = TimeResultHours.ToString("00") + ":" + TimeResultMinutes.ToString("00"); // & Strings.format(Str$(TimeResultSeconds), "00")
 
             // If LocADTPicked = True Then
@@ -2213,7 +2213,7 @@ namespace CelestialTools
         public void ZDCalc()
         {
             Lo = Conversion.Val(txtLoDeg.Text) + Conversion.Val(txtLoMin.Text) / 60d;
-            ZD = Conversion.Int(Lo / 15d + 0.5d);
+            ZD = Convert.ToInt32(Lo / 15d + 0.5d);
             if (cboLo.Text == "E")
                 ZD = -ZD;
             SignZD = "+";

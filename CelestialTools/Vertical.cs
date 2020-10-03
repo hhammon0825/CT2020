@@ -14,10 +14,10 @@ namespace CelestialTools
         private void cmdCalcVert_Click(object eventSender, EventArgs eventArgs)
         {
             H1 = (float)(0.5d * Conversion.Val(txtMTR.Text) + Conversion.Val(txtMTL.Text)); // H1 is height of MHW above MLLW
-            H1 = (float)(Conversion.Int(H1 * 10f + 0.5d) / 10d);
+            H1 = (float)(Convert.ToInt32(H1 * 10f + 0.5d) / 10d);
             VC = (float)(Conversion.Val(txtCH.Text) + H1 - Conversion.Val(txtHeight.Text));
             AC = (float)(VC - Conversion.Val(txtBH.Text));
-            AC = (float)(Conversion.Int(AC * 10f + 0.5d) / 10d);
+            AC = (float)(Convert.ToInt32(AC * 10f + 0.5d) / 10d);
             DC = (float)(Conversion.Val(txtCD.Text) + Conversion.Val(txtHeight.Text) - Conversion.Val(txtDraft.Text));
             VerticalTxtBx.SelectionAlignment = HorizontalAlignment.Center;
             VerticalTxtBx.AppendText("Height of MHW above MLLW = 1/2 Mean Range + Mean Tide");

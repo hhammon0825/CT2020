@@ -18,7 +18,7 @@ namespace CelestialTools
             string tablename = "Export2";
             var SR = new System.IO.StreamReader(FName);
             string allData = SR.ReadToEnd();
-            var rows = allData.Split(Conversions.ToChar(Constants.vbCrLf)); // ("\r".ToCharArray())
+            var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
             int incr1 = 0;
             foreach (string r in rows)
             {
@@ -54,7 +54,7 @@ namespace CelestialTools
             string NSEW = StrIn.ToString().Substring(StrIn.ToString().Length - 1, 1);
             string Str2 = StrIn.ToString().Substring(0, StrIn.ToString().Length - 1); // remove N/S on Lat and E/W on Long as last character
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'" + NSEW.ToString();
         }
@@ -73,7 +73,7 @@ namespace CelestialTools
 
             string Str2 = StrIn.ToString().TrimStart('-');
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("00") + ":" + TmpMin.ToString("00") + EqtSpeed;
         }
@@ -92,7 +92,7 @@ namespace CelestialTools
 
             string Str2 = StrIn.ToString().TrimStart('-');
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'" + NSEW.ToString();
         }
@@ -101,7 +101,7 @@ namespace CelestialTools
         {
             string Str2 = StrIn.ToString();
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'";
         }

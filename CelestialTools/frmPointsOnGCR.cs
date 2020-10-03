@@ -44,9 +44,9 @@ namespace CelestialTools
                 LoPoint = -LoPoint;
             LPoint = Math.Atan((Math.Sin(L1 * Pi / 180d) * Math.Cos(L2 * Pi / 180d) * Math.Sin((LoPoint - Lo2) * Pi / 180d) - Math.Sin(L2 * Pi / 180d) * Math.Cos(L1 * Pi / 180d) * Math.Sin((LoPoint - Lo1) * Pi / 180d)) / (Math.Cos(L1 * Pi / 180d) * Math.Cos(L2 * Pi / 180d) * Math.Sin((Lo1 - Lo2) * Pi / 180d)));
             LPoint = LPoint * 180d / Pi;
-            LPointDeg = Conversion.Int(Math.Abs(LPoint));
+            LPointDeg = Convert.ToInt32(Math.Abs(LPoint));
             LPointMin = (Math.Abs(LPoint) - LPointDeg) * 60d;
-            if (Conversion.Int(LPointMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LPointMin * 10d + 0.5d) / 10d == 60d)
             {
                 LPointMin = 0d;
                 LPointDeg = LPointDeg + 1d;

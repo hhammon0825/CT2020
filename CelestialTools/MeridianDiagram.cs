@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
+//using Microsoft.VisualBasic;
 
 namespace CelestialTools
 {
@@ -99,9 +99,9 @@ namespace CelestialTools
                     // tmpLMin = (L - tmpLDeg) * 60
                 }
 
-                tmpLDeg = Conversion.Int(tempLat);
+                tmpLDeg = Convert.ToInt32(tempLat);
                 tmpLMin = (tempLat - tmpLDeg) * 60d;
-                tmpLHADeg = Convert.ToDouble(Conversion.Int(LHAoriginal));
+                tmpLHADeg = Convert.ToDouble(Convert.ToInt32(LHAoriginal));
                 tmpLHAMin = (LHAoriginal - tmpLHADeg) * 60d;
                 LHAstr = tmpLHADeg.ToString("##0") + '°' + " " + tmpLHAMin.ToString("#0.0") + "'";
                 LatStr = tmpLDeg.ToString("##0") + '°';
@@ -123,7 +123,7 @@ namespace CelestialTools
                     tmpDec = Dec;
                 }
 
-                double DecDeg = Conversion.Int(tmpDec);
+                double DecDeg = Convert.ToInt32(tmpDec);
                 double DecMin = (tmpDec - DecDeg) * 60d;
                 Decstr = DecDeg.ToString("#0") + '°' + " " + DecMin.ToString("#0.0") + "'";  // tmpDec.ToString("#0.0") & Chr(176)
                 if (Dec < 0d)
@@ -135,16 +135,16 @@ namespace CelestialTools
                     Decstr += CommonGlobals.g_LatN;
                 }
 
-                int HoDeg = (int)Conversion.Int(Ho);
+                int HoDeg = (int)Convert.ToInt32(Ho);
                 double HoMin = (Ho - HoDeg) * 60d;
                 string HoStr = HoDeg.ToString("#0") + '°' + " " + HoMin.ToString("#0.0") + "'";
                 if (string.IsNullOrEmpty(BodyName))
                 {
-                    meridgraphic.DrawString("Lat: " + LatStr + Constants.vbCrLf + "LHA: " + LHAstr + Constants.vbCrLf + "Zn : " + Math.Round(ZNoriginal, 0, MidpointRounding.AwayFromZero).ToString("##0") + '°' + Constants.vbCrLf + "Ho : " + HoStr + Constants.vbCrLf + "Dec: " + Decstr, new Font("Arial", 8f, FontStyle.Bold), Brushes.DarkBlue, 15f, 15f);
+                    meridgraphic.DrawString("Lat: " + LatStr + Environment.NewLine + "LHA: " + LHAstr + Environment.NewLine + "Zn : " + Math.Round(ZNoriginal, 0, MidpointRounding.AwayFromZero).ToString("##0") + '°' + Environment.NewLine + "Ho : " + HoStr + Environment.NewLine + "Dec: " + Decstr, new Font("Arial", 8f, FontStyle.Bold), Brushes.DarkBlue, 15f, 15f);
                 }
                 else
                 {
-                    meridgraphic.DrawString("Body: " + BodyName + Constants.vbCrLf + "Lat: " + LatStr + Constants.vbCrLf + "LHA: " + LHAstr + Constants.vbCrLf + "Zn : " + Math.Round(ZN, 0, MidpointRounding.AwayFromZero).ToString("##0") + '°' + Constants.vbCrLf + "Ho : " + HoStr + Constants.vbCrLf + "Dec: " + Decstr, new Font("Arial", 8f, FontStyle.Bold), Brushes.DarkBlue, 15f, 15f);
+                    meridgraphic.DrawString("Body: " + BodyName + Environment.NewLine + "Lat: " + LatStr + Environment.NewLine + "LHA: " + LHAstr + Environment.NewLine + "Zn : " + Math.Round(ZN, 0, MidpointRounding.AwayFromZero).ToString("##0") + '°' + Environment.NewLine + "Ho : " + HoStr + Environment.NewLine + "Dec: " + Decstr, new Font("Arial", 8f, FontStyle.Bold), Brushes.DarkBlue, 15f, 15f);
                 }
             }
 

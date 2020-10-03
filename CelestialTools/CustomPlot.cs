@@ -455,8 +455,8 @@ namespace CelestialTools
                         LatDiff = LowLat - HighLat;
                     }
 
-                    LatDiffMin = (LatDiff - Conversion.Int(LatDiff)) * 60d;
-                    if (LatDiffMin > 59.9d | Conversion.Int(LatDiff) > 1d)
+                    LatDiffMin = (LatDiff - Convert.ToInt32(LatDiff)) * 60d;
+                    if (LatDiffMin > 59.9d | Convert.ToInt32(LatDiff) > 1d)
                     {
                         SendMsgBx("Error: Distances between all latitudes must be less than 60 miles to plot", MessageBoxIcon.Error);
                         return false;
@@ -475,8 +475,8 @@ namespace CelestialTools
                         LongDiff = LowLong - HighLong;
                     }
                     // LongDiff = HighLong - LowLong
-                    LongDiffMin = (LongDiff - Conversion.Int(LongDiff)) * 60d;
-                    if (LongDiffMin > 59.9d | Conversion.Int(LongDiff) > 1d)
+                    LongDiffMin = (LongDiff - Convert.ToInt32(LongDiff)) * 60d;
+                    if (LongDiffMin > 59.9d | Convert.ToInt32(LongDiff) > 1d)
                     {
                         SendMsgBx("Error: Distances between all longitudes must be less than 60 miles to plot", MessageBoxIcon.Error);
                         return false;
@@ -488,7 +488,7 @@ namespace CelestialTools
             if (Information.UBound(PlotArray) == 1)
             {
                 CentralLatDeg = Math.Abs(Convert.ToInt32(PlotArray[myIdx].PlotLatDeg));
-                CentralLatMin = Math.Abs(Convert.ToInt32(Conversion.Int(Convert.ToDouble(PlotArray[myIdx].PlotLatMin)) / 10d) * 10);
+                CentralLatMin = Math.Abs(Convert.ToInt32(Convert.ToInt32(Convert.ToDouble(PlotArray[myIdx].PlotLatMin)) / 10d) * 10);
                 if (CentralLatMin == 60)
                 {
                     CentralLatMin = 0;
@@ -497,7 +497,7 @@ namespace CelestialTools
 
                 CentralLat = CentralLatDeg + CentralLatMin / 60d;
                 CentralLongDeg = Math.Abs(Convert.ToInt32(PlotArray[myIdx].PlotLongDeg));
-                CentralLongMin = Math.Abs(Convert.ToInt32(Conversion.Int(Convert.ToDouble(PlotArray[myIdx].PlotLongMin)) / 10d) * 10);
+                CentralLongMin = Math.Abs(Convert.ToInt32(Convert.ToInt32(Convert.ToDouble(PlotArray[myIdx].PlotLongMin)) / 10d) * 10);
                 if (CentralLongMin == 60)
                 {
                     CentralLongMin = 0;
@@ -523,7 +523,7 @@ namespace CelestialTools
 
                 AvgLat = AvgLat / PlotCt;
                 AvgLong = AvgLong / PlotCt;
-                CentralLatDeg = (int)Conversion.Int(AvgLat);
+                CentralLatDeg = (int)Convert.ToInt32(AvgLat);
                 CentralLatMin = Convert.ToInt32((AvgLat - CentralLatDeg) * 60d / 10d) * 10;
                 if (CentralLatMin == 60)
                 {
@@ -532,7 +532,7 @@ namespace CelestialTools
                 }
 
                 CentralLat = CentralLatDeg + CentralLatMin / 60d;
-                CentralLongDeg = (int)Conversion.Int(AvgLong);
+                CentralLongDeg = (int)Convert.ToInt32(AvgLong);
                 CentralLongMin = Convert.ToInt32((AvgLong - CentralLongDeg) * 60d / 10d) * 10;
                 if (CentralLongMin == 60)
                 {
@@ -1765,7 +1765,7 @@ namespace CelestialTools
                 TmpLong = CentralLong - Convert.ToDouble((MidX - CLoc1.X) / OneNMLongPixels / 60d);
             }
 
-            double TmpLatD = Conversion.Int(Math.Abs(TmpLat));
+            double TmpLatD = Convert.ToInt32(Math.Abs(TmpLat));
             double TmpLatM = Math.Round((Math.Abs(TmpLat) - TmpLatD) * 60d, 1);
             string TmpLatNS = "N";
             if (ULLat < 0d)
@@ -1773,7 +1773,7 @@ namespace CelestialTools
                 TmpLatNS = "S";
             }
 
-            double TmpLongD = Conversion.Int(Math.Abs(TmpLong));
+            double TmpLongD = Convert.ToInt32(Math.Abs(TmpLong));
             double TmpLongM = Math.Round((Math.Abs(TmpLong) - TmpLongD) * 60d, 1);
             string TmpLongEW = "W";
             if (ULLong < 0d)

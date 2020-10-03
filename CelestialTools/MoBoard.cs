@@ -174,25 +174,25 @@ namespace CelestialTools
                     V2Course = V2Course - 360d;
                 if (V2Course < 0d)
                     V2Course = V2Course + 360d;
-                V2Course = Conversion.Int(V2Course * 10d + 0.5d) / 10d;
-                V2Speed = Conversion.Int(V2Speed * 10d + 0.5d) / 10d;
+                V2Course = Convert.ToInt32(V2Course * 10d + 0.5d) / 10d;
+                V2Speed = Convert.ToInt32(V2Speed * 10d + 0.5d) / 10d;
                 TimeToCPA = (float)(Dist2 / Dist * (Time2Minutes - Time1Minutes));
                 if (A > Pi / 2d)
                     TimeToCPA = -TimeToCPA;
                 TimeOfCPA = Time2Minutes + TimeToCPA;
                 Range = Math.Abs(Range);
-                Range = Conversion.Int(Range * 100d + 0.5d) / 100d;
-                CPABearing = Conversion.Int(CPABearing * 10d + 0.5d) / 10d;
-                TimeToCPA = (float)(Conversion.Int(TimeToCPA * 10f + 0.5d) / 10d);
-                SRM = (float)(Conversion.Int(SRM * 10f + 0.5d) / 10d);
+                Range = Convert.ToInt32(Range * 100d + 0.5d) / 100d;
+                CPABearing = Convert.ToInt32(CPABearing * 10d + 0.5d) / 10d;
+                TimeToCPA = (float)(Convert.ToInt32(TimeToCPA * 10f + 0.5d) / 10d);
+                SRM = (float)(Convert.ToInt32(SRM * 10f + 0.5d) / 10d);
                 TimeOfCPA = TimeOfCPA / 60f; // decimal hours
-                TimeOfCPAh = (short)Conversion.Int(TimeOfCPA);
+                TimeOfCPAh = (short)Convert.ToInt32(TimeOfCPA);
                 TimeOfCPAm = (TimeOfCPA - TimeOfCPAh) * 60f;
-                TimeOfCPAm = (float)Conversion.Int(TimeOfCPAm + 0.5d);
+                TimeOfCPAm = (float)Convert.ToInt32(TimeOfCPAm + 0.5d);
                 if (TimeOfCPAh >= 24)
                     TimeOfCPAh = (short)(TimeOfCPAh - 24);
                 TimeOfCPA = 100 * TimeOfCPAh + TimeOfCPAm;
-                DRM = Conversion.Int(DRM * 10d + 0.5d) / 10d;
+                DRM = Convert.ToInt32(DRM * 10d + 0.5d) / 10d;
                 if (CPAexists == true)
                 {
                     txtMoB.AppendText("CPA = " + Strings.Format(Range, "0.00") + " nm in " + Strings.Format(TimeToCPA, "0.0") + " minutes" + Environment.NewLine); // ;
@@ -239,7 +239,7 @@ namespace CelestialTools
                 if (DRM > 360d)
                     DRM = DRM - 360d;
                 SRM = (float)Math.Sqrt(A);
-                SRM = (float)(Conversion.Int(SRM * 10f + 0.5d) / 10d);
+                SRM = (float)(Convert.ToInt32(SRM * 10f + 0.5d) / 10d);
                 B = 2d * dot;
                 Range = Math.Abs(Conversion.Val(txtRange.Text) * Conversion.Val(txtRange.Text) - B * B / (4d * A)); // Abs prevents slightly negative numbers from creating error in Sqr(Range)
                 TimeToCPA = (float)(60d * (-B / (2d * A)));
@@ -346,10 +346,10 @@ namespace CelestialTools
                     CPABearing = 90d + CPABearing;
                 if (DeltaY < 0d & DeltaX < 0d)
                     CPABearing = 270d - CPABearing;
-                CPABearing = Conversion.Int(CPABearing * 10d + 0.5d) / 10d;
-                TimeToCPA = (float)(Conversion.Int(TimeToCPA * 10f + 0.5d) / 10d);
+                CPABearing = Convert.ToInt32(CPABearing * 10d + 0.5d) / 10d;
+                TimeToCPA = (float)(Convert.ToInt32(TimeToCPA * 10f + 0.5d) / 10d);
                 Range = Math.Sqrt(Range);
-                Range = Conversion.Int(Range * 100d + 0.5d) / 100d;
+                Range = Convert.ToInt32(Range * 100d + 0.5d) / 100d;
                 if (CPAexists == true)
                 {
                     txtMoB.AppendText("CPA = " + Strings.Format(Range, "0.00") + " nm in " + Strings.Format(TimeToCPA, "0.0") + " minutes" + Environment.NewLine); // ;
@@ -415,8 +415,8 @@ namespace CelestialTools
                     TrueWindDir = TrueWindDir - 360d;
                 if (TrueWindDir < 0d)
                     TrueWindDir = TrueWindDir + 360d;
-                TrueWindDir = Conversion.Int(TrueWindDir * 10d + 0.5d) / 10d;
-                TrueWindSpeed = Conversion.Int(TrueWindSpeed * 10d + 0.5d) / 10d;
+                TrueWindDir = Convert.ToInt32(TrueWindDir * 10d + 0.5d) / 10d;
+                TrueWindSpeed = Convert.ToInt32(TrueWindSpeed * 10d + 0.5d) / 10d;
                 txtMoB.AppendText("True wind from " + Strings.Format(TrueWindDir, "000.0") + '°' + " at " + Strings.Format(TrueWindSpeed, "0.0") + " knots" + Environment.NewLine);
             }
 
@@ -439,8 +439,8 @@ namespace CelestialTools
                 ApparentWindDir = (float)(ApparentWindDir * 180f / Pi);
                 if (PointingAngle > Pi)
                     ApparentWindDir = 360f - ApparentWindDir; // 180º
-                ApparentWindDir = (float)(Conversion.Int(ApparentWindDir * 10f + 0.5d) / 10d);
-                ApparentWindSpeed = Conversion.Int(ApparentWindSpeed * 10d + 0.5d) / 10d;
+                ApparentWindDir = (float)(Convert.ToInt32(ApparentWindDir * 10f + 0.5d) / 10d);
+                ApparentWindSpeed = Convert.ToInt32(ApparentWindSpeed * 10d + 0.5d) / 10d;
                 txtMoB.AppendText("Apparent wind from " + Strings.Format(ApparentWindDir, "000.0") + '°' + " relative at " + Strings.Format(ApparentWindSpeed, "0.0") + " knots" + Environment.NewLine);
             }
             // intResponse = ErrorMsgBoxResult.Ignore

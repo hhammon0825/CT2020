@@ -58,7 +58,7 @@ namespace CelestialTools
                 return;
             }
 
-            txtDistance.Text = (Conversion.Int(Distance * 10d + 0.50000000000001d) / 10d).ToString("0.0");
+            txtDistance.Text = (Convert.ToInt32(Distance * 10d + 0.50000000000001d) / 10d).ToString("0.0");
             Flag1 = false;
         }
 
@@ -82,7 +82,7 @@ namespace CelestialTools
                 return;
             }
 
-            txtSpeed.Text = (Conversion.Int(Speed * 10d + 0.50000000000001d) / 10d).ToString("0.0");
+            txtSpeed.Text = (Convert.ToInt32(Speed * 10d + 0.50000000000001d) / 10d).ToString("0.0");
             Flag1 = false;
         }
 
@@ -114,7 +114,7 @@ namespace CelestialTools
 
             TSpanDbl = Time + 0.50000000000001d;
             TSpan = TimeSpan.FromMinutes(TSpanDbl);
-            txtTime.Text = Conversion.Int(TSpanDbl).ToString("0");
+            txtTime.Text = Convert.ToInt32(TSpanDbl).ToString("0");
             txtd.Text = TSpan.Days.ToString("0");
             txth.Text = TSpan.Hours.ToString("0");
             txtm.Text = TSpan.Minutes.ToString("0");

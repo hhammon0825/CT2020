@@ -78,7 +78,7 @@ namespace CelestialTools
 
         private TimeZoneInfo[] CnvtLongtoTZInfo(double LongIn)
         {
-            int LongDegIn = (int)Conversion.Int(LongIn);
+            int LongDegIn = (int)Convert.ToInt32(LongIn);
             double LongMinIN = LongIn - LongDegIn;
             int ZDLongIn = (int)Math.Round(LongIn / 15d, 0, MidpointRounding.AwayFromZero);
             LongTZInfo = new TimeZoneInfo[1];
@@ -219,7 +219,7 @@ namespace CelestialTools
         {
             txtLocAZTInfo.Clear();
             var TZA = TimeZoneInfo.FindSystemTimeZoneById(FindZTID(cboLocAZD.Text));
-            txtLocAZTInfo.AppendText("UTC Offset Hr: " + TZA.BaseUtcOffset.Hours.ToString("00") + " Min: " + TZA.BaseUtcOffset.Minutes.ToString("00") + Constants.vbCrLf + "Standard Name: " + TZA.StandardName.ToString() + Constants.vbCrLf + "DST Support: " + TZA.SupportsDaylightSavingTime.ToString() + Constants.vbCrLf + "UTC Offset: " + TZA.GetUtcOffset(DTLocA.Value).ToString());
+            txtLocAZTInfo.AppendText("UTC Offset Hr: " + TZA.BaseUtcOffset.Hours.ToString("00") + " Min: " + TZA.BaseUtcOffset.Minutes.ToString("00") + Environment.NewLine + "Standard Name: " + TZA.StandardName.ToString() + Environment.NewLine + "DST Support: " + TZA.SupportsDaylightSavingTime.ToString() + Environment.NewLine + "UTC Offset: " + TZA.GetUtcOffset(DTLocA.Value).ToString());
             var DTTemp = new DateTime(DTLocA.Value.Ticks, DateTimeKind.Unspecified);
             DTLocAUTC.Value = TimeZoneInfo.ConvertTimeToUtc(DTTemp, TZA);
             if (!string.IsNullOrEmpty(cboLocBZD.Text))
@@ -232,7 +232,7 @@ namespace CelestialTools
         {
             txtLocBZTInfo.Clear();
             var TZB = TimeZoneInfo.FindSystemTimeZoneById(FindZTID(cboLocBZD.Text));
-            txtLocBZTInfo.AppendText("UTC Offset Hr: " + TZB.BaseUtcOffset.Hours.ToString("00") + " Min: " + TZB.BaseUtcOffset.Minutes.ToString("00") + Constants.vbCrLf + "Standard Name: " + TZB.StandardName.ToString() + Constants.vbCrLf + "DST Support: " + TZB.SupportsDaylightSavingTime.ToString() + Constants.vbCrLf + "UTC Offset: " + TZB.GetUtcOffset(DTResult.Value).ToString());
+            txtLocBZTInfo.AppendText("UTC Offset Hr: " + TZB.BaseUtcOffset.Hours.ToString("00") + " Min: " + TZB.BaseUtcOffset.Minutes.ToString("00") + Environment.NewLine + "Standard Name: " + TZB.StandardName.ToString() + Environment.NewLine + "DST Support: " + TZB.SupportsDaylightSavingTime.ToString() + Environment.NewLine + "UTC Offset: " + TZB.GetUtcOffset(DTResult.Value).ToString());
             PerformEditClick();
             return;
         }

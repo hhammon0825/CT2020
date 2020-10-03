@@ -56,7 +56,7 @@ namespace CelestialTools
             Time1inMinutes = (short)(60d * Conversion.Val(Strings.Left(txtTime1.Text, 2)) + Conversion.Val(Strings.Right(txtTime1.Text, 2)));
             Time2inMinutes = (short)(60d * Conversion.Val(Strings.Left(txtTime2.Text, 2)) + Conversion.Val(Strings.Right(txtTime2.Text, 2)));
             TimeinMinutes = (short)(Time2inMinutes - Time1inMinutes);
-            TimeHours = (short)Conversion.Int(TimeinMinutes / 60d);
+            TimeHours = (short)Convert.ToInt32(TimeinMinutes / 60d);
             TimeMinutes = (short)(TimeinMinutes - 60 * TimeHours);
             if (TimeinMinutes < 0)
             {
@@ -94,20 +94,20 @@ namespace CelestialTools
             if (!string.IsNullOrEmpty(txtTime2.Text))
             {
                 TimeOfCPA = Time2inMinutes + TimeToCPA;
-                TimeToCPA = Conversion.Int(TimeToCPA * 10d + 0.5d) / 10d;
+                TimeToCPA = Convert.ToInt32(TimeToCPA * 10d + 0.5d) / 10d;
                 TimeOfCPA = TimeOfCPA / 60d; // decimal hours
-                TimeOfCPAh = (short)Conversion.Int(TimeOfCPA);
+                TimeOfCPAh = (short)Convert.ToInt32(TimeOfCPA);
                 TimeOfCPAm = (TimeOfCPA - TimeOfCPAh) * 60d;
-                TimeOfCPAm = Conversion.Int(TimeOfCPAm + 0.5d);
+                TimeOfCPAm = Convert.ToInt32(TimeOfCPAm + 0.5d);
                 if (TimeOfCPAh >= 24)
                     TimeOfCPAh = (short)(TimeOfCPAh - 24);
                 TimeOfCPA = 100 * TimeOfCPAh + TimeOfCPAm;
             }
 
-            DistanceTraveled = Conversion.Int(DistanceTraveled * 100d + 0.5d) / 100d;
-            BeamDistance = Conversion.Int(BeamDistance * 100d + 0.5d) / 100d;
-            DistanceToObjectAbeam = Conversion.Int(DistanceToObjectAbeam * 100d + 0.5d) / 100d;
-            TimeToCPA = Conversion.Int(TimeToCPA + 0.5d);
+            DistanceTraveled = Convert.ToInt32(DistanceTraveled * 100d + 0.5d) / 100d;
+            BeamDistance = Convert.ToInt32(BeamDistance * 100d + 0.5d) / 100d;
+            DistanceToObjectAbeam = Convert.ToInt32(DistanceToObjectAbeam * 100d + 0.5d) / 100d;
+            TimeToCPA = Convert.ToInt32(TimeToCPA + 0.5d);
             TimeOfCPA = 100 * TimeOfCPAh + TimeOfCPAm;
             DistanceTxtBx.Clear();
             DistanceTxtBx.SelectionAlignment = HorizontalAlignment.Center;
@@ -203,18 +203,18 @@ namespace CelestialTools
             LoFix = LoFix * 180d / Pi;
             if (Math.Abs(LoFix) > 180d)
                 LoFix = -Math.Sign(LoFix) * (360d - Math.Abs(LoFix));
-            LfixDeg = (short)Conversion.Int(Math.Abs(Lfix));
+            LfixDeg = (short)Convert.ToInt32(Math.Abs(Lfix));
             LfixMin = (Math.Abs(Lfix) - LfixDeg) * 60d;
-            if (Conversion.Int(LfixMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LfixMin * 10d + 0.5d) / 10d == 60d)
             {
                 LfixMin = 0d;
                 LfixDeg = (short)(LfixDeg + 1);
             }
 
             LfixDeg = Math.Abs(LfixDeg);
-            LofixDeg = (short)Conversion.Int(Math.Abs(LoFix));
+            LofixDeg = (short)Convert.ToInt32(Math.Abs(LoFix));
             LofixMin = (Math.Abs(LoFix) - LofixDeg) * 60d;
-            if (Conversion.Int(LofixMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LofixMin * 10d + 0.5d) / 10d == 60d)
             {
                 LofixMin = 0d;
                 LofixDeg = (short)(LofixDeg + 1);

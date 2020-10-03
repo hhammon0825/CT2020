@@ -710,11 +710,11 @@ namespace CelestialTools
                 // objWriter.Dispose()
             }
         }
-
+        private string g_tab = "\t";
         private string FormatSightForPrint(FavoriteLoc SE)
         {
             string SaveStr = Constants.vbNullString;
-            string StrParm = Constants.vbTab;
+            string StrParm = g_tab;
             string SepLine = "__________________________________________________________________________________________";
             SaveStr = "Name = " + SE.SLName + StrParm + "No = " + SE.SightNum + StrParm + "DST = " + SE.DST + StrParm + "ZD = " + SE.ZD + StrParm + "DR Lat = " + SE.DRLat + StrParm + "DR Long = " + SE.DRLong + Environment.NewLine + "ApprxBrg=" + SE.ApprxBrg + StrParm + "HE = " + SE.HE + StrParm + "Horizon = " + SE.HorType + StrParm + "Dip Short = " + SE.HorDist + " " + SE.HorDistType + Environment.NewLine + "From AZ =" + SE.FromAZ + Environment.NewLine + "To AZ = " + SE.ToAZ + Environment.NewLine + "hsIEFmt =" + SE.hsIEFormat + Environment.NewLine + "Remarks = " + SE.Remarks + Environment.NewLine + SepLine.ToString() + Environment.NewLine;
             return SaveStr;

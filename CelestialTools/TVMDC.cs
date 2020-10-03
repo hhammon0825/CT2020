@@ -115,7 +115,7 @@ namespace CelestialTools
             Change = Conversions.ToInteger(Operators.MultiplyObject(Conversions.ToInteger(AnnualChange), Years));
             CorrVar = ChartedVariation + Change;
             CorrVar = CorrVar / 60d;
-            CorrVar = Conversion.Int(CorrVar + 0.5d);
+            CorrVar = Convert.ToInt32(CorrVar + 0.5d);
             if (cboCV.SelectedIndex == 0)
             {
                 txtEW.Text = CommonGlobals.g_LongW;

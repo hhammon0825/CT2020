@@ -33,11 +33,11 @@ namespace CelestialTools
             {
                 DecimalDegrees = Conversion.Val(txtDeg.Text) + Conversion.Val(txtMin.Text) / 60d;
                 timeinhours = DecimalDegrees / 15d;
-                TimeHours = (int)Conversion.Int(timeinhours);
-                TimeMinutes = (timeinhours - Conversion.Int(timeinhours)) * 60d;
-                TimeSeconds = (TimeMinutes - Conversion.Int(TimeMinutes)) * 60d;
-                TimeMinutes = Conversion.Int(TimeMinutes);
-                TimeSeconds = Conversion.Int(TimeSeconds + 0.5d);
+                TimeHours = (int)Convert.ToInt32(timeinhours);
+                TimeMinutes = (timeinhours - Convert.ToInt32(timeinhours)) * 60d;
+                TimeSeconds = (TimeMinutes - Convert.ToInt32(TimeMinutes)) * 60d;
+                TimeMinutes = Convert.ToInt32(TimeMinutes);
+                TimeSeconds = Convert.ToInt32(TimeSeconds + 0.5d);
                 if (TimeSeconds == 60d)
                 {
                     TimeSeconds = 0d;
@@ -62,9 +62,9 @@ namespace CelestialTools
                 DecimalHours = DTTime.Value.Hour + DTTime.Value.Minute / 60d + DTTime.Value.Second / 3600d;
                 // DecimalHours = Val(VB.Left(txtTime.Text, 2)) + Val(Mid(txtTime.Text, 3, 2)) / 60 + Val(Mid(txtTime.Text, 5, 2)) / 3600
                 ArcInDegrees = DecimalHours * 15d;
-                ArcDegrees = Conversion.Int(ArcInDegrees);
-                ArcMinutes = (ArcInDegrees - Conversion.Int(ArcInDegrees)) * 60d;
-                ArcMinutes = Conversion.Int(ArcMinutes * 10d + 0.5d) / 10d;
+                ArcDegrees = Convert.ToInt32(ArcInDegrees);
+                ArcMinutes = (ArcInDegrees - Convert.ToInt32(ArcInDegrees)) * 60d;
+                ArcMinutes = Convert.ToInt32(ArcMinutes * 10d + 0.5d) / 10d;
             }
 
             ZDCalc();
@@ -94,10 +94,10 @@ namespace CelestialTools
                 ConvertedTime = ConvertedTime + 86400d;
             }
 
-            ConvertedTimeHours = (int)Conversion.Int(ConvertedTime / 3600d);
-            ConvertedTimeMinutes = (int)Conversion.Int((ConvertedTime - ConvertedTimeHours * 3600) / 60d);
+            ConvertedTimeHours = (int)Convert.ToInt32(ConvertedTime / 3600d);
+            ConvertedTimeMinutes = (int)Convert.ToInt32((ConvertedTime - ConvertedTimeHours * 3600) / 60d);
             ConvertedTimeSeconds = (int)(ConvertedTime - ConvertedTimeHours * 3600 - ConvertedTimeMinutes * 60);
-            ConvertedTimeSeconds = (int)Conversion.Int(ConvertedTimeSeconds + 0.5d);
+            ConvertedTimeSeconds = (int)Convert.ToInt32(ConvertedTimeSeconds + 0.5d);
             if (ConvertedTimeSeconds == 60)
             {
                 ConvertedTimeSeconds = 0;

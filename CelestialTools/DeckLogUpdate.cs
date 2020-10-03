@@ -459,7 +459,7 @@ namespace CelestialTools
                         txtOpenFN.Visible = true;
                         txtOpenFN.Text = SLOpenFName;
                         string allData = myStream.ReadToEnd();
-                        var rows = allData.Split(Conversions.ToChar(Constants.vbCrLf)); // ("\r".ToCharArray())
+                        var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
                         int incr1 = 0;
                         foreach (string r1 in rows)
                         {
@@ -1609,8 +1609,8 @@ namespace CelestialTools
                 return false;
             }
             // due to csv file format for decklog file, all commas, line feeds, and CR/line feeds must be removed
-            txtRemarks.Text = txtRemarks.Text.ToString().Replace(Constants.vbCr, "").Replace(Constants.vbCrLf, "").Replace(",", "");
-            txtWeather.Text = txtWeather.Text.ToString().Replace(Constants.vbCr, "").Replace(Constants.vbCrLf, "").Replace(",", "");
+            txtRemarks.Text = txtRemarks.Text.ToString().Replace(Constants.vbCr, "").Replace(Environment.NewLine, "").Replace(",", "");
+            txtWeather.Text = txtWeather.Text.ToString().Replace(Constants.vbCr, "").Replace(Environment.NewLine, "").Replace(",", "");
             UpdtRtn.Wind = txtWind.Text.ToString();
             UpdtRtn.WindDir = cboWindDir.Text.ToString();
             UpdtRtn.Seas = txtSeas.Text.ToString();
@@ -2178,7 +2178,7 @@ namespace CelestialTools
             double DestDist = GetDistance(UpdtRtn.LatDouble, UpdtRtn.LongDouble, UpdtRtn.DestLatDouble, UpdtRtn.DestLongDouble);
             txtDestDist.Text = DestDist.ToString("##0.0") + "nm";
             // Get the true heading from origin Lat/Long to destination Lat/Long and format display text field
-            int TempHeading = (int)Conversion.Int(GetHeading(UpdtRtn.LatDouble, UpdtRtn.LongDouble, UpdtRtn.DestLatDouble, UpdtRtn.DestLongDouble));
+            int TempHeading = (int)Convert.ToInt32(GetHeading(UpdtRtn.LatDouble, UpdtRtn.LongDouble, UpdtRtn.DestLatDouble, UpdtRtn.DestLongDouble));
             txtDestTrue.Text = TempHeading.ToString("##0") + '°';
             // no matter what was entered the true bearing to steer is the calculated one - so it is installed along with the compass bearing recalculated.
             txtCTrue.Text = TempHeading.ToString("##0");    // txtDestTrue.Text.Trim(Chr(176))
@@ -3176,7 +3176,7 @@ namespace CelestialTools
                 TempL3Disp = TempL3;
             }
 
-            int TempL3Deg = (int)Conversion.Int(TempL3Disp);
+            int TempL3Deg = (int)Convert.ToInt32(TempL3Disp);
             double TempL3Min = (TempL3Disp - TempL3Deg) * 60d;
             double TempLo3 = TempLoc.Longitude;
             string TempLo3EW = TempcboLo;
@@ -3192,7 +3192,7 @@ namespace CelestialTools
                 TempLo3Disp = TempLo3;
             }
 
-            int TempLo3Deg = (int)Conversion.Int(TempLo3Disp);
+            int TempLo3Deg = (int)Convert.ToInt32(TempLo3Disp);
             double TempLo3Min = (TempLo3Disp - TempLo3Deg) * 60d;
             DataGridView1.Rows[CurrRec].Cells[CalcDestLogTypeCell].Value = "L=" + TempL3Deg.ToString("##0") + '°' + TempL3Min.ToString("#0.0") + "'" + TempL3NS + " " + "Lo=" + TempLo3Deg.ToString("##0") + '°' + TempLo3Min.ToString("#0.0") + "'" + TempLo3EW;
 
@@ -3783,13 +3783,13 @@ namespace CelestialTools
                     AdvNm = Convert.ToDouble(cboAdvNm.Value);
                     AdvMin = (int)(60d * AdvNm / TempSpeed);
                     double tmpHrMinD = AdvMin / 60d;
-                    if (Conversion.Int(tmpHrMinD) > (double)cboAdvHrs.Maximum)
+                    if (Convert.ToInt32(tmpHrMinD) > (double)cboAdvHrs.Maximum)
                     {
                         cboAdvHrs.Maximum = (decimal)(tmpHrMinD + 24d);
                     }
 
-                    cboAdvHrs.Value = (decimal)Conversion.Int(tmpHrMinD);
-                    cboAdvMin.Value = (decimal)((tmpHrMinD - Conversion.Int(tmpHrMinD)) * 60d);
+                    cboAdvHrs.Value = (decimal)Convert.ToInt32(tmpHrMinD);
+                    cboAdvMin.Value = (decimal)((tmpHrMinD - Convert.ToInt32(tmpHrMinD)) * 60d);
                 }
                 else if (cboAdvType.SelectedIndex == 0)
                 {
@@ -3835,8 +3835,8 @@ namespace CelestialTools
                     TmpLoc1Lat = TempLoc1.Latitude;
                 }
 
-                txtLDeg.Text = Conversion.Int(TmpLoc1Lat).ToString("#0");
-                txtLMin.Text = ((TmpLoc1Lat - Conversion.Int(TmpLoc1Lat)) * 60d).ToString("00.0");
+                txtLDeg.Text = Convert.ToInt32(TmpLoc1Lat).ToString("#0");
+                txtLMin.Text = ((TmpLoc1Lat - Convert.ToInt32(TmpLoc1Lat)) * 60d).ToString("00.0");
                 double TmpLoc1Long = TempLoc1.Longitude;
                 if (TempLoc1.Longitude < 0d) // if temploc1.longitude is negative, it is West longitude
                 {
@@ -3849,8 +3849,8 @@ namespace CelestialTools
                     TmpLoc1Long = TempLoc1.Longitude;
                 }
 
-                txtLoDeg.Text = Conversion.Int(TmpLoc1Long).ToString("##0");
-                txtLoMin.Text = ((TmpLoc1Long - Conversion.Int(TmpLoc1Long)) * 60d).ToString("00.0");
+                txtLoDeg.Text = Convert.ToInt32(TmpLoc1Long).ToString("##0");
+                txtLoMin.Text = ((TmpLoc1Long - Convert.ToInt32(TmpLoc1Long)) * 60d).ToString("00.0");
                 cboLocType.SelectedIndex = 0; // set log entry type to DR Track (index = 0)
                 int TmpZD = (int)Math.Round(TempLoc.Longitude / 15d, 0);
                 int TmpZD1 = (int)Math.Round(TempLoc1.Longitude / 15d, 0);
@@ -3882,8 +3882,8 @@ namespace CelestialTools
                 AdvNm = Convert.ToDouble(cboAdvNm.Value);
                 AdvMin = (int)(60d * AdvNm / TempSpeed);
                 double tmpHrMinD = AdvMin / 60d;
-                cboAdvHrs.Value = (decimal)Conversion.Int(tmpHrMinD);
-                cboAdvMin.Value = (decimal)((tmpHrMinD - Conversion.Int(tmpHrMinD)) * 60d);
+                cboAdvHrs.Value = (decimal)Convert.ToInt32(tmpHrMinD);
+                cboAdvMin.Value = (decimal)((tmpHrMinD - Convert.ToInt32(tmpHrMinD)) * 60d);
             }
             else if (cboAdvType.SelectedIndex == 0)
             {
@@ -3918,8 +3918,8 @@ namespace CelestialTools
                 TmpLoc1Lat = TempLoc1.Latitude;
             }
 
-            txtDestLDeg.Text = Conversion.Int(TmpLoc1Lat).ToString("#0");
-            txtDestLMin.Text = ((TmpLoc1Lat - Conversion.Int(TmpLoc1Lat)) * 60d).ToString("00.0");
+            txtDestLDeg.Text = Convert.ToInt32(TmpLoc1Lat).ToString("#0");
+            txtDestLMin.Text = ((TmpLoc1Lat - Convert.ToInt32(TmpLoc1Lat)) * 60d).ToString("00.0");
             double TmpLoc1Long = TempLoc1.Longitude;
             if (TempLoc1.Longitude < 0d)
             {
@@ -3932,8 +3932,8 @@ namespace CelestialTools
                 TmpLoc1Long = TempLoc1.Longitude;
             }
 
-            txtDestLoDeg.Text = Conversion.Int(TmpLoc1Long).ToString("##0");
-            txtDestLoMin.Text = ((TmpLoc1Long - Conversion.Int(TmpLoc1Long)) * 60d).ToString("00.0");
+            txtDestLoDeg.Text = Convert.ToInt32(TmpLoc1Long).ToString("##0");
+            txtDestLoMin.Text = ((TmpLoc1Long - Convert.ToInt32(TmpLoc1Long)) * 60d).ToString("00.0");
             return;
         }
 

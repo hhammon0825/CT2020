@@ -116,8 +116,8 @@ namespace CelestialTools
             }
 
             // recap info from SRF form in upper left corner
-            TDgraphics.DrawString("Body: " + My.MyProject.Forms.FormSRF.BNBodyName + Constants.vbCrLf + " Lat: " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lat)).ToString() + My.MyProject.Forms.FormSRF.cboL.Text + Constants.vbCrLf + " Lo : " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lo)).ToString() + My.MyProject.Forms.FormSRF.cboLo.Text + Constants.vbCrLf + " ZT : " + My.MyProject.Forms.FormSRF.ZTHours.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTMinutes.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTSeconds.ToString("00") + Constants.vbCrLf + " LHA: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.LHAOriginal) + Constants.vbCrLf, new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(-EqtPicBx.Height / 2d + 25d));
-            TDgraphics.DrawString("Major Arc Ticks = 1 hour of time or 15" + '°' + " of arc" + Constants.vbCrLf + "Minor Ticks = 20 minutes of time or 5" + '°' + " of arc" + Constants.vbCrLf + "Smallest Ticks = 4 minutes of time or 1" + '°' + " of arc", new Font("Arial", 8f, FontStyle.Regular), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(EqtPicBx.Height / 2d - 35d));
+            TDgraphics.DrawString("Body: " + My.MyProject.Forms.FormSRF.BNBodyName + Environment.NewLine + " Lat: " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lat)).ToString() + My.MyProject.Forms.FormSRF.cboL.Text + Environment.NewLine + " Lo : " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lo)).ToString() + My.MyProject.Forms.FormSRF.cboLo.Text + Environment.NewLine + " ZT : " + My.MyProject.Forms.FormSRF.ZTHours.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTMinutes.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTSeconds.ToString("00") + Environment.NewLine + " LHA: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.LHAOriginal) + Environment.NewLine, new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(-EqtPicBx.Height / 2d + 25d));
+            TDgraphics.DrawString("Major Arc Ticks = 1 hour of time or 15" + '°' + " of arc" + Environment.NewLine + "Minor Ticks = 20 minutes of time or 5" + '°' + " of arc" + Environment.NewLine + "Smallest Ticks = 4 minutes of time or 1" + '°' + " of arc", new Font("Arial", 8f, FontStyle.Regular), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(EqtPicBx.Height / 2d - 35d));
 
             // draw meridian line to the top
             TDgraphics.DrawLine(DPen2, 0, 0, 0, -CircleRadii);
@@ -142,7 +142,7 @@ namespace CelestialTools
             XTD1 = (float)((CircleRadii + 15) * Math.Cos(45 * Math.PI / 180d));
             YTD1 = (float)((CircleRadii + 15) * Math.Sin(45 * Math.PI / 180d));
             var PtText1 = new Point((int)XTD1, (int)YTD1);
-            TDgraphics.DrawString("Time & Angles" + Constants.vbCrLf + "Increase In" + Constants.vbCrLf + "This Direction", new Font("Arial", 8f, FontStyle.Regular), Brushes.Blue, PtText1);
+            TDgraphics.DrawString("Time & Angles" + Environment.NewLine + "Increase In" + Environment.NewLine + "This Direction", new Font("Arial", 8f, FontStyle.Regular), Brushes.Blue, PtText1);
 
             // otherwise continue on drawwing rest of time diagram for sight reduction data entered
             // Greenwich lower branch - rotate drawing according to whether the lower greenwich meridian is in positive or negative x location and label
@@ -438,13 +438,13 @@ namespace CelestialTools
                     }
 
                     double HGCalc = My.MyProject.Forms.FormSRF.EqTinSeconds / 60d;
-                    My.MyProject.Forms.FormSRF.EqTminutes = (float)Conversion.Int(Math.Abs(My.MyProject.Forms.FormSRF.EqTinSeconds / 60d));
+                    My.MyProject.Forms.FormSRF.EqTminutes = (float)Convert.ToInt32(Math.Abs(My.MyProject.Forms.FormSRF.EqTinSeconds / 60d));
                     My.MyProject.Forms.FormSRF.EqTseconds = Math.Abs(My.MyProject.Forms.FormSRF.EqTinSeconds) - My.MyProject.Forms.FormSRF.EqTminutes * 60f;
                     double HGCalcHR = My.MyProject.Forms.FormSRF.HG + My.MyProject.Forms.FormSRF.EqTinSeconds / 3600d; // convert HGCalc Minutes/second into Hours for subsequent calcs
                     var DTTemp = new DateTime(My.MyProject.Forms.FormSRF.DTSight.Value.Year, My.MyProject.Forms.FormSRF.DTSight.Value.Month, My.MyProject.Forms.FormSRF.DTSight.Value.Day, My.MyProject.Forms.FormSRF.ZTHours, My.MyProject.Forms.FormSRF.ZTMinutes, My.MyProject.Forms.FormSRF.ZTSeconds);
                     DTTemp = DTTemp.AddMinutes(HGCalc);
                     string EQTsign = "";
-                    StrDisp = "Apparent Sun: " + DTTemp.Hour.ToString("00") + ":" + DTTemp.Minute.ToString("00") + ":" + DTTemp.Second.ToString("00") + Constants.vbCrLf;
+                    StrDisp = "Apparent Sun: " + DTTemp.Hour.ToString("00") + ":" + DTTemp.Minute.ToString("00") + ":" + DTTemp.Second.ToString("00") + Environment.NewLine;
                     if (Math.Sign(My.MyProject.Forms.FormSRF.EqTinSeconds) == 1)
                         EQTsign = "(+)";
                     if (Math.Sign(My.MyProject.Forms.FormSRF.EqTinSeconds) == 0)
@@ -453,7 +453,7 @@ namespace CelestialTools
                         EQTsign = "(-)";
                     StrDisp += "Eqt Factor: " + EQTsign.ToString() + Strings.Format(My.MyProject.Forms.FormSRF.EqTminutes, "00") + "m" + Strings.Format(My.MyProject.Forms.FormSRF.EqTseconds, "00") + "s";
                     // redraw the general info block to include the App Sun ZT and Eqt factor
-                    TDgraphics.DrawString("Body: " + My.MyProject.Forms.FormSRF.BNBodyName + Constants.vbCrLf + " Lat: " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lat)).ToString() + My.MyProject.Forms.FormSRF.cboL.Text + Constants.vbCrLf + " Lo : " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lo)).ToString() + My.MyProject.Forms.FormSRF.cboLo.Text + Constants.vbCrLf + " ZT : " + My.MyProject.Forms.FormSRF.ZTHours.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTMinutes.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTSeconds.ToString("00") + Constants.vbCrLf + " LHA: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.LHAOriginal) + Constants.vbCrLf + StrDisp, new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(-EqtPicBx.Height / 2d + 25d));
+                    TDgraphics.DrawString("Body: " + My.MyProject.Forms.FormSRF.BNBodyName + Environment.NewLine + " Lat: " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lat)).ToString() + My.MyProject.Forms.FormSRF.cboL.Text + Environment.NewLine + " Lo : " + CnvtDbltoDegMin(Math.Abs(My.MyProject.Forms.FormSRF.Lo)).ToString() + My.MyProject.Forms.FormSRF.cboLo.Text + Environment.NewLine + " ZT : " + My.MyProject.Forms.FormSRF.ZTHours.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTMinutes.ToString("00") + ":" + My.MyProject.Forms.FormSRF.ZTSeconds.ToString("00") + Environment.NewLine + " LHA: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.LHAOriginal) + Environment.NewLine + StrDisp, new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(-EqtPicBx.Width / 2d), (float)(-EqtPicBx.Height / 2d + 25d));
 
                     // calculate and draw Sun mean time lower meridian line and mark with lesser sun character
                     XTD1 = (float)(CircleRadii * Math.Cos((90d + My.MyProject.Forms.FormSRF.Lo - HGCalcHR * 15d) * Math.PI / 180d));
@@ -505,16 +505,16 @@ namespace CelestialTools
 
         private string CnvtDbltoDegMin(double DblIn)
         {
-            int DegIn = (int)Conversion.Int(DblIn);
+            int DegIn = (int)Convert.ToInt32(DblIn);
             double MinIn = (DblIn - DegIn) * 60d;
             return DegIn.ToString("##0") + '°' + " " + MinIn.ToString("#0.0") + "'";
         }
 
         private string CnvtDbltoHrMin(double DblIn)
         {
-            int HrIn = (int)Conversion.Int(DblIn);
+            int HrIn = (int)Convert.ToInt32(DblIn);
             double MinIn = (DblIn - HrIn) * 60d;
-            int MinInInt = (int)Conversion.Int(MinIn);
+            int MinInInt = (int)Convert.ToInt32(MinIn);
             double SecIn = (MinIn - MinInInt) * 60d;
             if (HrIn >= 24)
                 HrIn = 24 - HrIn;

@@ -74,9 +74,9 @@ namespace CelestialTools
 
                 SOA = CruisingSpeed * Math.Sqrt(1d - SWC * SWC) - CurrentDrift * Math.Cos((SetComp - DesiredCourse) * Pi / 180d);
                 RequiredSpeed = (CruisingSpeed + CurrentDrift * Math.Cos((SetComp - DesiredCourse) * Pi / 180d)) / Math.Sqrt(1d - SWC * SWC);
-                CTS = Conversion.Int(CTS + 0.5d);
-                SOA = Conversion.Int(SOA * 10d + 0.5d) / 10d;
-                RequiredSpeed = Conversion.Int(RequiredSpeed * 10d + 0.5d) / 10d;
+                CTS = Convert.ToInt32(CTS + 0.5d);
+                SOA = Convert.ToInt32(SOA * 10d + 0.5d) / 10d;
+                RequiredSpeed = Convert.ToInt32(RequiredSpeed * 10d + 0.5d) / 10d;
                 if (Conversion.Val(txtDriftAngle.Text) != 0d)
                 {
                     PortStarboard = (short)(DesiredCourse - Convert.ToInt32(Conversion.Val(txtDriftAngle.Text)));
@@ -106,7 +106,7 @@ namespace CelestialTools
                     CTSwithLeeway = (float)(CTS + Conversion.Val(txtDriftAngle.Text));
                 }
 
-                CTSwithLeeway = (float)Conversion.Int(CTSwithLeeway + 0.5d);
+                CTSwithLeeway = (float)Convert.ToInt32(CTSwithLeeway + 0.5d);
                 txtWindCurrent.Clear();
                 txtWindCurrent.AppendText("Course to Steer (CTS) without leeway  " + Strings.Format(CTS, "000") + '°' + Environment.NewLine); // ; " *" '" True *"
                 txtWindCurrent.AppendText("Course to Steer (CTS) with leeway       " + Strings.Format(CTSwithLeeway, "000") + '°' + Environment.NewLine); // ; " *" '" True *"
@@ -136,8 +136,8 @@ namespace CelestialTools
                     CMG = CMG - 360d;
                 }
 
-                SMG = Conversion.Int(SMG * 10d + 0.5d) / 10d;
-                CMG = Conversion.Int(CMG + 0.5d);
+                SMG = Convert.ToInt32(SMG * 10d + 0.5d) / 10d;
+                CMG = Convert.ToInt32(CMG + 0.5d);
                 if (Conversion.Val(txtDriftAngle.Text) != 0d)
                 {
                     PortStarboard = (short)(CMG - Conversion.Val(txtDriftAngle.Text));
@@ -167,7 +167,7 @@ namespace CelestialTools
                     CMGWithLeeway = CMG - Conversion.Val(txtDriftAngle.Text);
                 }
 
-                CMGWithLeeway = Conversion.Int(CMGWithLeeway + 0.5d);
+                CMGWithLeeway = Convert.ToInt32(CMGWithLeeway + 0.5d);
                 txtWindCurrent.Clear();
                 txtWindCurrent.AppendText("Course Made Good (CMG) without leeway " + Strings.Format(CMG, "000") + '°' + Environment.NewLine);
                 txtWindCurrent.AppendText("Course Made Good (CMG) with leeway " + Strings.Format(CMGWithLeeway, "000") + '°' + Environment.NewLine);

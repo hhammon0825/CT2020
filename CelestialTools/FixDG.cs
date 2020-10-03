@@ -552,7 +552,7 @@ namespace CelestialTools
             }
             // What if fix is on other side of equator?
             // extract latitude minutes from calculated fix latitude BF
-            BD = Conversion.Int(Math.Abs(BI));
+            BD = Convert.ToInt32(Math.Abs(BI));
             BM = (Math.Abs(BI) - BD) * 60.0d;
             if (BM >= 60d)
             {
@@ -572,7 +572,7 @@ namespace CelestialTools
                 BH = " ";
             }
             // extract longitude minutes from calculated fix longitude LI
-            FD = Conversion.Int(Math.Abs(LI));
+            FD = Convert.ToInt32(Math.Abs(LI));
             FM = (Math.Abs(LI) - FD) * 60.0d;
             if (FM >= 60d)
             {

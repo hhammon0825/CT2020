@@ -977,9 +977,9 @@ namespace CelestialTools
 
                 SunGHACorr = (15d - SunHourChange) / 2d;
                 GHAHour1 = GHAHour1 - SunGHACorr;
-                GHAHourDeg1 = (short)Conversion.Int(GHAHour1);
+                GHAHourDeg1 = (short)Convert.ToInt32(GHAHour1);
                 GHAHourMin1 = (GHAHour1 - GHAHourDeg1) * 60d;
-                GHAHourMin1 = Conversion.Int(GHAHourMin1 * 10d + 0.5d) / 10d;
+                GHAHourMin1 = Convert.ToInt32(GHAHourMin1 * 10d + 0.5d) / 10d;
                 if (GHAHourMin1 == 60d)
                 {
                     GHAHourMin1 = 0d;
@@ -987,9 +987,9 @@ namespace CelestialTools
                 }
 
                 TotGHA = GHAHourDeg1 + GHAHourMin1 / 60d + GHAIncrementDeg + GHAIncrementMin / 60d; // + Sgn(HourChange) * vcorr / 60
-                TotGHADeg = (short)Conversion.Int(TotGHA);
+                TotGHADeg = (short)Convert.ToInt32(TotGHA);
                 TotGHAMin = (TotGHA - TotGHADeg) * 60d;
-                TotGHAMin = Conversion.Int(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
+                TotGHAMin = Convert.ToInt32(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
                 if (TotGHAMin == 60d)
                 {
                     TotGHAMin = 0d;
@@ -1012,9 +1012,9 @@ namespace CelestialTools
                     LHA = LHA + 360d;
                 }
 
-                LHADeg = (short)Conversion.Int(LHA);
+                LHADeg = (short)Convert.ToInt32(LHA);
                 LHAMin = (LHA - LHADeg) * 60d;
-                if (Conversion.Int(LHAMin * 10d + 0.5d) / 10d == 60d)
+                if (Convert.ToInt32(LHAMin * 10d + 0.5d) / 10d == 60d)
                 {
                     LHAMin = 0d;
                     LHADeg = (short)(LHADeg + 1);
@@ -2850,7 +2850,7 @@ namespace CelestialTools
             if (optZDAuto.Checked == true)
             {
                 Lo = Conversion.Val(txtLoDeg.Text) + Conversion.Val(txtLoMin.Text) / 60d;
-                ZD = Conversion.Int(Lo / 15d + 0.5d);
+                ZD = Convert.ToInt32(Lo / 15d + 0.5d);
                 if (cboLo.Text == "E")
                 {
                     ZD = -ZD;
@@ -2923,8 +2923,8 @@ namespace CelestialTools
                 ZTTemp = ZTTemp - 86400;
             if (ZTTemp < 0)
                 ZTTemp = ZTTemp + 86400;
-            ZTHours = (short)Conversion.Int(ZTTemp / 3600d);
-            ZTMinutes = (short)Conversion.Int((ZTTemp - ZTHours * 3600) / 60d);
+            ZTHours = (short)Convert.ToInt32(ZTTemp / 3600d);
+            ZTMinutes = (short)Convert.ToInt32((ZTTemp - ZTHours * 3600) / 60d);
             ZTSeconds = (short)(ZTTemp - ZTHours * 3600 - ZTMinutes * 60);
             return;
         }
@@ -2993,8 +2993,8 @@ namespace CelestialTools
                     UTinSeconds = 46800;
             }
 
-            GHour = (short)Conversion.Int(UTinSeconds / 3600d);
-            GMinute = (int)Conversion.Int((UTinSeconds - GHour * 3600) / 60d);
+            GHour = (short)Convert.ToInt32(UTinSeconds / 3600d);
+            GMinute = (int)Convert.ToInt32((UTinSeconds - GHour * 3600) / 60d);
             // If (BN > 57 And BN < 62 And cboPlanets.text = "NA vals. of v/d") Then GMinuteP
             GSecond = UTinSeconds - GHour * 3600 - GMinute * 60;
             GYear = (short)DTSight.Value.Year;
@@ -3089,9 +3089,9 @@ namespace CelestialTools
                 GMonth = (short)(GMonth + 12);
             }
 
-            JD = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
-            JDHour1 = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDateHour1 - 1537.5d;
-            JDHour2 = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDateHour2 - 1537.5d;
+            JD = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
+            JDHour1 = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDateHour1 - 1537.5d;
+            JDHour2 = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDateHour2 - 1537.5d;
             T = (JD - 2451545d + DeltaT / 86400d) / 36525.0d;
             Tfull = T;
             THour1 = (JDHour1 - 2451545d + DeltaT / 86400d) / 36525.0d;
@@ -3207,7 +3207,7 @@ namespace CelestialTools
                 tempstr2 += " )";
             }
 
-            tempstr3 = Conversion.Int(Math.Abs(ZD)).ToString("#0");
+            tempstr3 = Convert.ToInt32(Math.Abs(ZD)).ToString("#0");
             if (optZDManual.Checked == true & cboZDm.Text != "00")
             {
                 tempstr3 += "-" + cboZDm.Text;
@@ -3427,7 +3427,7 @@ namespace CelestialTools
 
             tempstr3 += Math.Abs(haDeg).ToString("0") + '°' + haMin.ToString("00.0") + "'";
             DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
-            tempstr1 = Constants.vbTab + "HP Moon";
+            tempstr1 = g_tab + "HP Moon";
             if (BNType == "Moon")
             {
                 tempstr2 = ((HPA * 10d + 0.5d) / 10d).ToString("00.0") + "'";
@@ -3441,7 +3441,7 @@ namespace CelestialTools
             DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             if (optHoParameters.Checked)
             {
-                tempstr1 = Conversions.ToString((Strings.Space(4) + "Refraction" + Strings.Space(4) + tempstr2 ?? "") == ("(-)" + Strings.Space(3 - Conversion.Int(Math.Abs(r)).ToString().Length) + (Conversion.Int(Math.Abs(r) * 1000d + 0.5d) / 1000d).ToString("0.000") + "'" ?? ""));
+                tempstr1 = Conversions.ToString((Strings.Space(4) + "Refraction" + Strings.Space(4) + tempstr2 ?? "") == ("(-)" + Strings.Space(3 - Convert.ToInt32(Math.Abs(r)).ToString().Length) + (Convert.ToInt32(Math.Abs(r) * 1000d + 0.5d) / 1000d).ToString("0.000") + "'" ?? ""));
                 tempstr3 = "";
                 DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             }
@@ -3470,14 +3470,14 @@ namespace CelestialTools
             if (optHoSRForm.Checked)
             {
                 tempstr2 += ")";
-                tempstr2 += Strings.Space(4 - Strings.Len(Conversion.Str(Conversion.Int(Main_Corr)))) + Math.Round(Math.Abs(Main_Corr), 2, MidpointRounding.AwayFromZero).ToString("00.0") + "'";
+                tempstr2 += Strings.Space(4 - Strings.Len(Conversion.Str(Convert.ToInt32(Main_Corr)))) + Math.Round(Math.Abs(Main_Corr), 2, MidpointRounding.AwayFromZero).ToString("00.0") + "'";
                 DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             }
 
             if (optHoParameters.Checked)
             {
                 tempstr1 = Strings.Space(4) + "Parallax";
-                tempstr2 = "(+)" + Strings.Space(4 - Strings.Len(Conversion.Str(Conversion.Int(PA)))) + PA.ToString("0.000") + "'";
+                tempstr2 = "(+)" + Strings.Space(4 - Strings.Len(Conversion.Str(Convert.ToInt32(PA)))) + PA.ToString("0.000") + "'";
                 tempstr3 = "";
                 DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             }
@@ -3623,7 +3623,7 @@ namespace CelestialTools
             if (Corr2Min < 0d)
                 tempstr2 += "-";
             LenCorr2Min = (short)Strings.Len(Math.Abs(Corr2Min).ToString("00.0"));
-            if (Corr2Min - Conversion.Int(Corr2Min) == 0d)
+            if (Corr2Min - Convert.ToInt32(Corr2Min) == 0d)
             {
                 LenCorr2Min = (short)(LenCorr2Min + 2);
             }
@@ -4042,17 +4042,17 @@ namespace CelestialTools
 
             if (cboHE.Text == "ft" | cboHE.Text == "m ")
             {
-                HE = Conversion.Int(HE * 10d + 0.5d) / 10d;
+                HE = Convert.ToInt32(HE * 10d + 0.5d) / 10d;
             }
 
             if (cboHE.Text == "in")
             {
-                HE = Conversion.Int(HE / 12d * 10d + 0.5d) / 10d;
+                HE = Convert.ToInt32(HE / 12d * 10d + 0.5d) / 10d;
             }
 
             if (cboHE.Text == "cm")
             {
-                HE = Conversion.Int(HE / 100d * 10d + 0.50000001d) / 10d;
+                HE = Convert.ToInt32(HE / 100d * 10d + 0.50000001d) / 10d;
             }
 
             DipShortDist = Conversion.Val(txtDsDist.Text);
@@ -4162,7 +4162,7 @@ namespace CelestialTools
                 }
             }
 
-            DipRet = Conversion.Int(DipRet * 10d + 0.500000000001d) / 10d;
+            DipRet = Convert.ToInt32(DipRet * 10d + 0.500000000001d) / 10d;
             return DipRet;
         }
 
@@ -4181,23 +4181,23 @@ namespace CelestialTools
             NO = 0d;
             NutD = 297.85036d + 445267.11148d * T - 0.0019142d * T * T + T * T * T / 189474d; // mean elongation of moon from sun, degrees
             if (NutD >= 360d | NutD < 0d)
-                NutD = NutD - Conversion.Int(NutD / 360d) * 360d;
+                NutD = NutD - Convert.ToInt32(NutD / 360d) * 360d;
             NutD = NutD * Pi / 180d; // radians
             NutM = 357.52772d + 35999.05034d * T - 0.0001603d * T * T - T * T * T / 300000d; // mean anomaly of the sun (Earth), degrees
             if (NutM >= 360d | NutM < 0d)
-                NutM = NutM - Conversion.Int(NutM / 360d) * 360d;
+                NutM = NutM - Convert.ToInt32(NutM / 360d) * 360d;
             NutM = NutM * Pi / 180d; // radians
             NutMprime = 134.96298d + 477198.867398d * T + 0.0086972d * T * T + T * T * T / 56250d; // mean anomaly of the moon, degrees
             if (NutMprime >= 360d | NutMprime < 0d)
-                NutMprime = NutMprime - Conversion.Int(NutMprime / 360d) * 360d;
+                NutMprime = NutMprime - Convert.ToInt32(NutMprime / 360d) * 360d;
             NutMprime = NutMprime * Pi / 180d; // radians
             NutF = 93.27191d + 483202.017538d * T - 0.0036825d * T * T + T * T * T / 327270d; // moon's argument of latitude, degrees
             if (NutF >= 360d | NutF < 0d)
-                NutF = NutF - Conversion.Int(NutF / 360d) * 360d;
+                NutF = NutF - Convert.ToInt32(NutF / 360d) * 360d;
             NutF = NutF * Pi / 180d; // radians
             NutOmega = 125.04452d - 1934.136261d * T + 0.0020708d * T * T + T * T * T / 450000d; // longitude of ascending node of moon..., degrees
             if (NutOmega >= 360d | NutOmega < 0d)
-                NutOmega = NutOmega - Conversion.Int(NutOmega / 360d) * 360d;
+                NutOmega = NutOmega - Convert.ToInt32(NutOmega / 360d) * 360d;
             NutOmega = NutOmega * Pi / 180d; // radians
             for (i = 0; i <= 62; i++)
             {
@@ -4281,13 +4281,13 @@ namespace CelestialTools
             Ecc = 0.016708634d - 0.000042037d * T - 0.0000001267d * T * T; // Ecc of Earth's orbit
             MS = 357.52911d + 35999.05029d * T - 0.0001537d * T * T; // mean anomaly of Sun, degrees
             if (MS >= 360d | MS < 0d)
-                MS = MS - Conversion.Int(MS / 360d) * 360d;
+                MS = MS - Convert.ToInt32(MS / 360d) * 360d;
             C = (1.914602d - 0.004817d * T - 0.000014d * T * T) * Math.Sin(MS * Pi / 180d) + (0.019993d - 0.000101d * T) * Math.Sin(2d * MS * Pi / 180d) + 0.000289d * Math.Sin(3d * MS * Pi / 180d); // center of Sun, degrees
             NU = MS + C; // Sun's true anomaly, degrees
             RN = 1.000001018d * (1d - Ecc * Ecc) / (1d + Ecc * Math.Cos(NU * Pi / 180d)); // Sun's radius vector (distance between centers of Sun and Earth), astronomical units
             L0 = 280.46646d + 36000.76983d * T + 0.0003032d * T * T; // geometric mean longitude of Sun, degrees
             if (L0 >= 360d | L0 < 0d)
-                L0 = L0 - Conversion.Int(L0 / 360d) * 360d;
+                L0 = L0 - Convert.ToInt32(L0 / 360d) * 360d;
             LN = L0 + C; // Sun's true longitude, degrees
             if (BN != 64 & BN != 65)
                 return; // no need to go further if not sun sight
@@ -4295,7 +4295,7 @@ namespace CelestialTools
             // Compute heliocentric, ecliptical Longitude L in radians
             L = EarthFunctions.Earth_L01(ref T) + EarthFunctions.Earth_L02(ref T) + EarthFunctions.Earth_L11(ref T) + EarthFunctions.Earth_L21(ref T) + EarthFunctions.Earth_L31(ref T) + EarthFunctions.Earth_L41(ref T) + EarthFunctions.Earth_L51(ref T); // radians
             if (Math.Abs(L) > 2d * Pi)
-                L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
             // Compute heliocentric, ecliptical Latitude B in radians
             B = EarthFunctions.Earth_B01(ref T) + EarthFunctions.Earth_B11(ref T) + EarthFunctions.Earth_B21(ref T) + EarthFunctions.Earth_B31(ref T) + EarthFunctions.Earth_B41(ref T); // radians
                                                                                                                                                                                          // Compute heliocentric distance R in AU
@@ -4320,9 +4320,9 @@ namespace CelestialTools
         public void HourAngles()
         {
             SH = 360d - AR;
-            SHdeg = Conversion.Int(SH);
+            SHdeg = Convert.ToInt32(SH);
             SHmin = (SH - SHdeg) * 60d;
-            SHmin = Conversion.Int(SHmin * 10d + 0.5d) / 10d;
+            SHmin = Convert.ToInt32(SHmin * 10d + 0.5d) / 10d;
             if (SHmin == 60d)
             {
                 SHmin = 0d;
@@ -4341,12 +4341,12 @@ namespace CelestialTools
             GHAAries = GHAAries + NL * Math.Cos(OETrue); // true GHA of Aries, degrees
             if (GHAAries >= 360d | GHAAries < 0d)
             {
-                GHAAries = GHAAries - Conversion.Int(GHAAries / 360d) * 360d;
+                GHAAries = GHAAries - Convert.ToInt32(GHAAries / 360d) * 360d;
             }
 
-            GHAAriesDeg = (short)Conversion.Int(GHAAries);
+            GHAAriesDeg = (short)Convert.ToInt32(GHAAries);
             GHAAriesMin = (GHAAries - GHAAriesDeg) * 60d;
-            GHAAriesMin = Conversion.Int(GHAAriesMin * 10d + 0.5d) / 10d;
+            GHAAriesMin = Convert.ToInt32(GHAAriesMin * 10d + 0.5d) / 10d;
             if (GHAAriesMin == 60d)
             {
                 GHAAriesMin = 0d;
@@ -4367,7 +4367,7 @@ namespace CelestialTools
 
             if (GHA >= 360d | GHA < 0d)
             {
-                GHA = GHA - Conversion.Int(GHA / 360d) * 360d;
+                GHA = GHA - Convert.ToInt32(GHA / 360d) * 360d;
             }
 
             if (BN <= 57)
@@ -4381,7 +4381,7 @@ namespace CelestialTools
 
             if (TotGHA >= 360d | TotGHA < 0d)
             {
-                TotGHA = TotGHA - Conversion.Int(TotGHA / 360d) * 360d;
+                TotGHA = TotGHA - Convert.ToInt32(TotGHA / 360d) * 360d;
             }
 
             TotGHAPol = TotGHA - SH;
@@ -4395,9 +4395,9 @@ namespace CelestialTools
                 TotGHAPol = TotGHAPol + 360d;
             }
 
-            TotGHAPolDeg = (short)Conversion.Int(TotGHAPol);
+            TotGHAPolDeg = (short)Convert.ToInt32(TotGHAPol);
             TotGHAPolMin = (TotGHAPol - TotGHAPolDeg) * 60d;
-            if (Conversion.Int(TotGHAPolMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(TotGHAPolMin * 10d + 0.5d) / 10d == 60d)
             {
                 TotGHAPolMin = 0d;
                 TotGHAPolDeg = (short)(TotGHAPolDeg + 1);
@@ -4425,9 +4425,9 @@ namespace CelestialTools
                 LHAPol = LHAPol + 360d;
             }
 
-            TotGHADeg = (short)Conversion.Int(TotGHA);
+            TotGHADeg = (short)Convert.ToInt32(TotGHA);
             TotGHAMin = (TotGHA - TotGHADeg) * 60d;
-            if (Conversion.Int(TotGHAMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(TotGHAMin * 10d + 0.5d) / 10d == 60d)
             {
                 TotGHAMin = 0d;
                 TotGHADeg = (short)(TotGHADeg + 1);
@@ -4438,17 +4438,17 @@ namespace CelestialTools
                 TotGHADeg = (short)(TotGHADeg - 360);
             }
 
-            LHADeg = (short)Conversion.Int(LHA);
+            LHADeg = (short)Convert.ToInt32(LHA);
             LHAMin = (LHA - LHADeg) * 60d;
-            if (Conversion.Int(LHAMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LHAMin * 10d + 0.5d) / 10d == 60d)
             {
                 LHAMin = 0d;
                 LHADeg = (short)(LHADeg + 1);
             }
 
-            LHAPolDeg = (short)Conversion.Int(LHAPol);
+            LHAPolDeg = (short)Convert.ToInt32(LHAPol);
             LHAPolMin = (LHAPol - LHAPolDeg) * 60d;
-            if (Conversion.Int(LHAPolMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LHAPolMin * 10d + 0.5d) / 10d == 60d)
             {
                 LHAPolMin = 0d;
                 LHAPolDeg = (short)(LHAPolDeg + 1);
@@ -4469,7 +4469,7 @@ namespace CelestialTools
             GHAAriesHour = GHAAriesHour + NL * Math.Cos(OETrue * Pi / 180d); // true GHA of Aries, degrees
             if (GHAAriesHour >= 360d | GHAAriesHour < 0d)
             {
-                GHAAriesHour = GHAAriesHour - Conversion.Int(GHAAriesHour / 360d) * 360d;
+                GHAAriesHour = GHAAriesHour - Convert.ToInt32(GHAAriesHour / 360d) * 360d;
             }
 
             if (BN <= 57)
@@ -4483,7 +4483,7 @@ namespace CelestialTools
 
             if (GHAHour >= 360d | GHAHour < 0d)
             {
-                GHAHour = GHAHour - Conversion.Int(GHAHour / 360d) * 360d;
+                GHAHour = GHAHour - Convert.ToInt32(GHAHour / 360d) * 360d;
             }
 
             return;
@@ -4518,7 +4518,7 @@ namespace CelestialTools
             }
 
             Corr1 = ICinMinutes - Dip();
-            Corr1Deg = (short)Conversion.Int(Math.Abs(Corr1 / 60d));
+            Corr1Deg = (short)Convert.ToInt32(Math.Abs(Corr1 / 60d));
             Corr1Min = Math.Abs(Corr1) - 60 * Corr1Deg;
             hsinMinutes = 60d * Conversion.Val(txtHsDeg.Text) + Conversion.Val(txtHsMin.Text) + Conversion.Val(txtHsSec.Text) / 60d;
             HsMin = Conversion.Val(txtHsMin.Text) + Conversion.Val(txtHsSec.Text) / 60d;
@@ -4615,7 +4615,7 @@ namespace CelestialTools
             if (BN == 62 | BN == 63)
             {
                 Aug = (1738d / 6378d * HPA / 60d / (1d - Math.Sin(HPA / 60d * Pi / 180d) * Math.Sin(hainMinutes / 60d * Pi / 180d)) - DI / 60d) * 60d;
-                Aug = Conversion.Int(Aug * 1000d + 0.5d) / 1000d;
+                Aug = Convert.ToInt32(Aug * 1000d + 0.5d) / 1000d;
             }
 
             if ((BN == 62 | BN == 63) & optCenter.Checked) // And chkAH.CheckState = 1 Then
@@ -4701,10 +4701,10 @@ namespace CelestialTools
                 r = 1.002d / Math.Tan(r); // 1.002 is 0.0167º in minutes, actually 0.01666666.... becomes 1, but 1.002 makes it match moon table better
                 Main_Corr = h3 - r + 0.2724d * 57.66d - 5d;
                 h4 = Main_Corr; // h4 is Main before rounding
-                Main_Corr = Conversion.Int(Main_Corr * 10d + 0.5d) / 10d;
+                Main_Corr = Convert.ToInt32(Main_Corr * 10d + 0.5d) / 10d;
             }
 
-            dHP = Conversion.Int(HPA * 10d + 0.5d) / 10d; // rounds HP to 0.1'
+            dHP = Convert.ToInt32(HPA * 10d + 0.5d) / 10d; // rounds HP to 0.1'
             if (BN == 62)
                 Addl = dHP * Math.Cos(H2 * Pi / 180d) - r + DI - h4;
             if (BN == 63)
@@ -4716,8 +4716,8 @@ namespace CelestialTools
                 Addl = dHP * Math.Cos(H2 * Pi / 180d) - r - h4 + 15d;
             }
 
-            Addl = Conversion.Int(Addl * 10d + 0.5d) / 10d;
-            Raddl = Conversion.Int(Raddl * 10d + 0.5d) / 10d;
+            Addl = Convert.ToInt32(Addl * 10d + 0.5d) / 10d;
+            Raddl = Convert.ToInt32(Raddl * 10d + 0.5d) / 10d;
             if (optHoSRForm.Checked)
             {
                 Corr2Min = Main_Corr + Addl - Raddl;
@@ -4736,7 +4736,7 @@ namespace CelestialTools
             HoinMinutes = hainMinutes + Corr2Min; // minutes
             HoDeg = Conversion.Fix(HoinMinutes / 60d); // min to dec. deg.; Fix was Int
             HoMin = HoinMinutes - 60d * HoDeg;
-            HoMin = Conversion.Int(HoMin * 10d + 0.5d) / 10d;
+            HoMin = Convert.ToInt32(HoMin * 10d + 0.5d) / 10d;
             if (HoMin == 60d)
             {
                 HoMin = 0d;
@@ -4745,7 +4745,7 @@ namespace CelestialTools
 
             haDeg = (short)Conversion.Fix(hainMinutes / 60d); // min. to dec. deg
             haMin = Math.Abs(hainMinutes - 60 * haDeg);
-            if (Conversion.Int(haMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(haMin * 10d + 0.5d) / 10d == 60d)
             {
                 haMin = 0d;
                 haDeg = (short)(haDeg + 1);
@@ -4788,7 +4788,7 @@ namespace CelestialTools
             Hc = Hc * 180d / Pi;
             HcDeg = (short)Conversion.Fix(Hc);
             HcMin = (Hc - HcDeg) * 60d;
-            HcMin = Conversion.Int(HcMin * 10d + 0.5d) / 10d;
+            HcMin = Convert.ToInt32(HcMin * 10d + 0.5d) / 10d;
             if (HcMin == 60d)
             {
                 HcMin = 0d;
@@ -4799,7 +4799,7 @@ namespace CelestialTools
             }
 
             Intercept = 60 * HcDeg + HcMin - (60d * HoDeg + HoMin);
-            Intercept = Math.Sign(Intercept) * Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d;
+            Intercept = Math.Sign(Intercept) * Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d;
             L4 = Math.Sin(DecLOC * Pi / 180d);
             L5 = Math.Sin(Math.Abs(Lat) * Pi / 180d) * Math.Sin(Hc * Pi / 180d);
             L6 = L4 - L5;
@@ -4837,7 +4837,7 @@ namespace CelestialTools
 
             if (BN != 0 | BNBodyName == "Polaris" & cboPolaris.Text == "Full reduction of Polaris sight")
             {
-                ZN = Conversion.Int(ZN + 0.5d);
+                ZN = Convert.ToInt32(ZN + 0.5d);
             }
 
             if (ZN == 360d)
@@ -5559,10 +5559,10 @@ namespace CelestialTools
 
         public void EstimatedPosition()
         {
-            Intercept = Math.Sign(Intercept) * Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d; // added in V4.0.0
+            Intercept = Math.Sign(Intercept) * Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d; // added in V4.0.0
             if (cboPolaris.Text != "Latitude by altitude of Polaris")
             {
-                ZN = Conversion.Int(ZN + 0.5d); // changed above line to this in V4.3.1
+                ZN = Convert.ToInt32(ZN + 0.5d); // changed above line to this in V4.3.1
             }
 
             EstL = Lat - Intercept / 60d * Math.Cos(ZN * Pi / 180d);
@@ -5572,17 +5572,17 @@ namespace CelestialTools
                 EstLo = -Math.Sign(EstLo) * (360d - Math.Abs(EstLo));
             }
 
-            EstLDeg = Conversion.Int(Math.Abs(EstL));
+            EstLDeg = Convert.ToInt32(Math.Abs(EstL));
             EstLMin = (Math.Abs(EstL) - EstLDeg) * 60d;
-            if (Conversion.Int(EstLMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(EstLMin * 10d + 0.5d) / 10d == 60d)
             {
                 EstLMin = 0d;
                 EstLDeg = EstLDeg + 1d;
             }
 
-            EstLoDeg = Conversion.Int(Math.Abs(EstLo));
+            EstLoDeg = Convert.ToInt32(Math.Abs(EstLo));
             EstLoMin = (Math.Abs(EstLo) - EstLoDeg) * 60d;
-            if (Conversion.Int(EstLoMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(EstLoMin * 10d + 0.5d) / 10d == 60d)
             {
                 EstLoMin = 0d;
                 EstLoDeg = EstLoDeg + 1d;
@@ -5596,35 +5596,35 @@ namespace CelestialTools
         {
             MLprime = 218.3164477d + 481267.88123421d * T - 0.0015786d * T * T + T * T * T / 538841d - T * T * T * T / 65194000d; // Moon's mean longitude, degrees
             if (MLprime >= 360d | MLprime < 0d)
-                MLprime = MLprime - Conversion.Int(MLprime / 360d) * 360d;
+                MLprime = MLprime - Convert.ToInt32(MLprime / 360d) * 360d;
             MLprime = MLprime * Pi / 180d;
             MD = 297.8501921d + 445267.1114034d * T - 0.0018819d * T * T + T * T * T / 545868d - T * T * T * T / 113065000d; // Moon'smean elongation, degrees
             if (MD >= 360d | MD < 0d)
-                MD = MD - Conversion.Int(MD / 360d) * 360d;
+                MD = MD - Convert.ToInt32(MD / 360d) * 360d;
             MD = MD * Pi / 180d; // radians
             MM = 357.5291092d + 35999.0502909d * T - 0.0001536d * T * T + T * T * T / 24490000d; // Sun's mean anomaly, degrees
             if (MM >= 360d | MM < 0d)
-                MM = MM - Conversion.Int(MM / 360d) * 360d;
+                MM = MM - Convert.ToInt32(MM / 360d) * 360d;
             MM = MM * Pi / 180d; // radians
             MMprime = 134.9633964d + 477198.8675055d * T + 0.0087414d * T * T + T * T * T / 69699d - T * T * T * T / 14712000d; // Moon's mean anomaly, degrees
             if (MMprime >= 360d | MMprime < 0d)
-                MMprime = MMprime - Conversion.Int(MMprime / 360d) * 360d;
+                MMprime = MMprime - Convert.ToInt32(MMprime / 360d) * 360d;
             MMprime = MMprime * Pi / 180d; // radians
             MF = 93.272095d + 483202.0175233d * T - 0.0036539d * T * T - T * T * T / 3526000d + T * T * T * T / 863310000d; // Moon's argument of altitude, degrees
             if (MF >= 360d | MF < 0d)
-                MF = MF - Conversion.Int(MF / 360d) * 360d;
+                MF = MF - Convert.ToInt32(MF / 360d) * 360d;
             MF = MF * Pi / 180d; // radians
             A1 = 119.75d + 131.849d * T; // degrees
             if (A1 >= 360d | A1 < 0d)
-                A1 = A1 - Conversion.Int(A1 / 360d) * 360d;
+                A1 = A1 - Convert.ToInt32(A1 / 360d) * 360d;
             A1 = A1 * Pi / 180d; // radians
             A2 = 53.09d + 479264.29d * T; // degrees
             if (A2 >= 360d | A2 < 0d)
-                A2 = A2 - Conversion.Int(A2 / 360d) * 360d;
+                A2 = A2 - Convert.ToInt32(A2 / 360d) * 360d;
             A2 = A2 * Pi / 180d; // radians
             A3 = 313.45d + 481266.484d * T; // degrees
             if (A3 >= 360d | A3 < 0d)
-                A3 = A3 - Conversion.Int(A3 / 360d) * 360d;
+                A3 = A3 - Convert.ToInt32(A3 / 360d) * 360d;
             A3 = A3 * Pi / 180d; // radians
             E = 1d - 0.002516d * T - 0.0000074d * T * T;
             SigmaL = 0d;
@@ -5681,7 +5681,7 @@ namespace CelestialTools
                 {
                     L = VenusFunctions.Venus_L01(ref T) + VenusFunctions.Venus_L11(ref T) + VenusFunctions.Venus_L21(ref T) + VenusFunctions.Venus_L31(ref T) + VenusFunctions.Venus_L41(ref T) + VenusFunctions.Venus_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     B = VenusFunctions.Venus_B01(ref T) + VenusFunctions.Venus_B11(ref T) + VenusFunctions.Venus_B21(ref T) + VenusFunctions.Venus_B31(ref T) + VenusFunctions.Venus_B41(ref T) + VenusFunctions.Venus_B51(ref T);
                     r = VenusFunctions.Venus_R01(ref T) + VenusFunctions.Venus_R11(ref T) + VenusFunctions.Venus_R21(ref T) + VenusFunctions.Venus_R31(ref T) + VenusFunctions.Venus_R41(ref T) + VenusFunctions.Venus_R51(ref T);
                 }
@@ -5690,7 +5690,7 @@ namespace CelestialTools
                 {
                     L = MarsFunctions.Mars_L01(ref T) + MarsFunctions.Mars_L02(ref T) + MarsFunctions.Mars_L03(ref T) + MarsFunctions.Mars_L11(ref T) + MarsFunctions.Mars_L12(ref T) + MarsFunctions.Mars_L21(ref T) + MarsFunctions.Mars_L31(ref T) + MarsFunctions.Mars_L41(ref T) + MarsFunctions.Mars_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     B = MarsFunctions.Mars_B01(ref T) + MarsFunctions.Mars_B11(ref T) + MarsFunctions.Mars_B21(ref T) + MarsFunctions.Mars_B31(ref T) + MarsFunctions.Mars_B41(ref T) + MarsFunctions.Mars_B51(ref T);
                     r = MarsFunctions.Mars_R01(ref T) + MarsFunctions.Mars_R02(ref T) + MarsFunctions.Mars_R03(ref T) + MarsFunctions.Mars_R11(ref T) + MarsFunctions.Mars_R12(ref T) + MarsFunctions.Mars_R21(ref T) + MarsFunctions.Mars_R31(ref T) + MarsFunctions.Mars_R41(ref T) + MarsFunctions.Mars_R51(ref T);
                 }
@@ -5701,7 +5701,7 @@ namespace CelestialTools
 
                     L = Conversions.ToDouble(Operators.AddObject(JupiterFunctions.Jupiter_L01(ref T) + JupiterFunctions.Jupiter_L02(ref T) + JupiterFunctions.Jupiter_L11(ref T) + JupiterFunctions.Jupiter_L21(ref T) + JupiterFunctions.Jupiter_L31(ref T) + JupiterFunctions.Jupiter_L41(ref T), localJupiter_L51()));
                     if (Math.Abs(L) > 2d * Pi)
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     object localJupiter_B01() { object argT = T; var ret = JupiterFunctions.Jupiter_B01(ref argT); return ret; }
 
                     object localJupiter_B11() { object argT = T; var ret = JupiterFunctions.Jupiter_B11(ref argT); return ret; }
@@ -5736,7 +5736,7 @@ namespace CelestialTools
                 {
                     L = SaturnFunctions.Saturn_L01(ref T) + SaturnFunctions.Saturn_L02(ref T) + SaturnFunctions.Saturn_L03(ref T) + SaturnFunctions.Saturn_L11(ref T) + SaturnFunctions.Saturn_L12(ref T) + SaturnFunctions.Saturn_L21(ref T) + SaturnFunctions.Saturn_L31(ref T) + SaturnFunctions.Saturn_L41(ref T) + SaturnFunctions.Saturn_L51(ref T);
                     if (Math.Abs(L) > 2d * Pi)
-                        L = L - 2d * Pi * Conversion.Int(L / 2d / Pi);
+                        L = L - 2d * Pi * Convert.ToInt32(L / 2d / Pi);
                     B = SaturnFunctions.Saturn_B01(ref T) + SaturnFunctions.Saturn_B02(ref T) + SaturnFunctions.Saturn_B11(ref T) + SaturnFunctions.Saturn_B21(ref T) + SaturnFunctions.Saturn_B31(ref T) + SaturnFunctions.Saturn_B41(ref T) + SaturnFunctions.Saturn_B51(ref T);
                     r = SaturnFunctions.Saturn_R01(ref T) + SaturnFunctions.Saturn_R02(ref T) + SaturnFunctions.Saturn_R03(ref T) + SaturnFunctions.Saturn_R11(ref T) + SaturnFunctions.Saturn_R12(ref T) + SaturnFunctions.Saturn_R21(ref T) + SaturnFunctions.Saturn_R31(ref T) + SaturnFunctions.Saturn_R41(ref T) + SaturnFunctions.Saturn_R51(ref T);
                 }
@@ -5745,7 +5745,7 @@ namespace CelestialTools
                 {
                     L0 = EarthFunctions.Earth_L01(ref T) + EarthFunctions.Earth_L02(ref T) + EarthFunctions.Earth_L11(ref T) + EarthFunctions.Earth_L21(ref T) + EarthFunctions.Earth_L31(ref T) + EarthFunctions.Earth_L41(ref T) + EarthFunctions.Earth_L51(ref T);
                     if (Math.Abs(L0) > 2d * Pi)
-                        L0 = L0 - 2d * Pi * Conversion.Int(L0 / 2d / Pi);
+                        L0 = L0 - 2d * Pi * Convert.ToInt32(L0 / 2d / Pi);
                     // L0Sun = L0
                     B0 = EarthFunctions.Earth_B01(ref T) + EarthFunctions.Earth_B11(ref T) + EarthFunctions.Earth_B21(ref T) + EarthFunctions.Earth_B31(ref T) + EarthFunctions.Earth_B41(ref T);
                     r0 = EarthFunctions.Earth_R01(ref T) + EarthFunctions.Earth_R02(ref T) + EarthFunctions.Earth_R11(ref T) + EarthFunctions.Earth_R21(ref T) + EarthFunctions.Earth_R31(ref T) + EarthFunctions.Earth_R41(ref T) + EarthFunctions.Earth_R51(ref T);
@@ -5766,7 +5766,7 @@ namespace CelestialTools
             if (x < 0d)
                 L1 = L1 + Pi;
             if (L1 >= 2d * Pi | L1 < 0d)
-                L1 = L1 - Conversion.Int(L1 / (2d * Pi)) * 2d * Pi;
+                L1 = L1 - Convert.ToInt32(L1 / (2d * Pi)) * 2d * Pi;
             B = Math.Atan(Z / Math.Sqrt(x * x + y * y)); // geocentric latitude, radians
 
             // Back to normal times
@@ -5799,9 +5799,9 @@ namespace CelestialTools
                 LR = LR + 360d;
             if (LR >= 360d)
                 LR = LR - 360d;
-            XD = (short)Conversion.Int(LR);
+            XD = (short)Convert.ToInt32(LR);
             XM = (LR - XD) * 60d;
-            XM = Conversion.Int(XM * 10d + 0.5d) / 10d;
+            XM = Convert.ToInt32(XM * 10d + 0.5d) / 10d;
             if (XM == 60d)
             {
                 XM = 0d;
@@ -5909,9 +5909,9 @@ namespace CelestialTools
             Pola1 = 60d * Pola1 + 0.6d;
             Pola2 = (90d - MeanDecPol) * Math.Cos((LR + MeanSHAPol) * Pi / 180d) - (90d - DE) * Math.Cos((LR + SH) * Pi / 180d);
             Pola2 = 60d * Pola2 + 0.6d;
-            Pola0min = Conversion.Int(10d * Pola0min + 0.5d) / 10d;
-            Pola1 = Conversion.Int(10d * Pola1 + 0.5d) / 10d;
-            Pola2 = Conversion.Int(10d * Pola2 + 0.5d) / 10d;
+            Pola0min = Convert.ToInt32(10d * Pola0min + 0.5d) / 10d;
+            Pola1 = Convert.ToInt32(10d * Pola1 + 0.5d) / 10d;
+            Pola2 = Convert.ToInt32(10d * Pola2 + 0.5d) / 10d;
             PC = Pola0deg * 60d + Pola0min + Pola1 + Pola2;
             PCdeg = 0;
             PCmin = PC;
@@ -5949,7 +5949,7 @@ namespace CelestialTools
             ;
             PD2 = Conversion.Fix(LbyPol);
             PM = (LbyPol - PD2) * 60d;
-            PM = Conversion.Int(PM * 10d + 0.5d) / 10d;
+            PM = Convert.ToInt32(PM * 10d + 0.5d) / 10d;
             if (PM == 60d)
             {
                 PM = 0d;
@@ -5957,9 +5957,9 @@ namespace CelestialTools
             }
 
             Ldiff = Math.Abs(LbyPol - Lat);
-            ldiffDeg = (short)Conversion.Int(Ldiff);
+            ldiffDeg = (short)Convert.ToInt32(Ldiff);
             ldiffMin = (Ldiff - ldiffDeg) * 60d;
-            ldiffMin = Conversion.Int(ldiffMin * 10d + 0.5d) / 10d;
+            ldiffMin = Convert.ToInt32(ldiffMin * 10d + 0.5d) / 10d;
             if (ldiffMin == 60d)
             {
                 ldiffMin = 0d;
@@ -5984,15 +5984,15 @@ namespace CelestialTools
             IntAzTxtBx.SelectionAlignment = HorizontalAlignment.Center;
             IntAzTxtBx.AppendText("LATITUDE by ALTITUDE of POLARIS" + Environment.NewLine);
             IntAzTxtBx.SelectionAlignment = HorizontalAlignment.Left;
-            IntAzTxtBx.AppendText("LHA Aries      " + Strings.Format(XD, "##0") + '°' + Strings.Format(XM, "00.0") + "'" + Constants.vbTab + "Polaris Correction" + Constants.vbTab + Constants.vbTab + "Latitude Computation" + Environment.NewLine);
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "a0     " + Strings.Format(Pola0deg, "0") + '°' + Strings.Format(Pola0min, "00.0") + "'" + Constants.vbTab + Constants.vbTab + "Ho     ");
+            IntAzTxtBx.AppendText("LHA Aries      " + Strings.Format(XD, "##0") + '°' + Strings.Format(XM, "00.0") + "'" + g_tab + "Polaris Correction" + g_tab + g_tab + "Latitude Computation" + Environment.NewLine);
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "a0     " + Strings.Format(Pola0deg, "0") + '°' + Strings.Format(Pola0min, "00.0") + "'" + g_tab + g_tab + "Ho     ");
             if (Math.Sign(HoinMinutes) == -1)
             {
                 IntAzTxtBx.AppendText(Strings.Space(35 - HoDeg.ToString().Length) + "-");
             }
 
             IntAzTxtBx.AppendText(Strings.Space(1) + Strings.Format(HoDeg, "##0") + '°' + Strings.Format(HoMin, "00.0") + "'" + Environment.NewLine);
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "a1       " + Strings.Format(Pola1, "00.0") + "'" + Constants.vbTab + Constants.vbTab + "Corr (");
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "a1       " + Strings.Format(Pola1, "00.0") + "'" + g_tab + g_tab + "Corr (");
             if (PCorr == 0d)
             {
                 IntAzTxtBx.AppendText(" )   00.0'"); // PCorr was PCorr2
@@ -6024,22 +6024,22 @@ namespace CelestialTools
                 PL = " ";
             }
 
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "a2       " + Strings.Format(Pola2, "00.0") + "'" + Constants.vbTab + Constants.vbTab + "Lat     " + Strings.Space(6 - Strings.Len(Conversion.Str(PD2))) + Strings.Format(Math.Abs(PD2), "#0") + '°' + Strings.Format(Math.Abs(PM), "00.0") + "'" + PL + Environment.NewLine);
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "Total" + Strings.Space(4 - Strings.Len(Conversion.Str(PCdeg))) + Strings.Format(PCdeg, "0") + '°' + Strings.Format(PCmin, "00.0") + "'" + Constants.vbTab + Constants.vbTab);
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "a2       " + Strings.Format(Pola2, "00.0") + "'" + g_tab + g_tab + "Lat     " + Strings.Space(6 - Strings.Len(Conversion.Str(PD2))) + Strings.Format(Math.Abs(PD2), "#0") + '°' + Strings.Format(Math.Abs(PM), "00.0") + "'" + PL + Environment.NewLine);
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "Total" + Strings.Space(4 - Strings.Len(Conversion.Str(PCdeg))) + Strings.Format(PCdeg, "0") + '°' + Strings.Format(PCmin, "00.0") + "'" + g_tab + g_tab);
             if (BNBodyName == "Polaris" & cboPolaris.Text != "Latitude by altitude of Polaris" | BNBodyName == "Polaris" & cboPolaris.Text == "Latitude by altitude of Polaris" & (!string.IsNullOrEmpty(txtLDeg.Text) | !string.IsNullOrEmpty(txtLMin.Text)))
             {
                 IntAzTxtBx.AppendText("DR Lat   " + Strings.Space(5 - Strings.Len(Conversion.Str(Conversion.Val(txtLDeg.Text)))) + Strings.Format(Conversion.Val(txtLDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(txtLMin.Text), "00.0") + "'" + cboL.Text);
             }
 
             IntAzTxtBx.AppendText(Environment.NewLine);
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "    (-)1" + '°' + "00.0'" + Constants.vbTab + Constants.vbTab);
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "    (-)1" + '°' + "00.0'" + g_tab + g_tab);
             if (BNBodyName == "Polaris" & cboPolaris.Text != "Latitude by altitude of Polaris" | BNBodyName == "Polaris" & cboPolaris.Text == "Latitude by altitude of Polaris" & (!string.IsNullOrEmpty(txtLDeg.Text) | !string.IsNullOrEmpty(txtLMin.Text)))
             {
                 IntAzTxtBx.AppendText("l diff   " + Strings.Space(5 - Strings.Len(Conversion.Str(ldiffDeg))) + Strings.Format(ldiffDeg, "0") + '°' + Strings.Format(ldiffMin, "00.0") + "'");
             }
 
             IntAzTxtBx.AppendText(Environment.NewLine);
-            IntAzTxtBx.AppendText(Constants.vbTab + Constants.vbTab + Constants.vbTab + Constants.vbTab + "Corr(");
+            IntAzTxtBx.AppendText(g_tab + g_tab + g_tab + g_tab + "Corr(");
             if (PCorr == 0d)
                 IntAzTxtBx.AppendText(" )  00.0'");
             if (PCorr > 0d)
@@ -6047,7 +6047,7 @@ namespace CelestialTools
             if (PCorr < 0d)
                 IntAzTxtBx.AppendText("-)  ");
             if (PCorr != 0d)
-                IntAzTxtBx.AppendText(Strings.Format(Math.Abs(PCorr), "00.0") + "'" + Constants.vbTab + Constants.vbTab + "Zn       " + Strings.Space(5 - Strings.Len(Conversion.Str(Conversion.Int(ZN)))) + Strings.Format(Conversion.Int(ZN * 10d + 0.5d) / 10d, "##0.0") + '°' + Environment.NewLine);
+                IntAzTxtBx.AppendText(Strings.Format(Math.Abs(PCorr), "00.0") + "'" + g_tab + g_tab + "Zn       " + Strings.Space(5 - Strings.Len(Conversion.Str(Convert.ToInt32(ZN)))) + Strings.Format(Convert.ToInt32(ZN * 10d + 0.5d) / 10d, "##0.0") + '°' + Environment.NewLine);
             IntAzTxtBx.AppendText("EP L  " + Strings.Space(11 - Strings.Len(Conversion.Str(PD2))) + Strings.Format(Math.Abs(PD2), "#0") + '°' + Strings.Format(Math.Abs(PM), "00.0") + "'" + PL + Environment.NewLine);
             IntAzTxtBx.AppendText("EP Lo " + Strings.Space(11 - Strings.Len(Conversion.Str(Conversion.Val(txtLoDeg.Text)))) + Strings.Format(Conversion.Val(txtLoDeg.Text), "0") + '°' + Strings.Format(Conversion.Val(txtLoMin.Text), "00.0") + "'" + cboLo.Text);
             return;
@@ -6091,8 +6091,8 @@ namespace CelestialTools
             }
 
             IntAzTxtBx.AppendText(Strings.Space(5 - Strings.Len(Conversion.Str(TotDecDegrees))) + Strings.Format(Math.Abs(TotDE), "0.00000") + '°' + Environment.NewLine);
-            IntAzTxtBx.AppendText(Strings.Space(5) + " (cos LHA x cos Lat x cos Dec) + (sin Lat x sin Dec) = sin Hc" + " ---->" + Strings.Space(3) + "Hc " + Strings.Format(Conversion.Int(Hc * 100000d + 0.5d) / 100000d, "0.00000") + '°' + Environment.NewLine);
-            IntAzTxtBx.AppendText(Strings.Space(5) + " (sin Dec - (sin Lat x sin Hc)) / (cos Lat x cos Hc) = cos Z" + " ----->" + Strings.Space(3) + "Z  " + cboL.Text + Strings.Format(Conversion.Int(Z * 10d + 0.5d) / 10d, "0.0") + '°');
+            IntAzTxtBx.AppendText(Strings.Space(5) + " (cos LHA x cos Lat x cos Dec) + (sin Lat x sin Dec) = sin Hc" + " ---->" + Strings.Space(3) + "Hc " + Strings.Format(Convert.ToInt32(Hc * 100000d + 0.5d) / 100000d, "0.00000") + '°' + Environment.NewLine);
+            IntAzTxtBx.AppendText(Strings.Space(5) + " (sin Dec - (sin Lat x sin Hc)) / (cos Lat x cos Hc) = cos Z" + " ----->" + Strings.Space(3) + "Z  " + cboL.Text + Strings.Format(Convert.ToInt32(Z * 10d + 0.5d) / 10d, "0.0") + '°');
             if (LHA <= 180d)
             {
                 IntAzTxtBx.AppendText(" W");
@@ -6118,21 +6118,21 @@ namespace CelestialTools
             }
 
             IntAzTxtBx.AppendText(Strings.Space(5 - Strings.Len(Conversion.Str(HoDeg))) + Strings.Format(Math.Abs(HoDeg), "0") + '°' + Strings.Format(Math.Abs(HoMin), "00.0") + "'" + Environment.NewLine);
-            i = (short)Strings.Len(Conversion.Str(Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d)));
+            i = (short)Strings.Len(Conversion.Str(Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d)));
             if (Math.Abs(Intercept) < 1d)
             {
                 i = (short)(i + 1);
             }
 
-            IntAzTxtBx.AppendText(Strings.Space(25) + " a =" + Strings.Space(9 - i) + Strings.Format(Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d, "0.0") + " nm ");
-            PlotOut.PlotIntercept = Strings.Format(Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d, "0.0") + " nm ";
-            if (Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d != 0d & Intercept < 0d)
+            IntAzTxtBx.AppendText(Strings.Space(25) + " a =" + Strings.Space(9 - i) + Strings.Format(Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d, "0.0") + " nm ");
+            PlotOut.PlotIntercept = Strings.Format(Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d, "0.0") + " nm ";
+            if (Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d != 0d & Intercept < 0d)
             {
                 IntAzTxtBx.AppendText("T  Ho > Hc....Toward");
                 PlotOut.PlotIntercept += " Toward";
             }
 
-            if (Conversion.Int(Math.Abs(Intercept) * 10d + 0.5d) / 10d != 0d & Intercept > 0d)
+            if (Convert.ToInt32(Math.Abs(Intercept) * 10d + 0.5d) / 10d != 0d & Intercept > 0d)
             {
                 IntAzTxtBx.AppendText("A  Hc > Ho....Away  ");
                 PlotOut.PlotIntercept += " Away";
@@ -6473,7 +6473,7 @@ namespace CelestialTools
                 goto ExitDrawTime;
             }
 
-            JD = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d; // or else JD incorrect for planets
+            JD = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d; // or else JD incorrect for planets
             int x = 0;
             int y = 0;
 
@@ -6551,7 +6551,7 @@ namespace CelestialTools
                 }
             }
 
-            EqTminutes = (float)Conversion.Int(Math.Abs(EqTinSeconds / 60d));
+            EqTminutes = (float)Convert.ToInt32(Math.Abs(EqTinSeconds / 60d));
             EqTseconds = Math.Abs(EqTinSeconds) - EqTminutes * 60f;
             XTD1 = -(CircleRadii + 10);
             YTD1 = -(CircleRadii + 10);
@@ -6742,7 +6742,7 @@ namespace CelestialTools
             if (GMonth < 3)
                 GYearJ = (short)(GYear - 1);
             GMonth = (short)(GMonth + 12);
-            JD = Conversion.Int(365.25d * (GYearJ + 4716)) + Conversion.Int(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
+            JD = Convert.ToInt32(365.25d * (GYearJ + 4716)) + Convert.ToInt32(30.6001d * (GMonth + 1)) + DecimalDate - 1537.5d;
             T = (JD - 2451545d + DeltaT / 86400d) / 36525.0d;
             return;
         }
@@ -6830,18 +6830,18 @@ namespace CelestialTools
             // is this a moon sight (BN = 62 or 63),use rounded values
             if (BN == 62 | BN == 63)
             {
-                GHAHourDeg1 = (short)Conversion.Int(GHAHour1);
+                GHAHourDeg1 = (short)Convert.ToInt32(GHAHour1);
                 GHAHourMin1 = (GHAHour1 - GHAHourDeg1) * 60d;
-                GHAHourMin1 = Conversion.Int(GHAHourMin1 * 10d + 0.5d) / 10d;
+                GHAHourMin1 = Convert.ToInt32(GHAHourMin1 * 10d + 0.5d) / 10d;
                 if (GHAHourMin1 == 60d)
                 {
                     GHAHourMin1 = 0d;
                     GHAHourDeg1 = (short)(GHAHourDeg1 + 1);
                 }
 
-                GHAHourDeg2 = (short)Conversion.Int(GHAHour2);
+                GHAHourDeg2 = (short)Convert.ToInt32(GHAHour2);
                 GHAHourMin2 = (GHAHour2 - GHAHourDeg2) * 60d;
-                GHAHourMin2 = Conversion.Int(GHAHourMin2 * 10d + 0.5d) / 10d;
+                GHAHourMin2 = Convert.ToInt32(GHAHourMin2 * 10d + 0.5d) / 10d;
                 if (GHAHourMin2 == 60d)
                 {
                     GHAHourMin2 = 0d;
@@ -6864,7 +6864,7 @@ namespace CelestialTools
 
             vvalue = HourChange - k;
             vvalue = vvalue * 60d;
-            vvalue = Conversion.Int(vvalue * 10d + 0.5d) / 10d; // This line was lower
+            vvalue = Convert.ToInt32(vvalue * 10d + 0.5d) / 10d; // This line was lower
             if (BN <= 57 & BN >= 62 | BN > 57 & BN < 62 & cboPlanets.Text == "Accurate vals. of v/d" & GMinute == 0 & GSecond == 0)
             {
                 vvalue = 0d;
@@ -6873,12 +6873,12 @@ namespace CelestialTools
             SignHourChange = (short)Math.Sign(vvalue);
             GHAIncrement = k * (GMinute + GSecond / 60d) / 60d;
             vcorr = vvalue * (GMinute + 0.5d) / 60d;
-            GHAIncrementDeg = (short)Conversion.Int(GHAIncrement);
+            GHAIncrementDeg = (short)Convert.ToInt32(GHAIncrement);
             GHAIncrementMin = (GHAIncrement - GHAIncrementDeg) * 60d;
-            GHAIncrementMin = Conversion.Int(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
+            GHAIncrementMin = Convert.ToInt32(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
             // vvalue = Int(vvalue * 10 + 0.5) / 10
             // vcorr = Int(vcorr * 10 + 0.50000000000001) / 10
-            vcorr = Math.Sign(vcorr) * Conversion.Int(Math.Abs(vcorr) * 10d + 0.50000000000001d) / 10d;
+            vcorr = Math.Sign(vcorr) * Convert.ToInt32(Math.Abs(vcorr) * 10d + 0.50000000000001d) / 10d;
             if (GMinute == 22 & vvalue == 2.8d)
             {
                 vcorr = 1.0d;
@@ -6939,9 +6939,9 @@ namespace CelestialTools
                 vcorr = 14.4d;
             }
 
-            GHAHourDeg1 = (short)Conversion.Int(GHAHour1);
+            GHAHourDeg1 = (short)Convert.ToInt32(GHAHour1);
             GHAHourMin1 = (GHAHour1 - GHAHourDeg1) * 60d;
-            GHAHourMin1 = Conversion.Int(GHAHourMin1 * 10d + 0.5d) / 10d;
+            GHAHourMin1 = Convert.ToInt32(GHAHourMin1 * 10d + 0.5d) / 10d;
             if (GHAHourMin1 == 60d)
             {
                 GHAHourMin1 = 0d;
@@ -6970,9 +6970,9 @@ namespace CelestialTools
                 }
             }
             // If BN >= 58 Then TotGHA = GHAHourDeg1 * 60 + GHAHourMin1 + Int(GHAIncrement * 600 + 0.5) / 10 + Sgn(HourChange) * vcorr: TotGHA = TotGHA / 60
-            TotGHADeg = (short)Conversion.Int(TotGHA);
+            TotGHADeg = (short)Convert.ToInt32(TotGHA);
             TotGHAMin = (TotGHA - TotGHADeg) * 60d;
-            TotGHAMin = Conversion.Int(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
+            TotGHAMin = Convert.ToInt32(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
             if (TotGHAMin == 60d)
             {
                 TotGHAMin = 0d;
@@ -6992,9 +6992,9 @@ namespace CelestialTools
 
             if (LHA < 0d)
                 LHA = LHA + 360d;
-            LHADeg = (short)Conversion.Int(LHA);
+            LHADeg = (short)Convert.ToInt32(LHA);
             LHAMin = (LHA - LHADeg) * 60d;
-            if (Conversion.Int(LHAMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LHAMin * 10d + 0.5d) / 10d == 60d)
             {
                 LHAMin = 0d;
                 LHADeg = (short)(LHADeg + 1);
@@ -7002,19 +7002,19 @@ namespace CelestialTools
 
             if (BN == 62 | BN == 63) // moon, use rounded values
             {
-                DecDegrees = (short)Conversion.Int(Math.Abs(DE1));
+                DecDegrees = (short)Convert.ToInt32(Math.Abs(DE1));
                 DecMinutes = (Math.Abs(DE1) - DecDegrees) * 60d;
-                DecMinutes = Conversion.Int(DecMinutes * 10d + 0.5d) / 10d;
-                if (Conversion.Int(DecMinutes * 10d + 0.5d) / 10d == 60d)
+                DecMinutes = Convert.ToInt32(DecMinutes * 10d + 0.5d) / 10d;
+                if (Convert.ToInt32(DecMinutes * 10d + 0.5d) / 10d == 60d)
                 {
                     DecMinutes = 0d;
                     DecDegrees = (short)(DecDegrees + 1);
                 }
 
-                DecDegrees2 = Conversion.Int(Math.Abs(DE2));
+                DecDegrees2 = Convert.ToInt32(Math.Abs(DE2));
                 DecMinutes2 = (Math.Abs(DE2) - DecDegrees2) * 60d;
-                DecMinutes2 = Conversion.Int(DecMinutes2 * 10d + 0.5d) / 10d;
-                if (Conversion.Int(DecMinutes2 * 10d + 0.5d) / 10d == 60d)
+                DecMinutes2 = Convert.ToInt32(DecMinutes2 * 10d + 0.5d) / 10d;
+                if (Convert.ToInt32(DecMinutes2 * 10d + 0.5d) / 10d == 60d)
                 {
                     DecMinutes2 = 0d;
                     DecDegrees2 = DecDegrees2 + 1d;
@@ -7033,16 +7033,16 @@ namespace CelestialTools
                 dvalue = (DENA2 - DENA1) * 60d;
             }
 
-            dvalue = Conversion.Int(Math.Abs(dvalue) * 10d + 0.5d) / 10d; // This line was lower
+            dvalue = Convert.ToInt32(Math.Abs(dvalue) * 10d + 0.5d) / 10d; // This line was lower
             Signdvalue = 1;
             if (Math.Abs(DE2) < Math.Abs(DE1))
             {
                 Signdvalue = -1;
             }
 
-            DecDegrees = (short)Conversion.Int(Math.Abs(DE1));
+            DecDegrees = (short)Convert.ToInt32(Math.Abs(DE1));
             DecMinutes = (Math.Abs(DE1) - DecDegrees) * 60d;
-            if (Conversion.Int(DecMinutes * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(DecMinutes * 10d + 0.5d) / 10d == 60d)
             {
                 DecMinutes = 0d;
                 DecDegrees = (short)(DecDegrees + 1);
@@ -7059,7 +7059,7 @@ namespace CelestialTools
             if (dvalue < 0.05d)
                 Signdvalue = 0;
             dcorr = dvalue * (GMinute + 0.5d) / 60d;
-            dcorr = Conversion.Int(Math.Abs(dcorr) * 10d + 0.50000000000001d) / 10d;
+            dcorr = Convert.ToInt32(Math.Abs(dcorr) * 10d + 0.50000000000001d) / 10d;
             if (GMinute == 0 & GSecond == 0)
             {
                 dcorr = 0d; // Add this line to not add correction to whole hour value
@@ -7097,13 +7097,13 @@ namespace CelestialTools
 
             if (BN > 57)
             {
-                TotDE = Math.Sign(DE1) * (Conversion.Int(Math.Abs(DE1) * 600d + 0.5d) / 10d + Signdvalue * dcorr);
+                TotDE = Math.Sign(DE1) * (Convert.ToInt32(Math.Abs(DE1) * 600d + 0.5d) / 10d + Signdvalue * dcorr);
                 TotDE = TotDE / 60d;
             }
 
-            TotDecDegrees = (short)Conversion.Int(Math.Abs(TotDE));
+            TotDecDegrees = (short)Convert.ToInt32(Math.Abs(TotDE));
             TotDecMinutes = (Math.Abs(TotDE) - TotDecDegrees) * 60d;
-            TotDecMinutes = Conversion.Int(TotDecMinutes * 10d + 0.5d) / 10d;
+            TotDecMinutes = Convert.ToInt32(TotDecMinutes * 10d + 0.5d) / 10d;
             if (TotDecMinutes == 60d)
             {
                 TotDecMinutes = 0d;
@@ -7115,11 +7115,11 @@ namespace CelestialTools
         {
             SignHourChange = (short)Math.Sign(vvalue);
             GHAIncrement = 15d * (GMinute + GSecond / 60d) / 60d;
-            GHAIncrementDeg = (short)Conversion.Int(GHAIncrement);
+            GHAIncrementDeg = (short)Convert.ToInt32(GHAIncrement);
             GHAIncrementMin = (GHAIncrement - GHAIncrementDeg) * 60d;
-            GHAIncrementMin = Conversion.Int(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
+            GHAIncrementMin = Convert.ToInt32(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
             vcorr = vvalue * (GMinute + 0.5d) / 60d;
-            vcorr = Math.Sign(vcorr) * Conversion.Int(Math.Abs(vcorr) * 10d + 0.50000000000001d) / 10d;
+            vcorr = Math.Sign(vcorr) * Convert.ToInt32(Math.Abs(vcorr) * 10d + 0.50000000000001d) / 10d;
             if (GMinute == 22 & vvalue == 2.8d)
             {
                 vcorr = 1.0d;
@@ -7180,9 +7180,9 @@ namespace CelestialTools
                 vcorr = 14.4d;
             }
 
-            GHAHourDeg1 = (short)Conversion.Int(GHAHour1);
+            GHAHourDeg1 = (short)Convert.ToInt32(GHAHour1);
             GHAHourMin1 = (GHAHour1 - GHAHourDeg1) * 60d;
-            GHAHourMin1 = Conversion.Int(GHAHourMin1 * 10d + 0.5d) / 10d;
+            GHAHourMin1 = Convert.ToInt32(GHAHourMin1 * 10d + 0.5d) / 10d;
             if (GHAHourMin1 == 60d)
             {
                 GHAHourMin1 = 0d;
@@ -7191,9 +7191,9 @@ namespace CelestialTools
 
             TotGHA = GHAHourDeg1 + GHAHourMin1 / 60d + GHAIncrementDeg + GHAIncrementMin / 60d; // + Sgn(HourChange) * vcorr / 60
             TotGHA = TotGHA + Math.Sign(HourChange) * vcorr / 60d;
-            TotGHADeg = (short)Conversion.Int(TotGHA);
+            TotGHADeg = (short)Convert.ToInt32(TotGHA);
             TotGHAMin = (TotGHA - TotGHADeg) * 60d;
-            TotGHAMin = Conversion.Int(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
+            TotGHAMin = Convert.ToInt32(TotGHAMin * 10d + 0.50000000001d) / 10d; // THIS MAKES ROUNDING COME OUT RIGHT BUT GHA BETTER WITHOUT IT
             if (TotGHAMin == 60d)
             {
                 TotGHAMin = 0d;
@@ -7216,25 +7216,25 @@ namespace CelestialTools
                 LHA = LHA + 360d;
             }
 
-            LHADeg = (short)Conversion.Int(LHA);
+            LHADeg = (short)Convert.ToInt32(LHA);
             LHAMin = (LHA - LHADeg) * 60d;
-            if (Conversion.Int(LHAMin * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(LHAMin * 10d + 0.5d) / 10d == 60d)
             {
                 LHAMin = 0d;
                 LHADeg = (short)(LHADeg + 1);
             }
 
             // next two lines try to fix Egbert's problem of 2/20/2016
-            DecDegrees = (short)Conversion.Int(Math.Abs(DE1));
+            DecDegrees = (short)Convert.ToInt32(Math.Abs(DE1));
             DecMinutes = (Math.Abs(DE1) - DecDegrees) * 60d;
-            if (Conversion.Int(DecMinutes * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(DecMinutes * 10d + 0.5d) / 10d == 60d)
             {
                 DecMinutes = 0d;
                 DecDegrees = (short)(DecDegrees + 1);
             }
 
             dvalue = (DENA2 - DENA1) * 60d;
-            dvalue = Conversion.Int(Math.Abs(dvalue) * 10d + 0.5d) / 10d; // This line was lower
+            dvalue = Convert.ToInt32(Math.Abs(dvalue) * 10d + 0.5d) / 10d; // This line was lower
             Signdvalue = 1;
             if (Math.Abs(DE2) < Math.Abs(DE1))
             {
@@ -7258,7 +7258,7 @@ namespace CelestialTools
             }
 
             dcorr = dvalue * (GMinute + 0.5d) / 60d;
-            dcorr = Conversion.Int(Math.Abs(dcorr) * 10d + 0.50000000000001d) / 10d;
+            dcorr = Convert.ToInt32(Math.Abs(dcorr) * 10d + 0.50000000000001d) / 10d;
             if (GMinute == 0 & GSecond == 0)
             {
                 dcorr = 0d; // Add this line to not add correction to whole hour value
@@ -7284,11 +7284,11 @@ namespace CelestialTools
                 dcorr = 14.4d;
             }
 
-            TotDE = Math.Sign(DE1) * (Conversion.Int(Math.Abs(DE1) * 600d + 0.5d) / 10d + Signdvalue * dcorr);
+            TotDE = Math.Sign(DE1) * (Convert.ToInt32(Math.Abs(DE1) * 600d + 0.5d) / 10d + Signdvalue * dcorr);
             TotDE = TotDE / 60d;
-            TotDecDegrees = (short)Conversion.Int(Math.Abs(TotDE));
+            TotDecDegrees = (short)Convert.ToInt32(Math.Abs(TotDE));
             TotDecMinutes = (Math.Abs(TotDE) - TotDecDegrees) * 60d;
-            TotDecMinutes = Conversion.Int(TotDecMinutes * 10d + 0.5d) / 10d;
+            TotDecMinutes = Convert.ToInt32(TotDecMinutes * 10d + 0.5d) / 10d;
             if (TotDecMinutes == 60d)
             {
                 TotDecMinutes = 0d;
@@ -7318,7 +7318,7 @@ namespace CelestialTools
                 D = D + Pi;
             if (D >= 2d * Pi | D < 0d)
             {
-                D = D - Conversion.Int(D / (2d * Pi)) * 2d * Pi;
+                D = D - Convert.ToInt32(D / (2d * Pi)) * 2d * Pi;
             }
 
             AR = D + Pre2; // radians

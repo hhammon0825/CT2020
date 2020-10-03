@@ -62,7 +62,7 @@ namespace CelestialTools
         public static double g_AriesHrDeg = 15.04106864d; // 23 hrs 56 min 4.1 sec 
         public static double g_MoonHrDeg = 14d + 19d / 60d;
         public static string g_TextZero = "0";
-
+        public static string g_tab = "\t";
         public static System.Device.Location.GeoCoordinate SailingsFindDestLLo(double LatIn, double LonIn, double Dist, double Course)
         {
             double LatDiff = Dist * Math.Cos(Course * Math.PI / 180d) / 60d;

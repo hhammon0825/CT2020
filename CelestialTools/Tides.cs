@@ -133,21 +133,21 @@ namespace CelestialTools
             LocTimeHighMinutes = (short)(TimeHighMinutes + (60d * Math.Abs(Conversion.Val(txtTab2HighHour.Text)) + Conversion.Val(txtTab2HighMin.Text)));
             if (Strings.Left(txtTab2HighHour.Text, 1) == "-")
                 LocTimeHighMinutes = (short)(TimeHighMinutes - (60d * Math.Abs(Conversion.Val(txtTab2HighHour.Text)) + Conversion.Val(txtTab2HighMin.Text)));
-            LocTimeHighHour = (short)Conversion.Int(LocTimeHighMinutes / 60d);
-            LocTimeHighMin = (short)Conversion.Int(LocTimeHighMinutes - LocTimeHighHour * 60);
+            LocTimeHighHour = (short)Convert.ToInt32(LocTimeHighMinutes / 60d);
+            LocTimeHighMin = (short)Convert.ToInt32(LocTimeHighMinutes - LocTimeHighHour * 60);
             LocTimeLowMinutes = (short)(TimeLowMinutes + (60d * Math.Abs(Conversion.Val(txtTab2LowHour.Text)) + Conversion.Val(txtTab2LowMin.Text)));
             if (Strings.Left(txtTab2LowHour.Text, 1) == "-")
                 LocTimeLowMinutes = (short)(TimeLowMinutes - (60d * Math.Abs(Conversion.Val(txtTab2LowHour.Text)) + Conversion.Val(txtTab2LowMin.Text)));
-            LocTimeLowHour = (short)Conversion.Int(LocTimeLowMinutes / 60d);
-            LocTimeLowMin = (short)Conversion.Int(LocTimeLowMinutes - LocTimeLowHour * 60);
+            LocTimeLowHour = (short)Convert.ToInt32(LocTimeLowMinutes / 60d);
+            LocTimeLowMin = (short)Convert.ToInt32(LocTimeLowMinutes - LocTimeLowHour * 60);
             LocHtHigh = Conversion.Val(txtHtHigh.Text) + Conversion.Val(txtTab2HtHigh.Text);
             if (Strings.Left(txtTab2HtHigh.Text, 1) == "*")
                 LocHtHigh = Conversion.Val(txtHtHigh.Text) * Conversion.Val(Strings.Mid(txtTab2HtHigh.Text, 2));
-            LocHtHigh = Conversion.Int(LocHtHigh * 10d + 0.5000000000001d) / 10d;
+            LocHtHigh = Convert.ToInt32(LocHtHigh * 10d + 0.5000000000001d) / 10d;
             LocHtLow = Conversion.Val(txtHtLow.Text) + Conversion.Val(txtTab2HtLow.Text);
             if (Strings.Left(txtTab2HtLow.Text, 1) == "*")
                 LocHtLow = Conversion.Val(txtHtLow.Text) * Conversion.Val(Strings.Mid(txtTab2HtLow.Text, 2));
-            LocHtLow = Conversion.Int(LocHtLow * 10d + 0.5000000000001d) / 10d;
+            LocHtLow = Convert.ToInt32(LocHtLow * 10d + 0.5000000000001d) / 10d;
             if (LocHtHigh <= LocHtLow)
             {
                 ErrorMsgBox("Check the tide heights.");
@@ -157,10 +157,10 @@ namespace CelestialTools
             DesTimeMinutes = (short)(DTTides.Value.Hour * 60 + DTTides.Value.Minute); // 60 * Val(VB.Left(txtDesTime.Text, 2)) + Val(VB.Right(txtDesTime.Text, 2))
             TimeIntHighMinutes = Math.Abs((short)(DesTimeMinutes - LocTimeHighMinutes));
             TimeIntLowMinutes = Math.Abs((short)(DesTimeMinutes - LocTimeLowMinutes));
-            TimeIntHighHour = (short)Conversion.Int(TimeIntHighMinutes / 60d);
-            TimeIntHighMin = (short)Conversion.Int(TimeIntHighMinutes - TimeIntHighHour * 60);
-            TimeIntLowHour = (short)Conversion.Int(TimeIntLowMinutes / 60d);
-            TimeIntLowMin = (short)Conversion.Int(TimeIntLowMinutes - TimeIntLowHour * 60);
+            TimeIntHighHour = (short)Convert.ToInt32(TimeIntHighMinutes / 60d);
+            TimeIntHighMin = (short)Convert.ToInt32(TimeIntHighMinutes - TimeIntHighHour * 60);
+            TimeIntLowHour = (short)Convert.ToInt32(TimeIntLowMinutes / 60d);
+            TimeIntLowMin = (short)Convert.ToInt32(TimeIntLowMinutes - TimeIntLowHour * 60);
             // If LocTimeLowMinutes <= LocTimeHighMinutes And (DesTimeMinutes < LocTimeLowMinutes Or DesTimeMinutes > LocTimeHighMinutes) Then  ErrorMsgBox ("Check the data."): Exit Sub
             // If LocTimeLowMinutes > LocTimeHighMinutes And (DesTimeMinutes > LocTimeLowMinutes Or DesTimeMinutes < LocTimeHighMinutes) Then  ErrorMsgBox ("Check the data."): Exit Sub
             // If DesTimeMinutes = LocTimeLowMinutes Or DesTimeMinutes = LocTimeHighMinutes Then  ErrorMsgBox ("Desired Time must be between Localized Time of High and Localized Time of Low."): Exit Sub
@@ -172,8 +172,8 @@ namespace CelestialTools
                 return;
             }
 
-            DurationHour = (short)Conversion.Int(DurationMinutes / 60d);
-            DurationMin = (short)Conversion.Int(DurationMinutes - DurationHour * 60);
+            DurationHour = (short)Convert.ToInt32(DurationMinutes / 60d);
+            DurationMin = (short)Convert.ToInt32(DurationMinutes - DurationHour * 60);
             if (optTable3.Checked == true)
             {
                 if (DurationMin <= 9)
@@ -189,7 +189,7 @@ namespace CelestialTools
             Range = (float)Math.Abs(LocHtHigh - LocHtLow);
             RangeDisplay = Range;
             if (optTable3.Checked == true)
-                Range = (float)(Conversion.Int(2f * Range + 0.5d) / 2d);
+                Range = (float)(Convert.ToInt32(2f * Range + 0.5d) / 2d);
             if (TimeIntHighMinutes > TimeIntLowMinutes)
                 Factor = (float)Math.Abs((DesTimeMinutes - LocTimeLowMinutes) / (double)DurationMinutes);
             if (TimeIntHighMinutes <= TimeIntLowMinutes)
@@ -197,7 +197,7 @@ namespace CelestialTools
             if (optTable3.Checked == true)
             {
                 Factor = Factor * 30f;
-                Factor = (float)Conversion.Int(Factor + 0.5d);
+                Factor = (float)Convert.ToInt32(Factor + 0.5d);
                 Factor = Factor / 30f;
             }
 
@@ -208,7 +208,7 @@ namespace CelestialTools
                     TimeDiff = TimeIntHighMinutes;
                 if (LocTimeLowMinutes < DesTimeMinutes)
                     TimeDiff = TimeIntLowMinutes;
-                TimeDiff = (short)Conversion.Int(TimeDiff / 60d + 0.5d);
+                TimeDiff = (short)Convert.ToInt32(TimeDiff / 60d + 0.5d);
                 if (TimeDiff == 0)
                     Factor = 0f;
                 if (TimeDiff == 1)
@@ -267,7 +267,7 @@ namespace CelestialTools
                 Correction = Range * Factor;
             }
 
-            Correction = (float)(Conversion.Int(Correction * 10f + 0.500001d) / 10d);
+            Correction = (float)(Convert.ToInt32(Correction * 10f + 0.500001d) / 10d);
             // TideHeight = Range / 2 * Cos(Pi * (DesTimeMinutes - LocTimeHighMinutes) / DurationMinutes) + (LocHtHigh + LocHtLow) / 2
             if (optCalc.Checked == true | optTable3.Checked == true)
             {
@@ -285,7 +285,7 @@ namespace CelestialTools
                     TideHeight = (float)(LocHtHigh - Correction);
             }
             // Correction = TideHeight - LocHtLow
-            TideHeight = (float)(Conversion.Int(TideHeight * 10f + 0.500001d) / 10d);
+            TideHeight = (float)(Convert.ToInt32(TideHeight * 10f + 0.500001d) / 10d);
             // clear form text boxes for reporting data
             ClearTextBoxes();
             // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> format tides1txt, tides2txt, and tides3txt boxes <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

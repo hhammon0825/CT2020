@@ -30,7 +30,7 @@ namespace CelestialTools
             // DataSet.Tables(tablename).Columns.Add("Calc Ho")
             var SR = new System.IO.StreamReader(FName);
             string allData = SR.ReadToEnd();
-            var rows = allData.Split(Conversions.ToChar(Constants.vbCrLf)); // ("\r".ToCharArray())
+            var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
             int incr1 = 0;
             foreach (string r in rows)
             {
@@ -93,7 +93,7 @@ namespace CelestialTools
             var ptB = new Point();
             ptA.X = -DrawWidth - 10;
             ptA.Y = -DrawWidth - 10;
-            AnalemaGraphic.DrawString("Analema Graph drawn" + Constants.vbCrLf + "for Latitude: " + CnvtToDeg(My.MyProject.Forms.FormNoonSight.EqtTable[0].EqtLat.ToString()) + Constants.vbCrLf + "and Longitude: " + CnvtToDeg(My.MyProject.Forms.FormNoonSight.EqtTable[0].EqtLong.ToString()) + Constants.vbCrLf + "for calendar year: " + tmpYear.ToString("0000"), FontB, Brushes.Black, ptA);
+            AnalemaGraphic.DrawString("Analema Graph drawn" + Environment.NewLine + "for Latitude: " + CnvtToDeg(My.MyProject.Forms.FormNoonSight.EqtTable[0].EqtLat.ToString()) + Environment.NewLine + "and Longitude: " + CnvtToDeg(My.MyProject.Forms.FormNoonSight.EqtTable[0].EqtLong.ToString()) + Environment.NewLine + "for calendar year: " + tmpYear.ToString("0000"), FontB, Brushes.Black, ptA);
             ptA.X = -DrawWidth;
             ptA.Y = 0;
             ptB.X = DrawWidth;
@@ -205,7 +205,7 @@ namespace CelestialTools
                     AnalemaGraphic.FillEllipse(Brushes.LawnGreen, new Rectangle(ptx.X - 2, ptx.Y - 2, 2, 2));
                 }
 
-                string strDtTm = "On " + My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTimeDate + Constants.vbCrLf + "LAN=" + CnvtTime(My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTZTLAN.ToString()) + " Ho=" + CnvtHo(My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTimeHo.ToString()) + '°';
+                string strDtTm = "On " + My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTimeDate + Environment.NewLine + "LAN=" + CnvtTime(My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTZTLAN.ToString()) + " Ho=" + CnvtHo(My.MyProject.Forms.FormNoonSight.EqtTable[incr].EqTimeHo.ToString()) + '°';
                 int strlen = (int)(strDtTm.Length / 2d * 6d);
                 if (TDate.Day == 1 | TDate.Day == 15)
                 {
@@ -253,7 +253,7 @@ namespace CelestialTools
             string NSEW = StrIn.ToString().Substring(StrIn.ToString().Length - 1, 1);
             string Str2 = StrIn.ToString().Substring(0, StrIn.ToString().Length - 1); // remove N/S on Lat and E/W on Long as last character
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'" + NSEW.ToString();
         }
@@ -272,7 +272,7 @@ namespace CelestialTools
 
             string Str2 = StrIn.ToString().TrimStart('-');
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("00") + ":" + TmpMin.ToString("00") + EqtSpeed;
         }
@@ -291,7 +291,7 @@ namespace CelestialTools
 
             string Str2 = StrIn.ToString().TrimStart('-');
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'" + NSEW.ToString();
         }
@@ -300,7 +300,7 @@ namespace CelestialTools
         {
             string Str2 = StrIn.ToString();
             double Tmp = Convert.ToDouble(Str2);
-            int TmpDeg = (int)Conversion.Int(Tmp);
+            int TmpDeg = (int)Convert.ToInt32(Tmp);
             double TmpMin = (Tmp - TmpDeg) * 60d;
             return TmpDeg.ToString("##0") + '°' + " " + TmpMin.ToString("#0.0") + "'";
         }

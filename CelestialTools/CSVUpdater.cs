@@ -112,7 +112,7 @@ namespace CelestialTools
                         txtOpenFN.Visible = true;
                         txtOpenFN.Text = SLOpenFName;
                         string allData = myStream.ReadToEnd();
-                        var rows = allData.Split(Conversions.ToChar(Constants.vbCrLf)); // ("\r".ToCharArray())
+                        var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
                         int incr1 = 0;
                         foreach (string r1 in rows)
                         {

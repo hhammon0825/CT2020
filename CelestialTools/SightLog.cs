@@ -946,7 +946,7 @@ namespace CelestialTools
                 TempTotGHA -= 360d;
             }
 
-            int TempGHADeg = (int)Conversion.Int(TempTotGHA);
+            int TempGHADeg = (int)Convert.ToInt32(TempTotGHA);
             double TempGHAMin = (TempTotGHA - TempGHADeg) * 60d;
             SRFFormGHADeg = TempGHADeg;
             SRFFormGHAMin = TempGHAMin;

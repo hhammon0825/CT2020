@@ -222,7 +222,7 @@ namespace CelestialTools
                 Time1inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime1.Text, 2)) + Conversion.Val(Strings.Right(txtTime1.Text, 2)));
                 Time2inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime2.Text, 2)) + Conversion.Val(Strings.Right(txtTime2.Text, 2)));
                 TimeinMinutes = Time2inMinutes - Time1inMinutes;
-                TimeHours = (int)Conversion.Int(TimeinMinutes / 60d);
+                TimeHours = (int)Convert.ToInt32(TimeinMinutes / 60d);
                 TimeMinutes = TimeinMinutes - 60 * TimeHours;
                 if (TimeinMinutes < 0)
                 {
@@ -368,7 +368,7 @@ namespace CelestialTools
             if (optCD.Checked == true)
             {
                 CDandSD();
-                Course = Conversion.Int(Course * 10d + 0.5d) / 10d;
+                Course = Convert.ToInt32(Course * 10d + 0.5d) / 10d;
                 DisplayCD();
             }
             // Calculate set and drift
@@ -377,7 +377,7 @@ namespace CelestialTools
                 Time1inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime1.Text, 2)) + Conversion.Val(Strings.Right(txtTime1.Text, 2)));
                 Time2inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime2.Text, 2)) + Conversion.Val(Strings.Right(txtTime2.Text, 2)));
                 TimeinMinutes = Time2inMinutes - Time1inMinutes;
-                TimeHours = (int)Conversion.Int(TimeinMinutes / 60d);
+                TimeHours = (int)Convert.ToInt32(TimeinMinutes / 60d);
                 TimeMinutes = TimeinMinutes - 60 * TimeHours;
                 if (TimeinMinutes < 0)
                 {
@@ -402,13 +402,13 @@ namespace CelestialTools
                     L1 = Fix1L;
                     Lo1 = Fix1Lo;
                     CDandSD();
-                    Distance = Math.Abs(Conversion.Int(Distance * 10d + 0.5d) / 10d);
+                    Distance = Math.Abs(Convert.ToInt32(Distance * 10d + 0.5d) / 10d);
                     if (TimeinMinutes != 0)
                     {
                         SMG = Distance / (TimeinMinutes / 60d);
                     }
 
-                    SMG = Conversion.Int(SMG * 10d + 0.5d) / 10d;
+                    SMG = Convert.ToInt32(SMG * 10d + 0.5d) / 10d;
                     DisplayCMGSMG();
                 }
             }
@@ -950,9 +950,9 @@ namespace CelestialTools
                     LoPointPrint = LoPoint;
                 }
 
-                LPointDeg = (int)Conversion.Int(Math.Abs(LPointPrint));
+                LPointDeg = (int)Convert.ToInt32(Math.Abs(LPointPrint));
                 LPointMin = (Math.Abs(LPointPrint) - LPointDeg) * 60d;
-                if (Conversion.Int(LPointMin * 10d + 0.5d) / 10d == 60d)
+                if (Convert.ToInt32(LPointMin * 10d + 0.5d) / 10d == 60d)
                 {
                     LPointMin = 0d;
                     LPointDeg = LPointDeg + 1;
@@ -963,9 +963,9 @@ namespace CelestialTools
                     LoPointPrint = -Math.Sign(LoPointPrint) * (360d - Math.Abs(LoPointPrint));
                 }
 
-                LoPointPrintDeg = (int)Conversion.Int(Math.Abs(LoPointPrint));
+                LoPointPrintDeg = (int)Convert.ToInt32(Math.Abs(LoPointPrint));
                 LoPointPrintMin = (Math.Abs(LoPointPrint) - LoPointPrintDeg) * 60d;
-                if (Conversion.Int(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
+                if (Convert.ToInt32(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
                 {
                     LoPointPrintMin = 0d;
                     LoPointPrintDeg = LoPointPrintDeg + 1;
@@ -1021,8 +1021,8 @@ namespace CelestialTools
                     Course = 360d - Math.Abs(CourseAngleDeg);
                 }
 
-                Course = Conversion.Int(Course + 0.5d);
-                Distance = Conversion.Int(Distance * 10d + 0.5d) / 10d;
+                Course = Convert.ToInt32(Course + 0.5d);
+                Distance = Convert.ToInt32(Distance * 10d + 0.5d) / 10d;
                 if (LeftMaxLatCount == 1)
                 {
                     Distance = Distance2;
@@ -1111,10 +1111,10 @@ namespace CelestialTools
             // TabVal = 6: If L2 = 0 Then TabVal = 5
             if (optL2Lo2GC.Checked == true)
             {
-                txtL2Deg.Text = Conversion.Int(Math.Abs(L2)).ToString();
-                txtL2Min.Text = ((Math.Abs(L2) - Conversion.Int(Math.Abs(L2))) * 60d).ToString();
-                txtLo2Deg.Text = Conversion.Int(Math.Abs(Lo2)).ToString();
-                txtLo2Min.Text = ((Math.Abs(Lo2) - Conversion.Int(Math.Abs(Lo2))) * 60d).ToString();
+                txtL2Deg.Text = Convert.ToInt32(Math.Abs(L2)).ToString();
+                txtL2Min.Text = ((Math.Abs(L2) - Convert.ToInt32(Math.Abs(L2))) * 60d).ToString();
+                txtLo2Deg.Text = Convert.ToInt32(Math.Abs(Lo2)).ToString();
+                txtLo2Min.Text = ((Math.Abs(Lo2) - Convert.ToInt32(Math.Abs(Lo2))) * 60d).ToString();
             }
 
             TabVal = 5;
@@ -1293,8 +1293,8 @@ namespace CelestialTools
                     Course = 360d - Math.Abs(CourseAngleDeg);
                 }
 
-                Course = Conversion.Int(Course + 0.5d);
-                Distance = Conversion.Int(Distance * 10d + 0.5d) / 10d;
+                Course = Convert.ToInt32(Course + 0.5d);
+                Distance = Convert.ToInt32(Distance * 10d + 0.5d) / 10d;
                 TotalDistance = (float)(TotalDistance + Distance);
             }
 
@@ -1312,7 +1312,7 @@ namespace CelestialTools
                 }
             }
 
-            TotalDistance = (float)(Conversion.Int(TotalDistance * 10f + 0.5d) / 10d);
+            TotalDistance = (float)(Convert.ToInt32(TotalDistance * 10f + 0.5d) / 10d);
             Dist = (Conversions.ToLong(Conversion.Str(Distance)) | Conversions.ToLong("000.0")).ToString();
             // frmPointsOnGCR.txtGCR.AppendText(Space(7) & Format(Course, "000"))
             // frmPointsOnGCR.txtGCR.AppendText(Space(13 - Dist.ToString.Length) & Format(Distance, "##0.0") & vbNewLine)
@@ -1398,7 +1398,7 @@ namespace CelestialTools
             Time1inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime1.Text, 2)) + Conversion.Val(Strings.Right(txtTime1.Text, 2)));
             Time2inMinutes = (int)(60d * Conversion.Val(Strings.Left(txtTime2.Text, 2)) + Conversion.Val(Strings.Right(txtTime2.Text, 2)));
             TimeinMinutes = Time2inMinutes - Time1inMinutes;
-            TimeHours = (int)Conversion.Int(TimeinMinutes / 60d);
+            TimeHours = (int)Convert.ToInt32(TimeinMinutes / 60d);
             TimeMinutes = TimeinMinutes - 60 * TimeHours;
             if (TimeinMinutes < 0)
             {
@@ -1463,19 +1463,19 @@ namespace CelestialTools
             }
 
             Factor = (float)Math.Cos(CourseAngle * Pi / 180d);
-            Factor = (float)(Conversion.Int(Factor * 10f + 0.5d) / 10d);
+            Factor = (float)(Convert.ToInt32(Factor * 10f + 0.5d) / 10d);
             LatDiff = Distance * Factor;
-            LatDiff = Conversion.Int(LatDiff * 10d + 0.5d) / 10d;
-            IntLatDiff = (int)Conversion.Int(LatDiff + 0.5d);
+            LatDiff = Convert.ToInt32(LatDiff * 10d + 0.5d) / 10d;
+            IntLatDiff = (int)Convert.ToInt32(LatDiff + 0.5d);
             txtSailings.Clear();
             txtSailings.SelectionAlignment = HorizontalAlignment.Left;
             txtSailings.WordWrap = true;
             txtSailings.AppendText(Strings.Space(50) + "1. C = " + Prefix + Math.Abs(CourseAngle).ToString() + '°' + " " + Suffix + "    factor (C) = " + Math.Abs(Factor).ToString() + Environment.NewLine);
             CompC = (float)(90d - CourseAngle);
             Factor = (float)Math.Cos(CompC * Pi / 180d);
-            Factor = (float)(Conversion.Int(Factor * 10f + 0.5d) / 10d);
+            Factor = (float)(Convert.ToInt32(Factor * 10f + 0.5d) / 10d);
             Departure = (float)(Distance * Factor);
-            Departure = (float)(Conversion.Int(Departure * 10f + 0.5d) / 10d);
+            Departure = (float)(Convert.ToInt32(Departure * 10f + 0.5d) / 10d);
             txtSailings.AppendText(Strings.Space(50) + "2. Complement C = " + CompC.ToString() + '°' + "    factor (Comp C) = " + Math.Abs(Factor).ToString() + Environment.NewLine);
             txtSailings.AppendText(Strings.Space(50) + "3. Diff Lat = " + LatDiff.ToString() + "' rounded to " + IntLatDiff.ToString() + "'" + Environment.NewLine);
             txtSailings.AppendText(Strings.Space(50) + "4. Departure = " + Math.Abs(Departure).ToString() + " nm" + Environment.NewLine);
@@ -1488,9 +1488,9 @@ namespace CelestialTools
                 return;
             }
 
-            L2Deg = (int)Conversion.Int(Math.Abs(L2));
+            L2Deg = (int)Convert.ToInt32(Math.Abs(L2));
             L2Min = (Math.Abs(L2) - L2Deg) * 60d;
-            L2Min = Conversion.Int(L2Min + 0.5d);
+            L2Min = Convert.ToInt32(L2Min + 0.5d);
             if (L2Min == 60d)
             {
                 L2Min = 0d;
@@ -1524,11 +1524,11 @@ namespace CelestialTools
             L2 = Math.Sign(L2) * (L2Deg + L2Min / 60d);
             Lm = (L1 + L2) / 2d; // Mid-latitude
             Factor = (float)Math.Abs(Math.Cos(Lm * Pi / 180d));
-            Factor = (float)(Conversion.Int(Factor * 10f + 0.5d) / 10d);
-            LmDeg = (int)Conversion.Int(Math.Abs(Lm));
+            Factor = (float)(Convert.ToInt32(Factor * 10f + 0.5d) / 10d);
+            LmDeg = (int)Convert.ToInt32(Math.Abs(Lm));
             LmMin = (float)((Math.Abs(Lm) - LmDeg) * 60d);
-            LmMin = (float)(Conversion.Int(LmMin * 10f + 0.5d) / 10d);
-            IntLmMin = (int)Conversion.Int(LmMin + 0.5d);
+            LmMin = (float)(Convert.ToInt32(LmMin * 10f + 0.5d) / 10d);
+            IntLmMin = (int)Convert.ToInt32(LmMin + 0.5d);
             txtSailings.AppendText(Strings.Space(50) + "6. Mid Lat = " + Strings.Format(LmDeg, "0") + '°' + Strings.Format(LmMin, "00.0") + "'");
             if (Lm >= 0d)
             {
@@ -1553,8 +1553,8 @@ namespace CelestialTools
 
             txtSailings.AppendText(Environment.NewLine);
             txtSailings.AppendText(Strings.Space(54) + "factor (Mid-Lat) = " + Factor.ToString() + Environment.NewLine);
-            DLo = Conversion.Int(Departure / Factor * 10f + 0.5d) / 10d;
-            IntDLo = (int)(Math.Sign(DLo) * Conversion.Int(Math.Abs(DLo) + 0.5d));
+            DLo = Convert.ToInt32(Departure / Factor * 10f + 0.5d) / 10d;
+            IntDLo = (int)(Math.Sign(DLo) * Convert.ToInt32(Math.Abs(DLo) + 0.5d));
             txtSailings.AppendText(Strings.Space(50) + "7. Diff Lo = " + Math.Abs(DLo).ToString() + "' rounded to " + Math.Abs(IntDLo).ToString() + "'" + Environment.NewLine);
             if (Conversion.Val(txtCourse.Text) > 0d & Conversion.Val(txtCourse.Text) < 180d)
             {
@@ -1570,9 +1570,9 @@ namespace CelestialTools
                 Lo2 = -Math.Sign(Lo2) * (360d - Math.Abs(Lo2));
             }
 
-            Lo2Deg = (int)Conversion.Int(Math.Abs(Lo2));
+            Lo2Deg = (int)Convert.ToInt32(Math.Abs(Lo2));
             Lo2Min = (Math.Abs(Lo2) - Lo2Deg) * 60d;
-            Lo2Min = Conversion.Int(Lo2Min + 0.5d);
+            Lo2Min = Convert.ToInt32(Lo2Min + 0.5d);
             txtSailings.AppendText(Strings.Space(50) + "8. Lo2 = " + Strings.Format(Lo2Deg, "0") + '°' + Strings.Format(Lo2Min, "00") + "'");
             if (Math.Abs(Lo2) < 0.01d)
             {
@@ -4208,18 +4208,18 @@ namespace CelestialTools
                 return;
             }
             // CurrentY = 4600
-            L2Deg = (int)Conversion.Int(Math.Abs(L2));
+            L2Deg = (int)Convert.ToInt32(Math.Abs(L2));
             L2Min = (Math.Abs(L2) - L2Deg) * 60d;
-            L2Min = Conversion.Int(L2Min * 10d + 0.5d) / 10d;
+            L2Min = Convert.ToInt32(L2Min * 10d + 0.5d) / 10d;
             if (L2Min == 60d)
             {
                 L2Min = 0d;
                 L2Deg = L2Deg + 1;
             }
 
-            Lo2Deg = (int)Conversion.Int(Math.Abs(Lo2));
+            Lo2Deg = (int)Convert.ToInt32(Math.Abs(Lo2));
             Lo2Min = (Math.Abs(Lo2) - Lo2Deg) * 60d;
-            Lo2Min = Conversion.Int(Lo2Min * 10d + 0.5d) / 10d;
+            Lo2Min = Convert.ToInt32(Lo2Min * 10d + 0.5d) / 10d;
             if (Lo2Min == 60d)
             {
                 Lo2Min = 0d;
@@ -4289,9 +4289,9 @@ namespace CelestialTools
 
             if (optGreatCircle.Checked == true)
             {
-                MaxLatDeg = (int)Conversion.Int(Math.Abs(MaxLat));
+                MaxLatDeg = (int)Convert.ToInt32(Math.Abs(MaxLat));
                 MaxLatMin = (Math.Abs(MaxLat) - MaxLatDeg) * 60d;
-                MaxLatMin = Conversion.Int(MaxLatMin * 10d + 0.5d) / 10d;
+                MaxLatMin = Convert.ToInt32(MaxLatMin * 10d + 0.5d) / 10d;
                 if (MaxLatMin == 60d)
                 {
                     MaxLatMin = 0d;
@@ -4357,7 +4357,7 @@ namespace CelestialTools
 
             // CurrentY = 4600
             // CourseAngleDeg = Int(CourseAngleDeg + 0.5)
-            Distance = Math.Abs(Conversion.Int(Distance * 10d + 0.5d) / 10d);
+            Distance = Math.Abs(Convert.ToInt32(Distance * 10d + 0.5d) / 10d);
             if (optGreatCircle.Checked == true & chkComposite.CheckState == 0)
             {
                 txtSailings.AppendText("Great Circle Sailing results:" + Environment.NewLine);
@@ -4388,10 +4388,10 @@ namespace CelestialTools
                 CourseFinal = Course3;
             }
 
-            Course = Conversion.Int(Course * 100d + 0.5d) / 100d;
+            Course = Convert.ToInt32(Course * 100d + 0.5d) / 100d;
             if (Course >= 360d)
                 Course = Course - 360d;
-            CourseFinal = Conversion.Int(CourseFinal * 100d + 0.5d) / 100d;
+            CourseFinal = Convert.ToInt32(CourseFinal * 100d + 0.5d) / 100d;
             if (CourseFinal >= 360d)
                 CourseFinal = CourseFinal - 360d;
 
@@ -4421,9 +4421,9 @@ namespace CelestialTools
 
             if (optGreatCircle.Checked == true & chkComposite.CheckState == 0)
             {
-                MaxLatDeg = (int)Conversion.Int(Math.Abs(MaxLat));
+                MaxLatDeg = (int)Convert.ToInt32(Math.Abs(MaxLat));
                 MaxLatMin = (Math.Abs(MaxLat) - MaxLatDeg) * 60d;
-                MaxLatMin = Conversion.Int(MaxLatMin * 10d + 0.5d) / 10d;
+                MaxLatMin = Convert.ToInt32(MaxLatMin * 10d + 0.5d) / 10d;
                 if (MaxLatMin == 60d)
                 {
                     MaxLatMin = 0d;
@@ -4509,7 +4509,7 @@ namespace CelestialTools
             }
             // txtSailings.Clear()
 
-            Distance = Math.Abs(Conversion.Int(Distance * 10d + 0.5d) / 10d);
+            Distance = Math.Abs(Convert.ToInt32(Distance * 10d + 0.5d) / 10d);
             txtSailings.AppendText(Strings.Space(40) + "Set" + Strings.Space(34) + Strings.Format(Course, "000.00") + '°' + " True => " + Strings.Format(Course, "000") + '°' + " True" + Environment.NewLine); // was Format(Course, "000"); Chr$(176); " True" until V5.4.0
             txtSailings.AppendText(Strings.Space(40) + "Total Drift" + Strings.Space(26) + Strings.Format(Distance, "0.0") + " nm" + Environment.NewLine);
             if (TimeinMinutes != 0)
@@ -4845,7 +4845,7 @@ namespace CelestialTools
                     Course = 0d;
                 }
 
-                InitialQuadrant = (int)(Conversion.Int(Course / 90d) + 1d);
+                InitialQuadrant = (int)(Convert.ToInt32(Course / 90d) + 1d);
                 FinalGCCourse();
                 if ((int)chkComposite.CheckState == 1 & optMethod1.Checked == true)
                 {
@@ -4900,7 +4900,7 @@ namespace CelestialTools
                     Direction = 1;
                 }
 
-                InitialQuadrant = (int)(Conversion.Int(Conversion.Val(txtCourse.Text) / 90d) + 1d);
+                InitialQuadrant = (int)(Convert.ToInt32(Conversion.Val(txtCourse.Text) / 90d) + 1d);
             }
             // Formula for maximum latitude (vertex) of entire great circle, not necessarily on route
             if (optICD.Checked == true)
@@ -4976,9 +4976,9 @@ namespace CelestialTools
         Degrees:
             ;
             MaxLat = MaxLat * 180d / Pi; // this is maximum latitude of entire great circle, not just of route
-            LoVertexDeg = (int)Conversion.Int(Math.Abs(LoVertex));
+            LoVertexDeg = (int)Convert.ToInt32(Math.Abs(LoVertex));
             LoVertexMin = (Math.Abs(LoVertex) - LoVertexDeg) * 60d;
-            LoVertexMin = Conversion.Int(LoVertexMin * 10d + 0.5d) / 10d;
+            LoVertexMin = Convert.ToInt32(LoVertexMin * 10d + 0.5d) / 10d;
             if (LoVertexMin == 60d)
             {
                 LoVertexMin = 0d;
@@ -5254,7 +5254,7 @@ namespace CelestialTools
             }
 
             // If Lo1Final = Lo2Final Then CourseFinal = Course
-            FinalQuadrant = (int)(Conversion.Int(CourseFinal / 90d) + 1d);
+            FinalQuadrant = (int)(Convert.ToInt32(CourseFinal / 90d) + 1d);
         }
 
         public double ModFP(double y, double x)
@@ -5356,7 +5356,7 @@ namespace CelestialTools
                 Flag4 = true;
             }
 
-            DriftAng = Conversion.Int(DriftAng + 0.5d);
+            DriftAng = Convert.ToInt32(DriftAng + 0.5d);
         }
 
         private void txtFix1LD_TextChanged(object eventSender, EventArgs eventArgs)
@@ -5721,17 +5721,17 @@ namespace CelestialTools
                 Lon31 = x;
             }
 
-            Lon31Deg = (int)Conversion.Int(Math.Abs(Lon31));
+            Lon31Deg = (int)Convert.ToInt32(Math.Abs(Lon31));
             Lon31Min = (Math.Abs(Lon31) - Lon31Deg) * 60d;
-            if (Conversion.Int(Lon31Min * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(Lon31Min * 10d + 0.5d) / 10d == 60d)
             {
                 Lon31Min = 0d;
                 Lon31Deg = Lon31Deg + 1;
             }
 
-            Lon32Deg = (int)Conversion.Int(Math.Abs(Lon32));
+            Lon32Deg = (int)Convert.ToInt32(Math.Abs(Lon32));
             Lon32Min = (Math.Abs(Lon32) - Lon32Deg) * 60d;
-            if (Conversion.Int(Lon32Min * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(Lon32Min * 10d + 0.5d) / 10d == 60d)
             {
                 Lon32Min = 0d;
                 Lon32Deg = Lon32Deg + 1;
@@ -5796,9 +5796,9 @@ namespace CelestialTools
             // Course3 = CourseCD
 
 
-            Distance1 = Conversion.Int(Distance1 * 10d + 0.5d) / 10d;
-            Distance2 = Conversion.Int(Distance2 * 10d + 0.5d) / 10d;
-            Distance3 = Conversion.Int(Distance3 * 10d + 0.5d) / 10d;
+            Distance1 = Convert.ToInt32(Distance1 * 10d + 0.5d) / 10d;
+            Distance2 = Convert.ToInt32(Distance2 * 10d + 0.5d) / 10d;
+            Distance3 = Convert.ToInt32(Distance3 * 10d + 0.5d) / 10d;
             DistanceComposite = (float)(Distance1 + Distance2 + Distance3);
         }
 
@@ -5932,17 +5932,17 @@ namespace CelestialTools
                 Lon32 = Lo2;
             }
 
-            Lon31Deg = (int)Conversion.Int(Math.Abs(Lon31));
+            Lon31Deg = (int)Convert.ToInt32(Math.Abs(Lon31));
             Lon31Min = (Math.Abs(Lon31) - Lon31Deg) * 60d;
-            if (Conversion.Int(Lon31Min * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(Lon31Min * 10d + 0.5d) / 10d == 60d)
             {
                 Lon31Min = 0d;
                 Lon31Deg = Lon31Deg + 1;
             }
 
-            Lon32Deg = (int)Conversion.Int(Math.Abs(Lon32));
+            Lon32Deg = (int)Convert.ToInt32(Math.Abs(Lon32));
             Lon32Min = (Math.Abs(Lon32) - Lon32Deg) * 60d;
-            if (Conversion.Int(Lon32Min * 10d + 0.5d) / 10d == 60d)
+            if (Convert.ToInt32(Lon32Min * 10d + 0.5d) / 10d == 60d)
             {
                 Lon32Min = 0d;
                 Lon32Deg = Lon32Deg + 1;
@@ -6004,9 +6004,9 @@ namespace CelestialTools
                     Course3 = 270d;
             }
 
-            Distance1 = Conversion.Int(Distance1 * 10d + 0.5d) / 10d;
-            Distance2 = Conversion.Int(Distance2 * 10d + 0.5d) / 10d;
-            Distance3 = Conversion.Int(Distance3 * 10d + 0.5d) / 10d;
+            Distance1 = Convert.ToInt32(Distance1 * 10d + 0.5d) / 10d;
+            Distance2 = Convert.ToInt32(Distance2 * 10d + 0.5d) / 10d;
+            Distance3 = Convert.ToInt32(Distance3 * 10d + 0.5d) / 10d;
             DistanceComposite = (float)(Distance1 + Distance2 + Distance3);
         }
 
@@ -6188,7 +6188,7 @@ namespace CelestialTools
             }
 
             DistanceCD = DistanceCD * 180d / Pi * 60d;
-            DistanceCD = Conversion.Int(DistanceCD * 10d + 0.5d) / 10d;
+            DistanceCD = Convert.ToInt32(DistanceCD * 10d + 0.5d) / 10d;
             CourseAngleDegCD = CourseAngleCD * 180d / Pi; // course in quadrant
             if (SignL1CD >= 0 & DirectionCD == 1)
             {
@@ -6538,14 +6538,14 @@ namespace CelestialTools
                             Course = 360d - Math.Abs(CourseAngleDeg);
                         }
                         // If (Segment = 2 And ReachedMaxLatCount = 1) Then
-                        Course = Conversion.Int(Course + 0.5d);
+                        Course = Convert.ToInt32(Course + 0.5d);
                         // '                    If Segment = 3 And LeftMaxLatCount = 1 Then Distance = 0
                         if (Segment == 2 & ReachedMaxLatCount == 1 & L1Initial == L3)
                         {
                             Distance = 0d; // want this if L1=L3
                         }
 
-                        Distance = Conversion.Int(Distance * 10d + 0.5d) / 10d;
+                        Distance = Convert.ToInt32(Distance * 10d + 0.5d) / 10d;
                         TotalDistance = (float)(TotalDistance + Distance);
                         Dist = (Conversions.ToLong(Conversion.Str(Distance)) | Conversions.ToLong("000.0")).ToString();
                         // End If
@@ -6557,9 +6557,9 @@ namespace CelestialTools
                         // End If
                         // If ReachedMaxLatCount = 0 Then frmPointsOnGCR.txtGCR.AppendText(vbNewLine)
 
-                        LPointPrintDeg = (int)Conversion.Int(Math.Abs(LPointPrint));
+                        LPointPrintDeg = (int)Convert.ToInt32(Math.Abs(LPointPrint));
                         LPointPrintMin = (Math.Abs(LPointPrint) - LPointPrintDeg) * 60d;
-                        if (Conversion.Int(LPointPrintMin * 10d + 0.5d) / 10d == 60d)
+                        if (Convert.ToInt32(LPointPrintMin * 10d + 0.5d) / 10d == 60d)
                         {
                             LPointPrintMin = 0d;
                             LPointPrintDeg = LPointPrintDeg + 1;
@@ -6570,9 +6570,9 @@ namespace CelestialTools
                             LoPointPrint = -(360d - Math.Abs(LoPointPrint));
                         }
 
-                        LoPointPrintDeg = (int)Conversion.Int(Math.Abs(LoPointPrint));
+                        LoPointPrintDeg = (int)Convert.ToInt32(Math.Abs(LoPointPrint));
                         LoPointPrintMin = (Math.Abs(LoPointPrint) - LoPointPrintDeg) * 60d;
-                        if (Conversion.Int(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
+                        if (Convert.ToInt32(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
                         {
                             LoPointPrintMin = 0d;
                             LoPointPrintDeg = LoPointPrintDeg + 1;
@@ -6629,9 +6629,9 @@ namespace CelestialTools
                     // Segment=2
                     if (ReachedMaxLatCount == 1) // Segment = 2 Then 'And
                     {
-                        LPointPrintDeg = (int)Conversion.Int(Math.Abs(LPointPrint));
+                        LPointPrintDeg = (int)Convert.ToInt32(Math.Abs(LPointPrint));
                         LPointPrintMin = (Math.Abs(LPointPrint) - LPointPrintDeg) * 60d;
-                        if (Conversion.Int(LPointPrintMin * 10d + 0.5d) / 10d == 60d)
+                        if (Convert.ToInt32(LPointPrintMin * 10d + 0.5d) / 10d == 60d)
                         {
                             LPointPrintMin = 0d;
                             LPointPrintDeg = LPointPrintDeg + 1;
@@ -6643,9 +6643,9 @@ namespace CelestialTools
                             LoPointPrint = -(360d - Math.Abs(LoPointPrint));
                         }
 
-                        LoPointPrintDeg = (int)Conversion.Int(Math.Abs(LoPointPrint));
+                        LoPointPrintDeg = (int)Convert.ToInt32(Math.Abs(LoPointPrint));
                         LoPointPrintMin = (Math.Abs(LoPointPrint) - LoPointPrintDeg) * 60d;
-                        if (Conversion.Int(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
+                        if (Convert.ToInt32(LoPointPrintMin * 10d + 0.5d) / 10d == 60d)
                         {
                             LoPointPrintMin = 0d;
                             LoPointPrintDeg = LoPointPrintDeg + 1;
@@ -6658,7 +6658,7 @@ namespace CelestialTools
                         }
 
                         Distance = 60d * DLo * Math.Cos(L3 * Pi / 180d);
-                        Distance = Conversion.Int(Distance * 10d + 0.5d) / 10d;
+                        Distance = Convert.ToInt32(Distance * 10d + 0.5d) / 10d;
                         TotalDistance = (float)(TotalDistance + Distance);
                         if (L1Initial != L3)
                         {
@@ -6818,10 +6818,10 @@ namespace CelestialTools
                     Course = 360d - Math.Abs(CourseAngleDeg);
                 }
 
-                Course = Conversion.Int(Course + 0.5d);
-                Distance = Conversion.Int(Distance * 10d + 0.5d) / 10d;
+                Course = Convert.ToInt32(Course + 0.5d);
+                Distance = Convert.ToInt32(Distance * 10d + 0.5d) / 10d;
                 TotalDistance = (float)(TotalDistance + Distance);
-                TotalDistance = (float)(Conversion.Int(TotalDistance * 10f + 0.5d) / 10d);
+                TotalDistance = (float)(Convert.ToInt32(TotalDistance * 10f + 0.5d) / 10d);
                 Dist = (Conversions.ToLong(Conversion.Str(Distance)) | Conversions.ToLong("000.0")).ToString();
                 // frmPointsOnGCR.CurrentY = frmPointsOnGCR.CurrentY - 210
                 // frmPointsOnGCR.txtGCR.AppendText(Space(7) & Format(Course, "000"))

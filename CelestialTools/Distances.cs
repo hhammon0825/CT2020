@@ -30,13 +30,13 @@ namespace CelestialTools
             if (optDistHorizon.Checked == true)
             {
                 Dist = 1.169497d * Math.Sqrt(HEinFeet);
-                TextBoxFormDistances.AppendText("Distance of the Horizon: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Distance of the Horizon: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Environment.NewLine);
             }
 
             if (optGeogRange.Checked == true)
             {
                 Dist = 1.169497d * (Math.Sqrt(HEinFeet) + Math.Sqrt(HOinFeet));
-                TextBoxFormDistances.AppendText("Geographical Range of Visibility: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Geographical Range of Visibility: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Environment.NewLine);
             }
 
             if (optVertWaterTop.Checked == true) // Table 16 (Bowditch 2002)
@@ -58,7 +58,7 @@ namespace CelestialTools
                 Dist = HOinFeet / Math.Tan(hainDegrees * Pi / 180d); // feet
                 Dist = Dist / 6076.1154d; // nautical miles
                                           // Dist = Int(Dist * 100 + 0.5) / 100
-                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0.00") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.00") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0.00") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.00") + " mi" + Environment.NewLine);
             }
 
             if (optVertWaterSea.Checked == true) // Table 17 (Bowditch 2002)
@@ -81,7 +81,7 @@ namespace CelestialTools
                 B = Math.Sqrt(2d * 0.8279d * (HEinNM / 3440.1d));
                 A = (Math.Tan(hainDegrees * Pi / 180d) + B) * (1d - Math.Tan(hainDegrees * Pi / 180d) * B);
                 Dist = 2025.3718d * (A * 3440.1d - Math.Sqrt(Math.Pow(A * 3440.1d, 2d) - 2d * HEinNM * 3440.1d * 0.8279d)) / 0.8279d;
-                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0") + " yards = " + Strings.Format(Dist / 2025.3718d, "#0.00") + " nm = " + Strings.Format(Dist / 1760d, "#0.00") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0") + " yards = " + Strings.Format(Dist / 2025.3718d, "#0.00") + " nm = " + Strings.Format(Dist / 1760d, "#0.00") + " mi" + Environment.NewLine);
             }
 
             if (optVertSeaTop.Checked == true) // Table 15 (Bowditch 2002)
@@ -154,25 +154,25 @@ namespace CelestialTools
                 }
 
                 Dist = Math.Sqrt(Math.Pow(Math.Tan(hainDegrees * Pi / 180d) / 0.0002419d, 2d) + (HOinFeet - HEinFeet) / 0.7349d) - Math.Tan(hainDegrees * Pi / 180d) / 0.0002419d;
-                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Distance to Object: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Environment.NewLine);
             }
 
             if (optVertWaterTop.Checked == true | optVertWaterSea.Checked == true | optVertSeaTop.Checked == true)
             {
-                TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Constants.vbCrLf);
+                TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(Dist, "#0.0") + " nm = " + Strings.Format(Dist * 1.1507765d, "#0.0") + " mi" + Environment.NewLine);
                 if (hainDegrees < 0d)
                 {
-                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + "-" + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Constants.vbCrLf);
+                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + "-" + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Environment.NewLine);
                 }
                 else if (haMinutes >= 60d)
                 {
                     haMinutes = haMinutes - 60d;
                     haDegrees = (short)(haDegrees + 1);
-                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Constants.vbCrLf);
+                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Environment.NewLine);
                 }
                 else
                 {
-                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Constants.vbCrLf);
+                    TextBoxFormDistances.AppendText("Corrected Vertical Angle: " + Strings.Format(haDegrees, "0") + '°' + Strings.Format(haMinutes, "00.0") + Environment.NewLine);
                 }
             }
 
@@ -192,13 +192,13 @@ namespace CelestialTools
             if (cboHE.Text == "cm")
                 HEinFeet = HE * 0.0328095d;
             if (cboHE.Text == "ft" | cboHE.Text == "m ")
-                HE = (float)(Conversion.Int(HE * 10f + 0.5d) / 10d);
+                HE = (float)(Convert.ToInt32(HE * 10f + 0.5d) / 10d);
             Ho = (float)Conversion.Val(txtHO.Text);
             if (cboHO.Text == "ft")
                 HOinFeet = Ho;
             if (cboHO.Text == "m ")
                 HOinFeet = Ho * 3.28095d;
-            Ho = (float)(Conversion.Int(Ho * 10f + 0.5d) / 10d);
+            Ho = (float)(Convert.ToInt32(Ho * 10f + 0.5d) / 10d);
             return rtnObject;
         }
 
@@ -1015,14 +1015,14 @@ namespace CelestialTools
             }
 
             Corr1 = ICinMinutes - Dip;
-            Corr1Deg = (short)Conversion.Int(Math.Abs(Corr1 / 60d));
+            Corr1Deg = (short)Convert.ToInt32(Math.Abs(Corr1 / 60d));
             Corr1Min = Math.Abs(Corr1) - 60 * Corr1Deg;
             hsinMinutes = 60d * Conversion.Val(txtHsDeg.Text) + Conversion.Val(txtHsMin.Text) + Conversion.Val(txtHsSec.Text) / 60d;
             HsMin = Conversion.Val(txtHsMin.Text) + Conversion.Val(txtHsSec.Text) / 60d;
             hainDegrees = (hsinMinutes + Corr1) / 60d;
-            haDegrees = (short)(Math.Sign(hainDegrees) * Conversion.Int(Math.Abs(hainDegrees)));
+            haDegrees = (short)(Math.Sign(hainDegrees) * Convert.ToInt32(Math.Abs(hainDegrees)));
             haMinutes = Math.Abs(hainDegrees - haDegrees) * 60d;
-            haMinutes = Conversion.Int(haMinutes * 10d + 0.5d) / 10d;
+            haMinutes = Convert.ToInt32(haMinutes * 10d + 0.5d) / 10d;
         }
 
         private void optHsDMm_CheckedChanged(object eventSender, EventArgs eventArgs)

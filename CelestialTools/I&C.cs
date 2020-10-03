@@ -398,11 +398,11 @@ namespace CelestialTools
                 vcorr = Conversion.Val(txtv.Text) * (Conversion.Val(txtUTm.Text) + 0.5d) / 60d;
                 dcorr = Conversion.Val(txtd.Text) * (Conversion.Val(txtUTm.Text) + 0.5d) / 60d;
                 // Arcane rounding of vcorr and dcorr to make certain they match almanac values
-                vcorr = Conversion.Int(vcorr * 10d + 0.50000000000001d) / 10d;
-                dcorr = Conversion.Int(dcorr * 10d + 0.50000000000001d) / 10d;
-                GHAIncrementDeg = (short)Conversion.Int(GHAIncrement);
+                vcorr = Convert.ToInt32(vcorr * 10d + 0.50000000000001d) / 10d;
+                dcorr = Convert.ToInt32(dcorr * 10d + 0.50000000000001d) / 10d;
+                GHAIncrementDeg = (short)Convert.ToInt32(GHAIncrement);
                 GHAIncrementMin = (GHAIncrement - GHAIncrementDeg) * 60d;
-                GHAIncrementMin = Conversion.Int(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
+                GHAIncrementMin = Convert.ToInt32(GHAIncrementMin * 10d + 0.500000000001d) / 10d;
                 if (Conversion.Val(txtUTm.Text) == 22d & Conversion.Val(txtv.Text) == 2.8d)
                 {
                     vcorr = 1.0d;
@@ -528,8 +528,8 @@ namespace CelestialTools
             if (optBack.Checked == true)
             {
                 Time = 60d * (Conversion.Val(txtDeg.Text) + Conversion.Val(txtMin.Text) / 60d) / k;
-                TimeMin = (short)Conversion.Int(Time);
-                TimeSec = Conversion.Int((Time - TimeMin) * 60d + 0.5d);
+                TimeMin = (short)Convert.ToInt32(Time);
+                TimeSec = Convert.ToInt32((Time - TimeMin) * 60d + 0.5d);
                 txtUTm.Text = TimeMin.ToString("0", CultureInfo.CurrentCulture);
                 txtUTs.Text = TimeSec.ToString("00", CultureInfo.CurrentCulture);
                 txtv.Clear();

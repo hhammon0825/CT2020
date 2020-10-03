@@ -130,10 +130,10 @@ namespace CelestialTools
 
                 Distance = Math.Abs(DLo * Math.Cos((L1 + L2) / 2d * Pi / 180d) / Math.Sin(CourseAngle));
                 LPoint = L1 + Sign * Distance * Math.Cos(CourseAngle);
-                LDeg = (short)Conversion.Int(Math.Abs(LPoint));
+                LDeg = (short)Convert.ToInt32(Math.Abs(LPoint));
                 LMin = (Math.Abs(LPoint) - LDeg) * 60d;
-                LMin = Conversion.Int(LMin * 10d + 0.5d) / 10d;
-                if (Conversion.Int(LMin * 10d + 0.5d) / 10d == 60d)
+                LMin = Convert.ToInt32(LMin * 10d + 0.5d) / 10d;
+                if (Convert.ToInt32(LMin * 10d + 0.5d) / 10d == 60d)
                 {
                     LMin = 0d;
                     LDeg = (short)(LDeg + 1);
@@ -166,10 +166,10 @@ namespace CelestialTools
                 LoPoint = Lo1 + Sign * DLo;
                 if (Math.Abs(LoPoint) > 180d)
                     LoPoint = -Math.Sign(LoPoint) * (360d - Math.Abs(LoPoint));
-                LoDeg = (short)Conversion.Int(Math.Abs(LoPoint));
+                LoDeg = (short)Convert.ToInt32(Math.Abs(LoPoint));
                 LoMin = (Math.Abs(LoPoint) - LoDeg) * 60d;
-                LoMin = Conversion.Int(LoMin * 10d + 0.5d) / 10d;
-                if (Conversion.Int(LoMin * 10d + 0.5d) / 10d == 60d)
+                LoMin = Convert.ToInt32(LoMin * 10d + 0.5d) / 10d;
+                if (Convert.ToInt32(LoMin * 10d + 0.5d) / 10d == 60d)
                 {
                     LoMin = 0d;
                     LoDeg = (short)(LoDeg + 1);

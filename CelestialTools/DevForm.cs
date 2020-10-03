@@ -132,7 +132,7 @@ namespace CelestialTools
                         string SLOpenFName = openFileDialog2.FileName;
                         txtOpenFile.Text = "Current Deviation File is: " + SLOpenFName;
                         string allData = myStream.ReadToEnd();
-                        var rows = allData.Split(Conversions.ToChar(Constants.vbCrLf)); // ("\r".ToCharArray())
+                        var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
                         int incr1 = 0;
                         foreach (string r1 in rows)
                         {
