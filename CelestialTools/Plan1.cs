@@ -2351,7 +2351,7 @@ namespace CelestialTools
             if (IC == 4)
             {
                 C30 = "----";
-                return Conversions.ToString(true);
+                return Convert.ToString(true);
                 return default; // V1.0.5 had IC = 3
             }
 
@@ -5774,7 +5774,7 @@ namespace CelestialTools
         {
             // this subroutine is required because issuing a raw SendMsgBx call also trigger a Paint event for graphic box on form which cannot be handled properly in error conditions
             IssuingSendMsgBx = true;
-            string HdrStr = Constants.vbNullString;
+            string HdrStr = string.Empty;
             // HdrStr = IconType.ToString
             if (IconType == MessageBoxIcon.Error)
             {

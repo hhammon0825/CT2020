@@ -117,17 +117,17 @@ namespace CelestialTools
                         foreach (string r1 in rows)
                         {
                             string r = r1;
-                            r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                            r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                             if (ReadNum == 0)
                             {
-                                r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                                r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                                 var items = r.Split(',');
                                 for (int ctr = 0, loopTo = Information.UBound(items); ctr <= loopTo; ctr++)
                                     DataSet1.Tables[tablename].Columns.Add(items[ctr]);
                             }
                             else
                             {
-                                r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                                r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                                 var items1 = r.Split(',');
                                 if (!string.IsNullOrEmpty(items1[0]) & items1[0] != null)
                                 {

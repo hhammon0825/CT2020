@@ -137,8 +137,8 @@ namespace CelestialTools
                         foreach (string r1 in rows)
                         {
                             string r = r1;
-                            r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
-                            r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                            r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
+                            r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                             var items1 = r.Split(',');
                             if (!string.IsNullOrEmpty(items1[0]) & items1[0] != null)
                             {
@@ -281,7 +281,7 @@ namespace CelestialTools
             if (idx == 8)
                 return;
             int TryInt = 0;
-            if (int.TryParse(Conversions.ToString(DGDev.Rows[idx].Cells[1].Value), out TryInt))
+            if (int.TryParse(Convert.ToString(DGDev.Rows[idx].Cells[1].Value), out TryInt))
             {
                 if (TryInt > 359)
                 {
@@ -334,7 +334,7 @@ namespace CelestialTools
             {
                 DevTbl[i].TblCompass = Convert.ToInt32(DGDev.Rows[i].Cells[0].Value);
                 DevTbl[i].TblMagnetic = Convert.ToInt32(DGDev.Rows[i].Cells[1].Value);
-                DevTbl[i].TblDevEW = Conversions.ToString(DGDev.Rows[i].Cells[3].Value);
+                DevTbl[i].TblDevEW = Convert.ToString(DGDev.Rows[i].Cells[3].Value);
                 if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(DGDev.Rows[i].Cells[3].Value, CommonGlobals.g_LongW, false)))
                 {
                     DevTbl[i].TblDev = Convert.ToInt32(DGDev.Rows[i].Cells[2].Value) * -1;

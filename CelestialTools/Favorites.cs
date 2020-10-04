@@ -842,7 +842,7 @@ namespace CelestialTools
         {
             System.IO.StreamReader myStream = null;
             var openFileDialog1 = new OpenFileDialog();
-            string rdline = Constants.vbNullString;
+            string rdline = string.Empty;
             int Ictr = 0;
             lstFavorites.Items.Clear();
             openFileDialog1.InitialDirectory = FavDir;

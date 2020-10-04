@@ -66,7 +66,7 @@ namespace CelestialTools
         public DataSet DatasetGCR;
         public string tablenameGCR = "TableGCR";
         public string[] HdrStrGCR = new[] { "Longitude", "Latitude", '°' + "True", "Dist (nm)" };
-        public string[] NullStrGCR = new[] { Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString };
+        public string[] NullStrGCR = new[] { string.Empty, string.Empty, string.Empty, string.Empty };
         public bool GCRAvailable = false;
 
         public struct GCRRec
@@ -1373,10 +1373,10 @@ namespace CelestialTools
             GCRArray = new GCRRec[My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2 + 1];
             for (int i = 0, loopTo3 = My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2; i <= loopTo3; i++)
             {
-                GCRArray[i].LongStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
-                GCRArray[i].LatStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
-                GCRArray[i].CTrue = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
-                GCRArray[i].GCRDist = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
+                GCRArray[i].LongStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
+                GCRArray[i].LatStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
+                GCRArray[i].CTrue = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
+                GCRArray[i].GCRDist = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
             }
 
             GCRAvailable = true;
@@ -6907,10 +6907,10 @@ namespace CelestialTools
             GCRArray = new GCRRec[My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2 + 1];
             for (int i = 0, loopTo3 = My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2; i <= loopTo3; i++)
             {
-                GCRArray[i].LongStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
-                GCRArray[i].LatStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
-                GCRArray[i].CTrue = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
-                GCRArray[i].GCRDist = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
+                GCRArray[i].LongStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
+                GCRArray[i].LatStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
+                GCRArray[i].CTrue = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
+                GCRArray[i].GCRDist = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
             }
 
             GCRAvailable = true;

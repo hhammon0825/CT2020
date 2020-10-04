@@ -107,7 +107,7 @@ namespace CelestialTools
         private void txtLoPointDeg_KeyPress(object eventSender, KeyPressEventArgs eventArgs)
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):
@@ -169,7 +169,7 @@ namespace CelestialTools
         private void txtLoPointMin_KeyPress(object eventSender, KeyPressEventArgs eventArgs)
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):

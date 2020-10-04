@@ -205,7 +205,7 @@ namespace CelestialTools
                     DPen2.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
                     DPen2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
                     TDgraphics.DrawLine(DPen2, 0, 0, -CircleRadii, 0);
-                    TDgraphics.DrawString(Conversions.ToString(CommonGlobals.Aries_Uchar), new Font("Arial", 12f, FontStyle.Bold), Brushes.Black, -(CircleRadii + 20), -10);
+                    TDgraphics.DrawString(Convert.ToString(CommonGlobals.Aries_Uchar), new Font("Arial", 12f, FontStyle.Bold), Brushes.Black, -(CircleRadii + 20), -10);
                     TDgraphics.DrawString("GHA Aries: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.GHAAries).ToString(), new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(-0.75d * CircleRadii), -15);
                     TDgraphics.ResetTransform();
                     TDgraphics.TranslateTransform((float)(EqtPicBx.Width / 2d), (float)(EqtPicBx.Height / 2d));
@@ -216,14 +216,14 @@ namespace CelestialTools
                     DPen2.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
                     DPen2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
                     TDgraphics.DrawLine(DPen2, 0, 0, CircleRadii, 0);
-                    TDgraphics.DrawString(Conversions.ToString(CommonGlobals.Aries_Uchar), new Font("Arial", 12f, FontStyle.Bold), Brushes.Black, CircleRadii + 8, -10);
+                    TDgraphics.DrawString(Convert.ToString(CommonGlobals.Aries_Uchar), new Font("Arial", 12f, FontStyle.Bold), Brushes.Black, CircleRadii + 8, -10);
                     TDgraphics.DrawString("GHA Aries: " + CnvtDbltoDegMin(My.MyProject.Forms.FormSRF.GHAAries).ToString(), new Font("Arial", 8f, FontStyle.Bold), Brushes.Blue, (float)(CircleRadii / 2d), -15);
                     TDgraphics.ResetTransform();
                     TDgraphics.TranslateTransform((float)(EqtPicBx.Width / 2d), (float)(EqtPicBx.Height / 2d));
                 }
             }
 
-            string DString = Constants.vbNullString;
+            string DString = string.Empty;
 
             // Any body other than Sun: Is this a star sight, a planet sight, or a moon sight
             if (My.MyProject.Forms.FormSRF.BNType != "Sun") // 64 Then
@@ -239,49 +239,49 @@ namespace CelestialTools
                     {
                         case "Mercury":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Mercury_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Mercury_Uchar);
                                 break;
                             }
 
                         case "Venus":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Venus_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Venus_Uchar);
                                 break;
                             }
 
                         case "Mars":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Mars_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Mars_Uchar);
                                 break;
                             }
 
                         case "Jupiter":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Jupiter_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Jupiter_Uchar);
                                 break;
                             }
 
                         case "Saturn":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Saturn_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Saturn_Uchar);
                                 break;
                             }
 
                         case "Neptune":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Neptune_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Neptune_Uchar);
                                 break;
                             }
 
                         case "Uranus":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Uranus_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Uranus_Uchar);
                                 break;
                             }
 
                         case "Pluto":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Pluto_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Pluto_Uchar);
                                 break;
                             }
 
@@ -295,7 +295,7 @@ namespace CelestialTools
 
                 if (My.MyProject.Forms.FormSRF.BNType == "Moon")  // = 62 Or FormSRF.BN = 63 Then
                 {
-                    DString = Conversions.ToString(CommonGlobals.Moon_Uchar);
+                    DString = Convert.ToString(CommonGlobals.Moon_Uchar);
                 }
 
                 XTD1 = (float)(CircleRadii * Math.Cos((-90 - My.MyProject.Forms.FormSRF.LHAOriginal) * Math.PI / 180d));

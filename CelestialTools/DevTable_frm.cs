@@ -46,7 +46,7 @@ namespace CelestialTools
             ClearingFields = true;
             for (i = 0; i <= 7; i++)
             {
-                DevValue[i] = Constants.vbNullString;
+                DevValue[i] = string.Empty;
                 txtM1[i].Clear();
                 D1[i].Clear();
                 txtEW1[i].Clear();
@@ -216,11 +216,11 @@ namespace CelestialTools
 
         private void ReadDevTblFile()
         {
-            string SLFName = Constants.vbNullString;
+            string SLFName = string.Empty;
             bool ReadError = false;
             bool FileLoading = false;
             System.IO.StreamReader myStream = null;
-            string rdline = Constants.vbNullString;
+            string rdline = string.Empty;
             ReadError = false;
             FileLoading = true;
             try
@@ -237,7 +237,7 @@ namespace CelestialTools
                             DevValue[i] = rdline;
                             txtM1[i].Text = DevValue[i];
                             i = (short)(i + 1);
-                            rdline = Constants.vbNullString;
+                            rdline = string.Empty;
                         }
                     }
 

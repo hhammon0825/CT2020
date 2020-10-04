@@ -203,11 +203,11 @@ namespace CelestialTools
         //private double SRFZn = 0d;
         //private bool SRFSightUpd = false;
         private SightEntry[] SightLogArray;
-        private string SLFName = Constants.vbNullString;
+        private string SLFName = string.Empty;
         private string SLDir = @"\SightLogs";
         // Private GraphDir As String = "./Graphics/"
         // Private SLDefName As String = "SightLog" & Now.ToShortDateString.Replace("/", "").Replace("-", "") & Now.ToLongTimeString.Replace(":", "").Replace(" ", "") & ".txt"
-        private string SLOpenFName = Constants.vbNullString;
+        private string SLOpenFName = string.Empty;
         private int EntryIndex = 0;
         private readonly string[] BNameArray = new[] { "Sun", "Moon", "Venus", "Mars", "Jupiter", "Saturn", "Acamar", "Achernar", "Acrux", "Adhara", "Aldebaran", "Alioth", "Alkaid", "Al Na'ir", "Alnilam", "Alphard", "Alphecca", "Alpheratz", "Altair", "Ankaa", "Antares", "Arcturus", "Atria", "Avior", "Bellatrix", "Betelgeuse", "Canopus", "Capella", "Deneb", "Denebola", "Diphda", "Dubhe", "Elnath", "Eltanin", "Enif", "Fomalhaut", "Gacrux", "Gienah", "Hadar", "Hamal", "Kaus Australis", "Kochab", "Markab", "Menkar", "Menkent", "Miaplacidus", "Mirfak", "Nunki", "Peacock", "Polaris", "Pollux", "Procyon", "Rasalhague", "Regulus", "Rigel", "Rigil Kentaurus", "Sabik", "Schedar", "Shaula", "Sirius", "Spica", "Suhail", "Vega", "Zubenelgenubi" };
         private bool FileUpdated = false;
@@ -265,7 +265,7 @@ namespace CelestialTools
         private int UserInfoCell = 30;
         // Public HorDistTypeCell As Integer = 25
         public string[] HdrStr = new[] { "Num", "DateTime", "Body", "Limb", "DST", "WE", "WEtype", "ZD", "Hs", "HorType", "HorDist", "Apprx Brg", "HEye", "IC", "ICType", "Lat", "Long", "LLoBy", "Int", "Az", "SLEP", "Name", "Squadron", "Remarks" };
-        public string[] NullStr = new[] { Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString };
+        public string[] NullStr = new[] { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public bool EditError = false;
         public bool MasterDST = false;
         public CLSForm.PlotEntry PlotOut;
@@ -421,7 +421,7 @@ namespace CelestialTools
             txtSRHo.Clear();
             txtUserInfo.Clear();
             InitSRFFormFields();
-            SRFFormEP = Constants.vbNullString;
+            SRFFormEP = string.Empty;
             txtWE.Text = "0000";
             btnAddNew.Visible = true;
             btnSightReduce.Visible = false;
@@ -453,7 +453,7 @@ namespace CelestialTools
 
             StreamReader myStream = null;
             var openFileDialog1 = new OpenFileDialog();
-            string rdline = Constants.vbNullString;
+            string rdline = string.Empty;
             string CurrDir = Directory.GetCurrentDirectory();
             openFileDialog1.Reset();
             openFileDialog1.InitialDirectory = CurrDir + @"\SightLogs";
@@ -491,7 +491,7 @@ namespace CelestialTools
                             if (!string.IsNullOrEmpty(rdline))
                             {
                                 ParseReadLine(rdline);
-                                rdline = Constants.vbNullString;
+                                rdline = string.Empty;
                                 if (ReadError == true)
                                 {
                                     goto LeaveReadLoop;
@@ -564,7 +564,7 @@ namespace CelestialTools
             InitSRFFormFields();
             txtIntZn.Clear();
             txtSRFEP.Clear();
-            SRFFormEP = Constants.vbNullString;
+            SRFFormEP = string.Empty;
 
             // ExitSRFandAltSR()
 
@@ -699,7 +699,7 @@ namespace CelestialTools
             }
 
             InitSRFFormFields();
-            SRFFormEP = Constants.vbNullString;
+            SRFFormEP = string.Empty;
             string DTHr = Strings.Format(SightDateTime.Value.Hour, "00");
             string DTMin = Strings.Format(SightDateTime.Value.Minute, "00");
             string DTSec = Strings.Format(SightDateTime.Value.Second, "00");
@@ -993,7 +993,7 @@ namespace CelestialTools
             // updating a sight entry do not carry forward the old sight reduction - may no longer be valid so zero out Int and Zn fields
 
             InitSRFFormFields();
-            SRFFormEP = Constants.vbNullString;
+            SRFFormEP = string.Empty;
             txtIntZn.Clear();
             txtSRFEP.Clear();
             txtSRGHA.Clear();
@@ -1215,7 +1215,7 @@ namespace CelestialTools
 
         private string FormatSightForSave(SightEntry SE)
         {
-            string SaveStr = Constants.vbNullString;
+            string SaveStr = string.Empty;
             string StrParm = ";";
             SaveStr = "No=" + SE.SightNum + StrParm + "Date/Time=" + SE.SightDateTime.ToString("MM/dd/yyyy HH:mm:ss") + StrParm + "SDate=" + SE.SightDateTime.ToString("MM/dd/yyyy") + StrParm + "STime=" + SE.SightDateTime.ToString("HH:mm:ss") + StrParm + "BodyName=" + SE.BodyName + StrParm + "BodyLimb=" + SE.BodyLimb + StrParm + "DST=" + SE.DST + StrParm + "WE=" + SE.WE + StrParm + "WEType=" + SE.WEType + StrParm + "DRLat=" + SE.DRLat + StrParm + "DRLong=" + SE.DRLong + StrParm + "LLoBy=" + SE.LLoBy + StrParm + "HS=" + SE.HS + StrParm + "IC=" + SE.IC + StrParm + "ICType=" + SE.ICType + StrParm + "HE=" + SE.HE + StrParm + "HorDist=" + SE.HorDist + StrParm + "HorDistType=" + SE.HorDistType + StrParm + "HorType=" + SE.HorType + StrParm + "a=" + SE.Intercept + StrParm + "Zn=" + SE.Zn + StrParm + "Name=" + SE.SLName + StrParm + "Squadron=" + SE.SLSquadron + StrParm + "ZD=" + SE.ZD + StrParm + "EP=" + SE.EP + StrParm + "ApprxBrg=" + SE.ApprxBrg + StrParm + "Remarks=" + SE.Remarks + StrParm + "SRGHA=" + SE.SRGHA + StrParm + "SRDEC=" + SE.SRDec + StrParm + "SRHO=" + SE.SRHo + StrParm + "UserInfo=" + SE.UserInfo;
             return SaveStr;
@@ -1268,7 +1268,7 @@ namespace CelestialTools
             }
 
             var textstr = new System.Text.StringBuilder();
-            string FileHdrStr = Constants.vbNullString;
+            string FileHdrStr = string.Empty;
             for (int idx = 0, loopTo1 = Information.UBound(HdrStr); idx <= loopTo1; idx++)
             {
                 if (idx > 0)
@@ -1425,7 +1425,7 @@ namespace CelestialTools
             ParseArray = Strings.Split(rdline, ";");
             int i = 0;
             int Idx = 0;
-            string Param = Constants.vbNullString;
+            string Param = string.Empty;
             int DataSt = 0;
             int DataEnd = 0;
             var loopTo = Information.UBound(ParseArray);
@@ -1752,14 +1752,14 @@ namespace CelestialTools
         public double CnvtHSStrtoDouble(object HSStr)
         {
             double HSDbl = 0d;
-            int HSDegLoc = Strings.InStr(Conversions.ToString(HSStr), Conversions.ToString('°'));
-            int HSMinLoc = Strings.InStr(Conversions.ToString(HSStr), "'");
-            int HSSecLoc = Strings.InStr(Conversions.ToString(HSStr), Conversions.ToString('"'));
-            HSDbl = Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), 1, HSDegLoc - 1));
-            HSDbl += Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), HSDegLoc + 1, HSMinLoc - HSDegLoc - 1)) / 60d;
+            int HSDegLoc = Strings.InStr(Convert.ToString(HSStr), Convert.ToString('°'));
+            int HSMinLoc = Strings.InStr(Convert.ToString(HSStr), "'");
+            int HSSecLoc = Strings.InStr(Convert.ToString(HSStr), Convert.ToString('"'));
+            HSDbl = Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), 1, HSDegLoc - 1));
+            HSDbl += Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), HSDegLoc + 1, HSMinLoc - HSDegLoc - 1)) / 60d;
             if (HSSecLoc != 0)
             {
-                HSDbl += Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), HSMinLoc + 1, HSSecLoc - HSMinLoc - 1)) / 3600d;
+                HSDbl += Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), HSMinLoc + 1, HSSecLoc - HSMinLoc - 1)) / 3600d;
             }
 
             return HSDbl;
@@ -2044,8 +2044,8 @@ namespace CelestialTools
             }
             else
             {
-                SightLogArray[Idx].Intercept = Constants.vbNullString;
-                SightLogArray[Idx].Zn = Constants.vbNullString;
+                SightLogArray[Idx].Intercept = string.Empty;
+                SightLogArray[Idx].Zn = string.Empty;
             }
 
             SightLogArray[Idx].ApprxBrg = cboApprxBrg.Items[cboApprxBrg.SelectedIndex].ToString();
@@ -2562,9 +2562,9 @@ namespace CelestialTools
             int n = SEDataGrid.CurrentRow.Index;
             // The order of these variable and the integer indexs contained in each MUST match the order of the fields in the data grid
             btnNoonSight.Visible = false;
-            txtName.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[SLNameCell].Value);
-            txtSquadron.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[SLSquadron].Value);
-            txtSightNum.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[SightNumCell].Value);
+            txtName.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[SLNameCell].Value);
+            txtSquadron.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[SLSquadron].Value);
+            txtSightNum.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[SightNumCell].Value);
             SightDateTime.Value = Conversions.ToDate(SEDataGrid.Rows[n].Cells[SightDateTimeCell].Value);
             if (SEDataGrid.Rows[n].Cells[DSTCell].Value.ToString() == "X")
             {
@@ -2575,7 +2575,7 @@ namespace CelestialTools
                 chkbxDST.Checked = false;
             }
 
-            txtWE.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[WECell].Value);
+            txtWE.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[WECell].Value);
             if (SEDataGrid.Rows[n].Cells[WETypeCell].Value.ToString() == "Fast")
             {
                 cbWEType.SelectedIndex = 0;
@@ -2613,7 +2613,7 @@ namespace CelestialTools
                 cboLo.SelectedIndex = 1;
             }
 
-            if (SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Contains(Conversions.ToString('"')) | SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Contains(Conversions.ToString('"')))
+            if (SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Contains(Convert.ToString('"')) | SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Contains(Convert.ToString('"')))
             {
                 cboHSIEFmt.SelectedIndex = 1;
             }
@@ -2626,7 +2626,7 @@ namespace CelestialTools
             txtHSDeg.Text = SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Substring(0, DegIdx);
             MinIdx = SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().IndexOf("'") - 1;
             txtHSMin.Text = SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Substring(DegIdx + 1, MinIdx - DegIdx);
-            if (SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Contains(Conversions.ToString('"')))
+            if (SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Contains(Convert.ToString('"')))
             {
                 int SecIdx = SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().IndexOf('"') - 1;
                 txtHsSec.Text = SEDataGrid.Rows[n].Cells[HSCell].Value.ToString().Substring(MinIdx + 2, SecIdx - 1 - MinIdx);
@@ -2640,7 +2640,7 @@ namespace CelestialTools
             txtIEDeg.Text = SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Substring(0, DegIdx);
             MinIdx = SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().IndexOf("'") - 1;
             txtIE.Text = SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Substring(DegIdx + 1, MinIdx - DegIdx);
-            if (SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Contains(Conversions.ToString('"')))
+            if (SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Contains(Convert.ToString('"')))
             {
                 int SecIdx = SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().IndexOf('"') - 1;
                 txtIESec.Text = SEDataGrid.Rows[n].Cells[ICCell].Value.ToString().Substring(MinIdx + 2, SecIdx - 1 - MinIdx);
@@ -2811,7 +2811,7 @@ namespace CelestialTools
                     }
             }
 
-            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[RemarksCell].Value, Constants.vbNullString, false)))
+            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[RemarksCell].Value, string.Empty, false)))
             {
                 txtRemarks.Clear();
             }
@@ -2826,7 +2826,7 @@ namespace CelestialTools
             // txtIntZn.AppendText(" a= " & SEDataGrid.Rows(n).Cells(InterceptCell).Value.ToString & "  ")
             // End If
 
-            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[LLoByCell].Value, Constants.vbNullString, false)))
+            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[LLoByCell].Value, string.Empty, false)))
             {
                 cboLLoBy.SelectedIndex = 0;
             }
@@ -2835,7 +2835,7 @@ namespace CelestialTools
                 cboLLoBy.Text = SEDataGrid.Rows[n].Cells[LLoByCell].Value.ToString();
             }
 
-            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLEP].Value, Constants.vbNullString, false)))
+            if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLEP].Value, string.Empty, false)))
             {
                 txtSRFEP.Clear();
             }
@@ -2851,11 +2851,11 @@ namespace CelestialTools
             // txtIntZn.AppendText(" a= " & SEDataGrid.Rows(n).Cells(ZnCell).Value.ToString & "  ")
             // End If
 
-            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[InterceptCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[InterceptCell].Value, Constants.vbNullString, false))))
+            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[InterceptCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[InterceptCell].Value, string.Empty, false))))
             {
                 txtIntZn.Clear();
-                PlotIntercept = Constants.vbNullString;
-                PlotAzimuth = Constants.vbNullString;
+                PlotIntercept = string.Empty;
+                PlotAzimuth = string.Empty;
                 btnUseCLS.Visible = false;
                 btnCustomPlot.Visible = false;
             }
@@ -2870,7 +2870,7 @@ namespace CelestialTools
             }
 
             int TurnAltSROn = 0;
-            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLGHACell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLGHACell].Value, Constants.vbNullString, false))))
+            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLGHACell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLGHACell].Value, string.Empty, false))))
             {
                 txtSRGHA.Clear();
             }
@@ -2881,7 +2881,7 @@ namespace CelestialTools
                 TurnAltSROn += 1;
             }
 
-            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLDecCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLDecCell].Value, Constants.vbNullString, false))))
+            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLDecCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLDecCell].Value, string.Empty, false))))
             {
                 txtSRDec.Clear();
             }
@@ -2892,7 +2892,7 @@ namespace CelestialTools
                 TurnAltSROn += 1;
             }
 
-            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLHoCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLHoCell].Value, Constants.vbNullString, false))))
+            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLHoCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[SLHoCell].Value, string.Empty, false))))
             {
                 txtSRHo.Clear();
             }
@@ -2903,7 +2903,7 @@ namespace CelestialTools
                 TurnAltSROn += 1;
             }
 
-            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[UserInfoCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[UserInfoCell].Value, Constants.vbNullString, false))))
+            if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[UserInfoCell].Value, null, false), Operators.ConditionalCompareObjectEqual(SEDataGrid.Rows[n].Cells[UserInfoCell].Value, string.Empty, false))))
             {
                 txtUserInfo.Clear();
             }
@@ -3197,7 +3197,7 @@ namespace CelestialTools
                     cell = new Rectangle(startX, startY, SEDataGrid.RowHeadersWidth, SEDataGrid.Rows[r].Height);
                     e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlLight), cell);
                     e.Graphics.DrawRectangle(Pens.Black, cell);
-                    e.Graphics.DrawString(Conversions.ToString(SEDataGrid.Rows[r].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                    e.Graphics.DrawString(Convert.ToString(SEDataGrid.Rows[r].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                     startY += SEDataGrid.Rows[r].Height;
                 }
 
@@ -3208,7 +3208,7 @@ namespace CelestialTools
                     cell = new Rectangle(startX, startY, SEDataGrid.Columns[c].Width, SEDataGrid.ColumnHeadersHeight);
                     e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlLight), cell);
                     e.Graphics.DrawRectangle(Pens.Black, cell);
-                    e.Graphics.DrawString(Conversions.ToString(SEDataGrid.Columns[c].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                    e.Graphics.DrawString(Convert.ToString(SEDataGrid.Columns[c].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                     startX += SEDataGrid.Columns[c].Width;
                 }
 
@@ -3220,7 +3220,7 @@ namespace CelestialTools
                     {
                         cell = new Rectangle(startX, startY, SEDataGrid.Columns[c].Width, SEDataGrid.Rows[r].Height);
                         e.Graphics.DrawRectangle(Pens.Black, cell);
-                        e.Graphics.DrawString(Conversions.ToString(SEDataGrid[c, r].Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                        e.Graphics.DrawString(Convert.ToString(SEDataGrid[c, r].Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                         startX += SEDataGrid.Columns[c].Width;
                     }
 
@@ -4032,7 +4032,7 @@ namespace CelestialTools
 
         private static string FormatSightForPrint(SightEntry SE)
         {
-            string SaveStr = Constants.vbNullString;
+            string SaveStr = string.Empty;
             string StrParm = Strings.Space(3);
             string SepLine = "__________________________________________________________________________________________";
             SaveStr = "Sight # = " + SE.SightNum + StrParm + "Body = " + SE.BodyName + StrParm + "Limb = " + SE.BodyLimb + StrParm + "Lat = " + SE.DRLat + StrParm + "Long = " + SE.DRLong + StrParm + "L/Lo By = " + SE.LLoBy + Environment.NewLine + "Date/Zone Time = " + SE.SightDateTime.ToString("MM/dd/yyyy HH:mm:ss") + StrParm + "DST = " + SE.DST + StrParm + "ZD = " + SE.ZD + StrParm + StrParm + "WE = " + SE.WE + " " + SE.WEType + Environment.NewLine + "HS = " + SE.HS + StrParm + "ApprxBrg=" + SE.ApprxBrg + StrParm + "IC = " + SE.IC + " " + SE.ICType + StrParm + "HE = " + SE.HE + StrParm + "Horizon = " + SE.HorType + StrParm; // SepLine & vbNewLine &

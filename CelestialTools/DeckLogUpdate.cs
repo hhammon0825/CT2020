@@ -7,8 +7,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+//using Microsoft.VisualBasic;
+//using Microsoft.VisualBasic.CompilerServices;
 
 namespace CelestialTools
 {
@@ -67,7 +67,7 @@ namespace CelestialTools
         private DateTime MaxDate = new DateTime(2999, 12, 31, 23, 59, 59);
         //private DateTime DefaultDT = new DateTime(100L);
         private readonly string[] HdrStr = new[] { "Vessel", "Navigator", "From", "To", "Log Type", "Log DateTime", "Course Psc", "Var", "Dev", "Course True", "Speed", "Position L/Lo", "Weather Notes", "Log Entry Notes", "ElapsedTime", "Distance", "Calc Dest", "Calc True", "Calc Speed", "Set", "Drift", "Eval Basis", "ZD", "KnotLog", "Wind", "WindDir", "Seas", "Use4Eval" };
-        private readonly string[] NullStr = new[] { Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString };
+        private readonly string[] NullStr = new[] { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
 
         private struct GCRRec
         {
@@ -158,6 +158,8 @@ namespace CelestialTools
         // the next 2 log types require Date/Time, L/Lo but NO TVMDC - they are fixed points in time not moving point. GPS Track is a moving 
         private readonly string g_LogTypeFix = "Fix";
         private readonly string g_LogTypeWayPoint = "Waypoint";
+        private readonly string SaveCaption = "Save Updated Data";
+
 
         // The order of these variable and the integer indexs contained in each MUST match the order of the fields in the data grid
         // Cell 0 = Vessel name  
@@ -216,7 +218,7 @@ namespace CelestialTools
 
         private void FormDeckLogUpdate_Load(object sender, EventArgs e)
         {
-            string DefFName = "DeckLog" + DateAndTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.CurrentCulture) + ".csv";
+            string DefFName = "DeckLog" + DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.CurrentCulture) + ".csv";
             CurrDir = Microsoft.VisualBasic.FileIO.FileSystem.CurrentDirectory + @"\DeckLog";
             InitialLoad = true;
             FName += CurrDir + "/" + DefFName;
@@ -226,7 +228,8 @@ namespace CelestialTools
             DataSet1.Tables.Add(tablename);
             DataSet1.DataSetName = tablename;
             DataGridView1.DataSource = DataSet1;
-            for (int i = 0, loopTo = Information.UBound(HdrStr); i <= loopTo; i++)
+            int Upper = HdrStr.GetUpperBound(0); 
+                for (int i = 0, loopTo = Upper; i <= loopTo; i++)
             {
                 DataSet1.Tables[tablename].Columns.Add(HdrStr[i]);
                 DataSet1.Tables[tablename].Columns[i].AllowDBNull = false;
@@ -312,15 +315,18 @@ namespace CelestialTools
             var openFileDialog1 = new OpenFileDialog();
             if (IsUpdated == true)
             {
-                var MsgBack = Interaction.MsgBox("Data has been updated - Save to File - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
-                if (MsgBack == MsgBoxResult.Yes)
+                MessageBoxResult dr = System.Windows.MessageBox.Show("Data has been updated - Save to File - Yes or No", SaveCaption, MessageBoxButton.YesNo);
+                switch (dr)
                 {
-                    SaveDataGrid();
+                    case MessageBoxResult.Yes:
+                        SaveDataGrid();
+                        IsUpdated = false;
+                        break;
+                    case MessageBoxResult.No:
+                        IsUpdated = false;
+                        break;
                 }
-
-                IsUpdated = false;
             }
-
             openFileDialog1.Dispose();
             DataSet1.Dispose();
             return;
@@ -350,8 +356,8 @@ namespace CelestialTools
             }
 
             var textstr = new System.Text.StringBuilder();
-            string FileHdrStr = Constants.vbNullString;
-            for (int i = 0, loopTo = Information.UBound(HdrStr); i <= loopTo; i++)
+            string FileHdrStr = string.Empty;
+            for (int i = 0, loopTo = HdrStr.GetUpperBound(0); i <= loopTo; i++)
             {
                 if (i > 0)
                 {
@@ -364,7 +370,7 @@ namespace CelestialTools
             textstr.AppendLine();
             for (int x = 0, loopTo1 = DataGridView1.Rows.Count - 1; x <= loopTo1; x++)
             {
-                if (Information.IsNothing(DataGridView1.Rows[x].Cells[VesselCell].Value) == false)
+                if (DataGridView1.Rows[x].Cells[VesselCell].Value.ToString() != null)
                 {
                     for (int v = 0, loopTo2 = DataGridView1.Columns.Count - 1; v <= loopTo2; v++)
                     {
@@ -391,18 +397,21 @@ namespace CelestialTools
             saveFileDialog1.Dispose();
             return;
         }
-
         private void btnExitNoSave_Click(object sender, EventArgs e)
         {
             if (IsUpdated == true)
             {
-                var MsgBack = Interaction.MsgBox("Data has been updated - Save to File - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
-                if (MsgBack == MsgBoxResult.Yes)
+                MessageBoxResult dr = System.Windows.MessageBox.Show("Data has been updated - Save to File - Yes or No", SaveCaption, MessageBoxButton.YesNo);
+                switch (dr)
                 {
-                    SaveDataGrid();
+                    case MessageBoxResult.Yes:
+                        SaveDataGrid();
+                        IsUpdated = false;
+                        break;
+                    case MessageBoxResult.No:
+                        IsUpdated = false;
+                        break;
                 }
-
-                IsUpdated = false;
             }
 
             CleanUp();
@@ -418,13 +427,17 @@ namespace CelestialTools
 
             if (IsUpdated == true)
             {
-                var MsgBack = Interaction.MsgBox("Data has been updated - Save to File - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
-                if (MsgBack == MsgBoxResult.Yes)
+                MessageBoxResult dr = System.Windows.MessageBox.Show("Data has been updated - Save to File - Yes or No", SaveCaption, MessageBoxButton.YesNo);
+                switch (dr)
                 {
-                    SaveDataGrid();
+                    case MessageBoxResult.Yes:
+                        SaveDataGrid();
+                        IsUpdated = false;
+                        break;
+                    case MessageBoxResult.No:
+                        IsUpdated = false;
+                        break;
                 }
-
-                IsUpdated = false;
             }
 
             FileLoading = true;
@@ -459,15 +472,15 @@ namespace CelestialTools
                         txtOpenFN.Visible = true;
                         txtOpenFN.Text = SLOpenFName;
                         string allData = myStream.ReadToEnd();
-                        var rows = allData.Split(Conversions.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
+                        var rows = allData.Split(Convert.ToChar(Environment.NewLine)); // ("\r".ToCharArray())
                         int incr1 = 0;
                         foreach (string r1 in rows)
                         {
                             string r = r1;
-                            r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                            r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                             if (ReadNum == 0)
                             {
-                                r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                                r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                                 var items = r.Split(',');
                             }
                             // For ctr As Integer = 0 To UBound(items)
@@ -475,7 +488,7 @@ namespace CelestialTools
                             // Next
                             else
                             {
-                                r = r.Trim(Conversions.ToChar(Constants.vbLf)).Trim();
+                                r = r.Trim(Convert.ToChar(Environment.NewLine)).Trim();
                                 var items1 = r.Split(',');
                                 if (!string.IsNullOrEmpty(items1[0]) & items1[0] != null)
                                 {
@@ -579,7 +592,7 @@ namespace CelestialTools
                 return;
             }
 
-            if (Information.IsNothing(DataGridView1.CurrentRow.Index)) // Or DataGridView1.CurrentRow.Index = vbNull Then
+            if (DataGridView1.CurrentRow.Index != -1) // Or DataGridView1.CurrentRow.Index = vbNull Then
             {
                 return;
             }
@@ -623,68 +636,68 @@ namespace CelestialTools
             // Cell 26 =  Seas Height info
             // Cell 27 =  UseForEval Y/N 
 
-            if (DataGridView1.Rows[n].Cells[VesselCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[VesselCell].Value.ToString()) == false)
             {
-                UpdtRtn.Vessel = Conversions.ToString(DataGridView1.Rows[n].Cells[VesselCell].Value);
-                txtVessel.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[VesselCell].Value);
+                UpdtRtn.Vessel = Convert.ToString(DataGridView1.Rows[n].Cells[VesselCell].Value);
+                txtVessel.Text = Convert.ToString(DataGridView1.Rows[n].Cells[VesselCell].Value);
             }
             else
             {
-                UpdtRtn.Vessel = Constants.vbNullString;
-                txtVessel.Text = Constants.vbNullString;
+                UpdtRtn.Vessel = string.Empty;
+                txtVessel.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[NavigatorCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[NavigatorCell].Value.ToString()) == false)
             {
-                UpdtRtn.Navigator = Conversions.ToString(DataGridView1.Rows[n].Cells[NavigatorCell].Value);
-                txtNavigator.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[NavigatorCell].Value);
+                UpdtRtn.Navigator = Convert.ToString(DataGridView1.Rows[n].Cells[NavigatorCell].Value);
+                txtNavigator.Text = Convert.ToString(DataGridView1.Rows[n].Cells[NavigatorCell].Value);
             }
             else
             {
-                UpdtRtn.Navigator = Constants.vbNullString;
-                txtNavigator.Text = Constants.vbNullString;
+                UpdtRtn.Navigator = string.Empty;
+                txtNavigator.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[FromCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[FromCell].Value.ToString()) == false)
             {
-                UpdtRtn.LocFrom = Conversions.ToString(DataGridView1.Rows[n].Cells[FromCell].Value);
-                txtFrom.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[FromCell].Value);
+                UpdtRtn.LocFrom = Convert.ToString(DataGridView1.Rows[n].Cells[FromCell].Value);
+                txtFrom.Text = Convert.ToString(DataGridView1.Rows[n].Cells[FromCell].Value);
             }
 
-            if (DataGridView1.Rows[n].Cells[ToCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[ToCell].Value.ToString()) == false)
             {
-                UpdtRtn.LocTo = Conversions.ToString(DataGridView1.Rows[n].Cells[ToCell].Value);
-                txtTo.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[ToCell].Value);
+                UpdtRtn.LocTo = Convert.ToString(DataGridView1.Rows[n].Cells[ToCell].Value);
+                txtTo.Text = Convert.ToString(DataGridView1.Rows[n].Cells[ToCell].Value);
             }
             else
             {
-                UpdtRtn.LocTo = Constants.vbNullString;
-                txtTo.Text = Constants.vbNullString;
+                UpdtRtn.LocTo = string.Empty;
+                txtTo.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[LogTypeCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[LogTypeCell].Value.ToString()) == false)
             {
-                UpdtRtn.LogType = Conversions.ToString(DataGridView1.Rows[n].Cells[LogTypeCell].Value);
-                cboLocType.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[LogTypeCell].Value);
+                UpdtRtn.LogType = Convert.ToString(DataGridView1.Rows[n].Cells[LogTypeCell].Value);
+                cboLocType.Text = Convert.ToString(DataGridView1.Rows[n].Cells[LogTypeCell].Value);
             }
             else
             {
-                UpdtRtn.LogType = Constants.vbNullString;
-                cboLocType.Text = Constants.vbNullString;
+                UpdtRtn.LogType = string.Empty;
+                cboLocType.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[DTCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[DTCell].Value.ToString()) == false)
             {
-                UpdtRtn.DateZoneTime = Conversions.ToString(DataGridView1.Rows[n].Cells[DTCell].Value);
+                UpdtRtn.DateZoneTime = Convert.ToString(DataGridView1.Rows[n].Cells[DTCell].Value);
                 DTDateZoneTime.Value = Convert.ToDateTime(DataGridView1.Rows[n].Cells[DTCell].Value);
             }
             else
             {
-                UpdtRtn.DateZoneTime = DateAndTime.Now.ToString(DTFormatString); // ("MM/dd/yyyy HH:mm:ss")
-                DTDateZoneTime.Value = DateAndTime.Now;
+                UpdtRtn.DateZoneTime = DateTime.Now.ToString(DTFormatString); // ("MM/dd/yyyy HH:mm:ss")
+                DTDateZoneTime.Value = DateTime.Now;
             }
 
-            if (DataGridView1.Rows[n].Cells[CompassCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[CompassCell].Value.ToString()) == false)
             {
                 int tlen = DataGridView1.Rows[n].Cells[CompassCell].Value.ToString().Length;
                 UpdtRtn.Compass = DataGridView1.Rows[n].Cells[CompassCell].Value.ToString().Substring(0, tlen - 1);
@@ -692,14 +705,14 @@ namespace CelestialTools
             }
             else
             {
-                UpdtRtn.Compass = Constants.vbNullString;
-                txtCompass.Text = Constants.vbNullString;
+                UpdtRtn.Compass = string.Empty;
+                txtCompass.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[VarCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[VarCell].Value.ToString()) == false)
             {
-                UpdtRtn.Var = Conversions.ToString(DataGridView1.Rows[n].Cells[VarCell].Value);
-                UpdtRtn.VarEW = Conversions.ToString(UpdtRtn.Var.Last());
+                UpdtRtn.Var = Convert.ToString(DataGridView1.Rows[n].Cells[VarCell].Value);
+                UpdtRtn.VarEW = Convert.ToString(UpdtRtn.Var.Last());
                 UpdtRtn.Var = UpdtRtn.Var.Substring(0, UpdtRtn.Var.Length - 1);
                 txtVar.Text = UpdtRtn.Var;
                 cboVar.Text = UpdtRtn.VarEW;
@@ -710,10 +723,10 @@ namespace CelestialTools
                 txtVar.Clear();
             }
 
-            if (DataGridView1.Rows[n].Cells[DevCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[DevCell].Value.ToString()) == false)
             {
-                UpdtRtn.Dev = Conversions.ToString(DataGridView1.Rows[n].Cells[DevCell].Value);
-                UpdtRtn.DevEW = Conversions.ToString(UpdtRtn.Dev.Last());
+                UpdtRtn.Dev = Convert.ToString(DataGridView1.Rows[n].Cells[DevCell].Value);
+                UpdtRtn.DevEW = Convert.ToString(UpdtRtn.Dev.Last());
                 UpdtRtn.Dev = UpdtRtn.Dev.Substring(0, UpdtRtn.Dev.Length - 1);
                 txtDev.Text = UpdtRtn.Dev;
                 cboDev.Text = UpdtRtn.DevEW;
@@ -727,7 +740,7 @@ namespace CelestialTools
             // End If
 
 
-            if (DataGridView1.Rows[n].Cells[TrueCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[TrueCell].Value.ToString()) == false)
             {
                 int tlen = DataGridView1.Rows[n].Cells[TrueCell].Value.ToString().Length;
                 UpdtRtn.CTrue = DataGridView1.Rows[n].Cells[TrueCell].Value.ToString().Substring(0, tlen - 1);
@@ -735,11 +748,11 @@ namespace CelestialTools
             }
             else
             {
-                UpdtRtn.CTrue = Constants.vbNullString;
-                txtCTrue.Text = Constants.vbNullString;
+                UpdtRtn.CTrue = string.Empty;
+                txtCTrue.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[DRSpeedCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[DRSpeedCell].Value.ToString()) == false)
             {
                 int tlen = DataGridView1.Rows[n].Cells[DRSpeedCell].Value.ToString().Length;
                 UpdtRtn.Speed = DataGridView1.Rows[n].Cells[DRSpeedCell].Value.ToString().Substring(0, tlen - 2);
@@ -747,14 +760,14 @@ namespace CelestialTools
             }
             else
             {
-                UpdtRtn.Speed = Constants.vbNullString;
-                txtSpeed.Text = Constants.vbNullString;
+                UpdtRtn.Speed = string.Empty;
+                txtSpeed.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[DestLogTypeCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[DestLogTypeCell].Value.ToString()) == false)
             {
-                UpdtRtn.PositionLatLong = Conversions.ToString(DataGridView1.Rows[n].Cells[DestLogTypeCell].Value);
-                string LLo = Conversions.ToString(DataGridView1.Rows[n].Cells[DestLogTypeCell].Value);
+                UpdtRtn.PositionLatLong = Convert.ToString(DataGridView1.Rows[n].Cells[DestLogTypeCell].Value);
+                string LLo = Convert.ToString(DataGridView1.Rows[n].Cells[DestLogTypeCell].Value);
                 int LPos = LLo.IndexOf("=", StringComparison.OrdinalIgnoreCase);
                 int LDegPos = LLo.IndexOf('°');
                 int LMinPos = LLo.IndexOf("'", StringComparison.OrdinalIgnoreCase);
@@ -770,7 +783,7 @@ namespace CelestialTools
             }
             else
             {
-                UpdtRtn.PositionLatLong = Constants.vbNullString;
+                UpdtRtn.PositionLatLong = string.Empty;
                 txtLDeg.Clear();
                 txtLMin.Clear();
                 cboL.SelectedIndex = 0;
@@ -779,10 +792,10 @@ namespace CelestialTools
                 cboLo.SelectedIndex = 0;
             }
 
-            if (DataGridView1.Rows[n].Cells[ZDCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[ZDCell].Value.ToString()) == false)
             {
-                UpdtRtn.ZD = Conversions.ToString(DataGridView1.Rows[n].Cells[ZDCell].Value);
-                txtZD.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[ZDCell].Value);
+                UpdtRtn.ZD = Convert.ToString(DataGridView1.Rows[n].Cells[ZDCell].Value);
+                txtZD.Text = Convert.ToString(DataGridView1.Rows[n].Cells[ZDCell].Value);
             }
             else
             {
@@ -799,48 +812,48 @@ namespace CelestialTools
                 }
             }
 
-            if (DataGridView1.Rows[n].Cells[KnotLogCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[KnotLogCell].Value.ToString()) == false)
             {
-                UpdtRtn.KnotLog = Conversions.ToString(DataGridView1.Rows[n].Cells[KnotLogCell].Value);
-                txtKnotLog.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[KnotLogCell].Value);
+                UpdtRtn.KnotLog = Convert.ToString(DataGridView1.Rows[n].Cells[KnotLogCell].Value);
+                txtKnotLog.Text = Convert.ToString(DataGridView1.Rows[n].Cells[KnotLogCell].Value);
             }
             else
             {
-                UpdtRtn.KnotLog = Constants.vbNullString;
-                txtKnotLog.Text = Constants.vbNullString;
+                UpdtRtn.KnotLog = string.Empty;
+                txtKnotLog.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[WeatherCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[WeatherCell].Value.ToString()) == false)
             {
-                UpdtRtn.Weather = Conversions.ToString(DataGridView1.Rows[n].Cells[WeatherCell].Value);
-                txtWeather.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[WeatherCell].Value);
+                UpdtRtn.Weather = Convert.ToString(DataGridView1.Rows[n].Cells[WeatherCell].Value);
+                txtWeather.Text = Convert.ToString(DataGridView1.Rows[n].Cells[WeatherCell].Value);
             }
             else
             {
-                UpdtRtn.Weather = Constants.vbNullString;
-                txtWeather.Text = Constants.vbNullString;
+                UpdtRtn.Weather = string.Empty;
+                txtWeather.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[WindCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[WindCell].Value.ToString()) == false)
             {
-                UpdtRtn.Wind = Conversions.ToString(DataGridView1.Rows[n].Cells[WindCell].Value);
-                txtWind.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[WindCell].Value);
+                UpdtRtn.Wind = Convert.ToString(DataGridView1.Rows[n].Cells[WindCell].Value);
+                txtWind.Text = Convert.ToString(DataGridView1.Rows[n].Cells[WindCell].Value);
             }
             else
             {
-                UpdtRtn.Wind = Constants.vbNullString;
-                txtWind.Text = Constants.vbNullString;
+                UpdtRtn.Wind = string.Empty;
+                txtWind.Text = string.Empty;
             }
 
-            if (DataGridView1.Rows[n].Cells[WindDirCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[WindDirCell].Value.ToString()) == false)
             {
-                UpdtRtn.WindDir = Conversions.ToString(DataGridView1.Rows[n].Cells[WindDirCell].Value);
-                cboWindDir.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[WindDirCell].Value);
+                UpdtRtn.WindDir = Convert.ToString(DataGridView1.Rows[n].Cells[WindDirCell].Value);
+                cboWindDir.Text = Convert.ToString(DataGridView1.Rows[n].Cells[WindDirCell].Value);
             }
             else
             {
-                UpdtRtn.WindDir = Constants.vbNullString;
-                cboWindDir.Text = Constants.vbNullString;
+                UpdtRtn.WindDir = string.Empty;
+                cboWindDir.Text = string.Empty;
             }
 
             if (DataGridView1.Rows[n].Cells[UseForEvalCell].Value.ToString() == "Y")
@@ -854,15 +867,15 @@ namespace CelestialTools
                 UpdtRtn.UseForEval = "N";
             }
 
-            if (DataGridView1.Rows[n].Cells[NotesCell].Value.ToString() != Constants.vbNullString)
+            if (string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[NotesCell].Value.ToString()) == false)
             {
-                UpdtRtn.Remarks = Conversions.ToString(DataGridView1.Rows[n].Cells[NotesCell].Value);
-                txtRemarks.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[NotesCell].Value);
+                UpdtRtn.Remarks = Convert.ToString(DataGridView1.Rows[n].Cells[NotesCell].Value);
+                txtRemarks.Text = Convert.ToString(DataGridView1.Rows[n].Cells[NotesCell].Value);
             }
             else
             {
-                UpdtRtn.Remarks = Constants.vbNullString;
-                txtRemarks.Text = Constants.vbNullString;
+                UpdtRtn.Remarks = string.Empty;
+                txtRemarks.Text = string.Empty;
             }
 
             if ((UpdtRtn.LogType ) != (g_LogTypeDRAdv ))
@@ -882,15 +895,15 @@ namespace CelestialTools
                 UpdtRtn.DestEstElapsed = (DataGridView1.Rows[n].Cells[ElapsedCell].Value.ToString());
                 if ((string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[DistCell].Value.ToString())) == false )
                 {
-                    txtDestDist.Text = Conversions.ToString(DataGridView1.Rows[n].Cells[DistCell].Value);
+                    txtDestDist.Text = Convert.ToString(DataGridView1.Rows[n].Cells[DistCell].Value);
                     UpdtRtn.DestDistance = Convert.ToDouble(DataGridView1.Rows[n].Cells[DistCell].Value.ToString().Substring(0, txtDestDist.Text.ToString().Length - 2));
                 }
 
                 if ((string.IsNullOrEmpty(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value.ToString())) == false)
                  //   if (Conversions.ToBoolean(Operators.ConditionalCompareObjectNotEqual(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value, "", false)))
                 {
-                    UpdtRtn.DestLatLongStr = Conversions.ToString(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value);
-                    string DestLLo = Conversions.ToString(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value);
+                    UpdtRtn.DestLatLongStr = Convert.ToString(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value);
+                    string DestLLo = Convert.ToString(DataGridView1.Rows[n].Cells[CalcDestLogTypeCell].Value);
                     int LPos = DestLLo.IndexOf("=", StringComparison.OrdinalIgnoreCase);
                     int LDegPos = DestLLo.IndexOf('°');
                     int LMinPos = DestLLo.IndexOf("'", StringComparison.OrdinalIgnoreCase);
@@ -1282,36 +1295,44 @@ namespace CelestialTools
                     // if this is a planned route entry and the date/time has changed, ask if user wants to autocalc subsequent entries to new date / time and execute updat
                     if (UpdtRow < DataGridView1.Rows.Count)
                     {
-                        var MsgBack = Interaction.MsgBox("Plan Entry Date/Time has been updated - Do You Want to AutoUpdate the Date/Time for subsequent Plan entries - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
-                        if (MsgBack == MsgBoxResult.Yes)
                         {
-                            NewDT = DTDateZoneTime.Value;
-                            OriginalDT = Convert.ToDateTime(DataGridView1.Rows[UpdtRow].Cells[DTCell].Value);
-                            TDiff = NewDT - OriginalDT;
-                            PlanDTChg = true;
+                            MessageBoxResult dr = System.Windows.MessageBox.Show("Plan Entry Date/Time has been updated - Do You Want to AutoUpdate the Date/Time for subsequent Plan entries - Yes or No",
+                                SaveCaption, MessageBoxButton.YesNo);
+                            switch (dr)
+                            {
+                                case MessageBoxResult.Yes:
+                                    NewDT = DTDateZoneTime.Value;
+                                    OriginalDT = Convert.ToDateTime(DataGridView1.Rows[UpdtRow].Cells[DTCell].Value);
+                                    TDiff = NewDT - OriginalDT;
+                                    PlanDTChg = true;
+                                    break;
+                                case MessageBoxResult.No:
+                                    PlanDTChg = false;
+                                    break;
+                            }
                         }
-                        else
-                        {
-                            PlanDTChg = false;
-                        }
+                        
                     }
                 }
-                else if ((cboLocType.Text == g_LogTypeDR ) | (cboLocType.Text == g_LogTypeOldDR ) | 
-                    (cboLocType.Text  == g_LogTypeOldGPS ) | (cboLocType.Text == g_LogTypeGPS ))
+                else if ((cboLocType.Text == g_LogTypeDR ) | (cboLocType.Text == g_LogTypeOldDR ) | (cboLocType.Text  == g_LogTypeOldGPS ) | (cboLocType.Text == g_LogTypeGPS ))
                 {
                     if (UpdtRow < DataGridView1.Rows.Count)
                     {
-                        var MsgBack = Interaction.MsgBox("DR/GPS Entry Date/Time has been updated - Do You Want to AutoUpdate the Date/Time for subsequent DR/GPS entries - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
-                        if (MsgBack == MsgBoxResult.Yes)
                         {
-                            NewDT = DTDateZoneTime.Value;
-                            OriginalDT = Convert.ToDateTime(DataGridView1.Rows[UpdtRow].Cells[DTCell].Value);
-                            TDiff = NewDT - OriginalDT;
-                            DRGPSSightDTChg = true;
-                        }
-                        else
-                        {
-                            DRGPSSightDTChg = false;
+                            MessageBoxResult dr = System.Windows.MessageBox.Show("DR/GPS Entry Date/Time has been updated - Do You Want to AutoUpdate the Date/Time for subsequent DR/GPS entries - Yes or No",
+                                SaveCaption, MessageBoxButton.YesNo);
+                            switch (dr)
+                            {
+                                case MessageBoxResult.Yes:
+                                    NewDT = DTDateZoneTime.Value;
+                                    OriginalDT = Convert.ToDateTime(DataGridView1.Rows[UpdtRow].Cells[DTCell].Value);
+                                    TDiff = NewDT - OriginalDT;
+                                    DRGPSSightDTChg = true;
+                                    break;
+                                case MessageBoxResult.No:
+                                    DRGPSSightDTChg = false;
+                                    break;
+                            }
                         }
                     }
                 }
@@ -1481,11 +1502,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtLDeg.Text) == false)
-            {
-                ErrorMsgBox("Latitude Degrees must be numeric between 0 and 89");
-                return false;
-            }
+            //if (Information.IsNumeric(txtLDeg.Text) == false)
+            //{
+            //    ErrorMsgBox("Latitude Degrees must be numeric between 0 and 89");
+            //    return false;
+            //}
 
             try
             {
@@ -1498,7 +1519,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("Latitude Degrees must be numeric between 0 and 89");
+                ErrorMsgBox("Latitude Degrees must be numeric between 0 and 89" + " Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -1508,11 +1529,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtLMin.Text) == false)
-            {
-                ErrorMsgBox("Latitude Minutes be numeric between 0 and 59.9");
-                return false;
-            }
+            //if (Information.IsNumeric(txtLMin.Text) == false)
+            //{
+            //    ErrorMsgBox("Latitude Minutes be numeric between 0 and 59.9");
+            //    return false;
+            //}
 
             try
             {
@@ -1533,11 +1554,13 @@ namespace CelestialTools
                     return false;
                 }
             }
+
             catch (Exception ex)
             {
-                ErrorMsgBox("Latitude Minutes must be numeric between 0 and 59.9");
+                ErrorMsgBox("Latitude Minutes must be numeric between 0 and 59.9" + " Exception Error Msg: " + ex.Message);
                 return false;
             }
+
 
             if (string.IsNullOrEmpty(txtLoDeg.Text) | string.IsNullOrEmpty(txtLoDeg.Text))
             {
@@ -1545,11 +1568,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtLoDeg.Text) == false)
-            {
-                ErrorMsgBox("Longitude Degrees must be numeric between 0 and 89");
-                return false;
-            }
+            //if (Information.IsNumeric(txtLoDeg.Text) == false)
+            //{
+            //    ErrorMsgBox("Longitude Degrees must be numeric between 0 and 89");
+            //    return false;
+            //}
 
             try
             {
@@ -1562,7 +1585,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("Longitude Degrees must be numeric between 0 and 180");
+                ErrorMsgBox("Longitude Degrees must be numeric between 0 and 180" + " Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -1572,11 +1595,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtLoMin.Text) == false)
-            {
-                ErrorMsgBox("Longitude Minutes be numeric between 0 and 59.9");
-                return false;
-            }
+            //if (Information.IsNumeric(txtLoMin.Text) == false)
+            //{
+            //    ErrorMsgBox("Longitude Minutes be numeric between 0 and 59.9");
+            //    return false;
+            //}
 
             try
             {
@@ -1599,7 +1622,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("Longitude Minutes must be numeric between 0 and 59.9");
+                ErrorMsgBox("Longitude Minutes must be numeric between 0 and 59.9" + " Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -1609,8 +1632,8 @@ namespace CelestialTools
                 return false;
             }
             // due to csv file format for decklog file, all commas, line feeds, and CR/line feeds must be removed
-            txtRemarks.Text = txtRemarks.Text.ToString().Replace(Constants.vbCr, "").Replace(Environment.NewLine, "").Replace(",", "");
-            txtWeather.Text = txtWeather.Text.ToString().Replace(Constants.vbCr, "").Replace(Environment.NewLine, "").Replace(",", "");
+            txtRemarks.Text = txtRemarks.Text.ToString().Replace("\r", "").Replace(Environment.NewLine, "").Replace(",", "");
+            txtWeather.Text = txtWeather.Text.ToString().Replace("\r", "").Replace(Environment.NewLine, "").Replace(",", "");
             UpdtRtn.Wind = txtWind.Text.ToString();
             UpdtRtn.WindDir = cboWindDir.Text.ToString();
             UpdtRtn.Seas = txtSeas.Text.ToString();
@@ -1642,7 +1665,7 @@ namespace CelestialTools
             CompassInput = false;
             if ((cboLocType.Text.ToString() == g_LogTypeDR ) | (cboLocType.Text.ToString() == g_LogTypeOldDR ))
             {
-                if (string.IsNullOrEmpty(txtCompass.Text) | string.IsNullOrEmpty(txtCompass.Text))
+                if (string.IsNullOrEmpty(txtCompass.Text))
                 {
                     ErrorMsgBox("For DR Track Entry Compass Course must be entered - input one and try again");
                     return false;
@@ -1652,20 +1675,17 @@ namespace CelestialTools
                     CompassInput = true;
                 }
             }
-            else if (string.IsNullOrEmpty(txtCompass.Text) | string.IsNullOrEmpty(txtCompass.Text))
-            {
-            }
-            // Nothing()
-            else
+            else if (string.IsNullOrEmpty(txtCompass.Text) == false)
             {
                 CompassInput = true;
             }
 
             // GPS track log entries and Plan log entries must have True Course entries made - a zero true course is valid
             TrueInput = false;
-            if ((cboLocType.Text.ToString() == g_LogTypeGPS ) | (cboLocType.Text.ToString() == g_LogTypeOldGPS ) | (cboLocType.Text.ToString() == g_LogTypePlan ) | (cboLocType.Text.ToString() == g_LogTypeOldPlan ))
+            if ((cboLocType.Text.ToString() == g_LogTypeGPS ) | (cboLocType.Text.ToString() == g_LogTypeOldGPS ) |
+                (cboLocType.Text.ToString() == g_LogTypePlan ) | (cboLocType.Text.ToString() == g_LogTypeOldPlan ))
             {
-                if (string.IsNullOrEmpty(txtCTrue.Text) & string.IsNullOrEmpty(txtCTrue.Text))
+                if (string.IsNullOrEmpty(txtCTrue.Text))
                 {
                     ErrorMsgBox("For GPS Track or Plan Entry a True Course must be entered - input one and try again");
                     return false;
@@ -1675,16 +1695,12 @@ namespace CelestialTools
                     TrueInput = true;
                 }
             }
-            else if (string.IsNullOrEmpty(txtCTrue.Text) & string.IsNullOrEmpty(txtCTrue.Text))
-            {
-            }
-            // nothing
-            else
+            else if (string.IsNullOrEmpty(txtCTrue.Text) == false)
             {
                 TrueInput = true;
             }
 
-            if (CompassInput == false & TrueInput == false & string.IsNullOrEmpty(txtCTrue.Text) & string.IsNullOrEmpty(txtCompass.Text))
+            if (CompassInput == false & TrueInput == false)
             {
                 // neither was input - issue an error message
                 ErrorMsgBox("Either Compass or True Course must be entered - input one and try again");
@@ -1694,20 +1710,27 @@ namespace CelestialTools
             // if log type is GPS, DR, or Fix = Not a Plan type
             if ((cboLocType.Text.ToString() == g_LogTypeDR ) | (cboLocType.Text.ToString() == g_LogTypeOldDR ))
             {
-                if (string.IsNullOrEmpty(txtKnotLog.Text) | string.IsNullOrEmpty(txtKnotLog.Text))
+                if (string.IsNullOrEmpty(txtKnotLog.Text))
                 {
+                    // ignore - nothing to do
                 }
-                // ignore - nothing to do
-                else if (Information.IsNumeric(txtKnotLog.Text) == false)
+
+                try
+                { 
+                    double TmpKnotLog =  Convert.ToDouble(txtKnotLog.Text.ToString());
+                    UpdtRtn.KnotLog = txtKnotLog.Text.ToString()
+                }
+                catch (Exception ex)
                 {
-                    ErrorMsgBox("KnotLog value must be numeric text string");
+                    ErrorMsgBox("KnotLog value must be numeric text string" + "- Exception Error Msg: " + ex.Message);
                     return false;
-                }
+                };
+                
             }
 
             if (CompassInput == true)
             {
-                if (string.IsNullOrEmpty(txtCompass.Text) | string.IsNullOrEmpty(txtCompass.Text))
+                if (string.IsNullOrEmpty(txtCompass.Text))
                 {
                     if ((cboLocType.Text.ToString() == g_LogTypeFix ))
                     {
@@ -1720,11 +1743,11 @@ namespace CelestialTools
                     }
                 }
 
-                if (Information.IsNumeric(txtCompass.Text) == false)
-                {
-                    ErrorMsgBox("Compass Course must be numeric between 0 and 360");
-                    return false;
-                }
+                //if (Information.IsNumeric(txtCompass.Text) == false)
+                //{
+                //    ErrorMsgBox("Compass Course must be numeric between 0 and 360");
+                //    return false;
+                //}
 
                 try
                 {
@@ -1737,18 +1760,18 @@ namespace CelestialTools
                 }
                 catch (Exception ex)
                 {
-                    ErrorMsgBox("Compass Course must be numeric between 0 and 360");
+                    ErrorMsgBox("Compass Course must be numeric between 0 and 360" + "- Exception Error Msg: " + ex.Message);
                     return false;
                 }
             }
 
             if (TrueInput == true)
             {
-                if (Information.IsNumeric(txtCTrue.Text) == false)
-                {
-                    ErrorMsgBox("True Course must be numeric between 0 and 360");
-                    return false;
-                }
+                //if (Information.IsNumeric(txtCTrue.Text) == false)
+                //{
+                //    ErrorMsgBox("True Course must be numeric between 0 and 360");
+                //    return false;
+                //}
 
                 try
                 {
@@ -1762,22 +1785,22 @@ namespace CelestialTools
                 }
                 catch (Exception ex)
                 {
-                    ErrorMsgBox("True Course must be numeric between 0 and 360");
+                    ErrorMsgBox("True Course must be numeric between 0 and 360" + "- Exception Error Msg: " + ex.Message);
                     return false;
                 }
             }
 
-            if (string.IsNullOrEmpty(txtVar.Text) | string.IsNullOrEmpty(txtVar.Text))
+            if (string.IsNullOrEmpty(txtVar.Text) )
             {
                 ErrorMsgBox("Variation must be entered");
                 return false;
             }
-            else if (Information.IsNumeric(txtVar.Text) == false)
-            {
-                ErrorMsgBox("Variation must be numeric between 0 and 20");
-                return false;
-            }
-            else
+            //else if (Information.IsNumeric(txtVar.Text) == false)
+            //{
+            //    ErrorMsgBox("Variation must be numeric between 0 and 20");
+            //    return false;
+            //}
+            //else
             {
                 try
                 {
@@ -1795,7 +1818,7 @@ namespace CelestialTools
                 }
                 catch (Exception ex)
                 {
-                    ErrorMsgBox("Var Course must be numeric between 0 and 20");
+                    ErrorMsgBox("Var Course must be numeric between 0 and 20" + "- Exception Error Msg: " + ex.Message);
                     return false;
                 }
             }
@@ -1868,12 +1891,12 @@ namespace CelestialTools
                     ErrorMsgBox("Deviation must be entered");
                     return false;
                 }
-                else if (Information.IsNumeric(txtDev.Text) == false)
-                {
-                    ErrorMsgBox("Deviation must be numeric between 0 and 20");
-                    return false;
-                }
-                else
+                //else if (Information.IsNumeric(txtDev.Text) == false)
+                //{
+                //    ErrorMsgBox("Deviation must be numeric between 0 and 20");
+                //    return false;
+                //}
+                //else
                 {
                     try
                     {
@@ -1888,7 +1911,7 @@ namespace CelestialTools
                     }
                     catch (Exception ex)
                     {
-                        ErrorMsgBox("Dev Course must be numeric between 0 and 20");
+                        ErrorMsgBox("Dev Course must be numeric between 0 and 20" + "- Exception Error Msg: " + ex.Message);
                         return false;
                     }
                 }
@@ -1966,17 +1989,17 @@ namespace CelestialTools
             }
             else
             {
-                if (string.IsNullOrEmpty(txtSpeed.Text) | string.IsNullOrEmpty(txtSpeed.Text))
+                if (string.IsNullOrEmpty(txtSpeed.Text))
                 {
                     ErrorMsgBox("Speed must be entered");
                     return false;
                 }
 
-                if (Information.IsNumeric(txtSpeed.Text) == false)
-                {
-                    ErrorMsgBox("Speed must be numeric between 0 and 99");
-                    return false;
-                }
+                //if (Information.IsNumeric(txtSpeed.Text) == false)
+                //{
+                //    ErrorMsgBox("Speed must be numeric between 0 and 99");
+                //    return false;
+                //}
 
                 try
                 {
@@ -1989,13 +2012,12 @@ namespace CelestialTools
                 }
                 catch (Exception ex)
                 {
-                    ErrorMsgBox("Speed must be numeric between 0 and 99");
+                    ErrorMsgBox("Speed must be numeric between 0 and 99" + "- Exception Error Msg: " + ex.Message);
                     return false;
                 }
             }
 
             return true;
-            return default;
         }
 
         private bool EditPlanFields()
@@ -2043,11 +2065,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtDestLDeg.Text) == false)
-            {
-                ErrorMsgBox("For Plan Entry, Destination Latitude Degrees must be numeric between 0 and 89");
-                return false;
-            }
+            //if (Information.IsNumeric(txtDestLDeg.Text) == false)
+            //{
+            //    ErrorMsgBox("For Plan Entry, Destination Latitude Degrees must be numeric between 0 and 89");
+            //    return false;
+            //}
 
             try
             {
@@ -2060,7 +2082,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("For Plan Entry, DestinationLatitude Degrees must be numeric between 0 and 89");
+                ErrorMsgBox("For Plan Entry, DestinationLatitude Degrees must be numeric between 0 and 89" + "- Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -2070,11 +2092,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtDestLMin.Text) == false)
-            {
-                ErrorMsgBox("For Plan Entry, Latitude Minutes be numeric between 0 and 59.9");
-                return false;
-            }
+            //if (Information.IsNumeric(txtDestLMin.Text) == false)
+            //{
+            //    ErrorMsgBox("For Plan Entry, Latitude Minutes be numeric between 0 and 59.9");
+            //    return false;
+            //}
 
             try
             {
@@ -2097,7 +2119,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("For Plan Entry, Latitude Minutes must be numeric between 0 and 59.9");
+                ErrorMsgBox("For Plan Entry, Latitude Minutes must be numeric between 0 and 59.9" + "- Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -2107,11 +2129,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtDestLoDeg.Text) == false)
-            {
-                ErrorMsgBox("For Plan Entry, Longitude Degrees must be numeric between 0 and 89");
-                return false;
-            }
+            //if (Information.IsNumeric(txtDestLoDeg.Text) == false)
+            //{
+            //    ErrorMsgBox("For Plan Entry, Longitude Degrees must be numeric between 0 and 89");
+            //    return false;
+            //}
 
             try
             {
@@ -2124,7 +2146,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("For Plan Entry, Longitude Degrees must be numeric between 0 and 180");
+                ErrorMsgBox("For Plan Entry, Longitude Degrees must be numeric between 0 and 180" + "- Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -2134,11 +2156,11 @@ namespace CelestialTools
                 return false;
             }
 
-            if (Information.IsNumeric(txtDestLoMin.Text) == false)
-            {
-                ErrorMsgBox("For Plan Entry, Longitude Minutes be numeric between 0 and 59.9");
-                return false;
-            }
+            //if (Information.IsNumeric(txtDestLoMin.Text) == false)
+            //{
+            //    ErrorMsgBox("For Plan Entry, Longitude Minutes be numeric between 0 and 59.9");
+            //    return false;
+            //}
 
             try
             {
@@ -2166,7 +2188,7 @@ namespace CelestialTools
             }
             catch (Exception ex)
             {
-                ErrorMsgBox("For Plan Entry, Longitude Minutes must be numeric between 0 and 59.9");
+                ErrorMsgBox("For Plan Entry, Longitude Minutes must be numeric between 0 and 59.9" + "- Exception Error Msg: " + ex.Message);
                 return false;
             }
 
@@ -2208,8 +2230,8 @@ namespace CelestialTools
                     var MsgBack = Interaction.MsgBox("Great Circle Route Plan availble to load from Sailings form. Load? - Yes or No", MsgBoxStyle.YesNo, "Save Updated Data");
                     if (MsgBack == MsgBoxResult.Yes)
                     {
-                        GCRArray = new GCRRec[Information.UBound(My.MyProject.Forms.FormSailings.GCRArray) + 1];
-                        for (int i = 0, loopTo = Information.UBound(My.MyProject.Forms.FormSailings.GCRArray); i <= loopTo; i++)
+                        GCRArray = new GCRRec[(My.MyProject.Forms.FormSailings.GCRArray).GetUpperBound(0) + 1];
+                        for (int i = 0, loopTo = (My.MyProject.Forms.FormSailings.GCRArray).GetUpperBound(0); i <= loopTo; i++)
                         {
                             GCRArray[i].LongStr = My.MyProject.Forms.FormSailings.GCRArray[i].LongStr;
                             GCRArray[i].LatStr = My.MyProject.Forms.FormSailings.GCRArray[i].LatStr;
@@ -2260,10 +2282,10 @@ namespace CelestialTools
                         GCRArray = new GCRRec[My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2 + 1];
                         for (int i = 0, loopTo1 = My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows.Count - 2; i <= loopTo1; i++)
                         {
-                            GCRArray[i].LongStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
-                            GCRArray[i].LatStr = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
-                            GCRArray[i].CTrue = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
-                            GCRArray[i].GCRDist = Conversions.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
+                            GCRArray[i].LongStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[0].Value);
+                            GCRArray[i].LatStr = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[1].Value);
+                            GCRArray[i].CTrue = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[2].Value);
+                            GCRArray[i].GCRDist = Convert.ToString(My.MyProject.Forms.frmPointsOnGCR.DGGCR.Rows[i].Cells[3].Value);
                         }
 
                         // now close the GCR form and then close the Sailings form
@@ -2769,7 +2791,7 @@ namespace CelestialTools
             txtNavigator.Clear();
             txtFrom.Clear();
             txtTo.Clear();
-            DTDateZoneTime.Value = DateAndTime.Now;
+            DTDateZoneTime.Value = DateTime.Now;
             txtCompass.Clear();
             txtVar.Clear();
             txtDev.Clear();
@@ -2845,7 +2867,7 @@ namespace CelestialTools
             int DGLimit = DataGridView1.Rows.Count;
             for (int i = 0, loopTo = DGLimit - 1; i <= loopTo; i++)
             {
-                if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(DataGridView1.Rows[i].Cells[LogTypeCell].Value, Constants.vbNullString, false), Operators.ConditionalCompareObjectEqual(DataGridView1.Rows[i].Cells[LogTypeCell].Value, "", false))))
+                if (Conversions.ToBoolean(Operators.OrObject(Operators.ConditionalCompareObjectEqual(DataGridView1.Rows[i].Cells[LogTypeCell].Value, string.Empty, false), Operators.ConditionalCompareObjectEqual(DataGridView1.Rows[i].Cells[LogTypeCell].Value, "", false))))
                 {
                     DataGridView1.Rows[i].Cells[LogTypeCell].Value = "Delete";
                     DataGridView1.Rows[i].Cells[DTCell].Value = MaxDate;
@@ -3070,7 +3092,7 @@ namespace CelestialTools
             }
 
             // evaluate Calculate destination location - start with location of previous entry 
-            var GeoLLo1 = ParseLatLong(Conversions.ToString(DataGridView1.Rows[PrevRec].Cells[DestLogTypeCell].Value));
+            var GeoLLo1 = ParseLatLong(Convert.ToString(DataGridView1.Rows[PrevRec].Cells[DestLogTypeCell].Value));
             string TempcboL1 = CommonGlobals.g_LatN;
             double TempL1 = GeoLLo1.Latitude;
             double TempL1Disp = GeoLLo1.Latitude;
@@ -3100,7 +3122,7 @@ namespace CelestialTools
             }
 
             // now calculate the location for the current entry
-            var GeoLLo2 = ParseLatLong(Conversions.ToString(DataGridView1.Rows[CurrRec].Cells[DestLogTypeCell].Value));
+            var GeoLLo2 = ParseLatLong(Convert.ToString(DataGridView1.Rows[CurrRec].Cells[DestLogTypeCell].Value));
             string TempcboL = CommonGlobals.g_LatN;
             double TempL = GeoLLo2.Latitude;
             double TempLDisp = GeoLLo2.Latitude;
@@ -3631,7 +3653,7 @@ namespace CelestialTools
                         (DataGridView1.Rows[x].Cells[LogTypeCell].Value.ToString() ==  g_LogTypeWayPoint)|
                         (DataGridView1.Rows[x].Cells[LogTypeCell].Value.ToString() ==  g_LogTypeFix))
                     {
-                        var TmpGeo = ParseLatLong(Conversions.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
+                        var TmpGeo = ParseLatLong(Convert.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
                         string TmpLat = TmpGeo.Latitude.ToString("00.00000");
                         double TmpLong = Conversions.ToDouble(TmpGeo.Longitude.ToString("000.00000"));
                         int TimeZone = (int)Math.Round(TmpLong / 15d, 0, MidpointRounding.AwayFromZero);
@@ -3684,7 +3706,7 @@ namespace CelestialTools
                             textstr.Append("<name>" + DataGridView1.Rows[x].Cells[FromCell].Value.ToString() + "/" + DataGridView1.Rows[x].Cells[ToCell].Value.ToString() + "/" + "Planned Route" + "</name>");
                         }
 
-                        var TmpGeo = ParseLatLong(Conversions.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
+                        var TmpGeo = ParseLatLong(Convert.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
                         string TmpLat = TmpGeo.Latitude.ToString("00.00000");
                         double TmpLong = Conversions.ToDouble(TmpGeo.Longitude.ToString("000.00000"));
                         int TimeZone = (int)Math.Round(TmpLong / 15d, 0, MidpointRounding.AwayFromZero);
@@ -3716,7 +3738,7 @@ namespace CelestialTools
                         (DataGridView1.Rows[x].Cells[LogTypeCell].Value.ToString() == g_LogTypeOldDR)|
                         (DataGridView1.Rows[x].Cells[LogTypeCell].Value.ToString() == g_LogTypeFix))
                     {
-                        var TmpGeo = ParseLatLong(Conversions.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
+                        var TmpGeo = ParseLatLong(Convert.ToString(DataGridView1.Rows[x].Cells[DestLogTypeCell].Value));
                         string TmpLat = TmpGeo.Latitude.ToString("00.00000");
                         double TmpLong = Conversions.ToDouble(TmpGeo.Longitude.ToString("000.00000"));
                         int TimeZone = (int)Math.Round(TmpLong / 15d, 0, MidpointRounding.AwayFromZero);
@@ -3744,7 +3766,7 @@ namespace CelestialTools
 
         private string GetGPXHdr()
         {
-            //string tmpstr = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" " + Environment.NewLine + "xmlns:xsi = \"http://www.w3.org/2001/XMLSchema-instance\" " + Environment.NewLine + "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\"" + Environment.NewLine + "version=\"1.1\"" + Environment.NewLine + "creator=\"", DataGridView1.Rows[0].Cells[VesselCell].Value), " "), DataGridView1.Rows[0].Cells[FromCell].Value), "Plan Entries"), "\">"), Environment.NewLine));
+            //string tmpstr = Convert.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" " + Environment.NewLine + "xmlns:xsi = \"http://www.w3.org/2001/XMLSchema-instance\" " + Environment.NewLine + "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\"" + Environment.NewLine + "version=\"1.1\"" + Environment.NewLine + "creator=\"", DataGridView1.Rows[0].Cells[VesselCell].Value), " "), DataGridView1.Rows[0].Cells[FromCell].Value), "Plan Entries"), "\">"), Environment.NewLine));
 
             string tmpstr = "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" " + Environment.NewLine + 
                 "xmlns:xsi = \"http://www.w3.org/2001/XMLSchema-instance\" " + Environment.NewLine + 
@@ -3966,7 +3988,7 @@ namespace CelestialTools
             }
 
             var textstr = new System.Text.StringBuilder();
-            string FileHdrStr = Constants.vbNullString;
+            string FileHdrStr = string.Empty;
             for (int i = 0, loopTo = Information.UBound(HdrStr); i <= loopTo; i++)
             {
                 if (i > 0)

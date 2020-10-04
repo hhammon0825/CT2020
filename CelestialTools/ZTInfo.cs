@@ -27,7 +27,7 @@ namespace CelestialTools
         private readonly string tablename = "Table1";
         private DataSet DataSet1;
         private readonly string[] HdrStr = new[] { "Display Name", "UTC Hours", "UTC Minutes", "Supports DST", "DST Name" };
-        private readonly string[] NullStr = new[] { Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString, Constants.vbNullString };
+        private readonly string[] NullStr = new[] { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
 
         private void ZTInfo_Load(object sender, EventArgs e)
         {

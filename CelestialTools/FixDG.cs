@@ -204,7 +204,7 @@ namespace CelestialTools
                     PlotOut.PlotLongSec = "0";
                     if (FixDataArray[i].SFM == null)
                     {
-                        PlotOut.PlotLongEW = Constants.vbNullString;
+                        PlotOut.PlotLongEW = string.Empty;
                     }
                     else
                     {
@@ -301,7 +301,7 @@ namespace CelestialTools
                     PlotOut.PlotLongSec = "0";
                     if (FixDataArray[i].SFM == null)
                     {
-                        PlotOut.PlotLongEW = Constants.vbNullString;
+                        PlotOut.PlotLongEW = string.Empty;
                     }
                     else
                     {

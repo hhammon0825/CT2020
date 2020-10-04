@@ -3441,7 +3441,7 @@ namespace CelestialTools
             DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             if (optHoParameters.Checked)
             {
-                tempstr1 = Conversions.ToString((Strings.Space(4) + "Refraction" + Strings.Space(4) + tempstr2 ?? "") == ("(-)" + Strings.Space(3 - Convert.ToInt32(Math.Abs(r)).ToString().Length) + (Convert.ToInt32(Math.Abs(r) * 1000d + 0.5d) / 1000d).ToString("0.000") + "'" ?? ""));
+                tempstr1 = Convert.ToString((Strings.Space(4) + "Refraction" + Strings.Space(4) + tempstr2 ?? "") == ("(-)" + Strings.Space(3 - Convert.ToInt32(Math.Abs(r)).ToString().Length) + (Convert.ToInt32(Math.Abs(r) * 1000d + 0.5d) / 1000d).ToString("0.000") + "'" ?? ""));
                 tempstr3 = "";
                 DataSet1.Tables["Table1"].Rows.Add(tempstr1, tempstr2, tempstr3);
             }
@@ -6327,11 +6327,11 @@ namespace CelestialTools
                 SRF1graphic.DrawLine(DPen, 0f, 0f, XTD1, YTD1);
                 PtText = new Point((int)XTD1, (int)YTD1);
                 PtText = SetPrintTextPt(PtText, 10, 10);
-                SRF1graphic.DrawString(Conversions.ToString(CommonGlobals.Aries_Uchar), DFontArial7Reg, Brushes.Black, PtText);
+                SRF1graphic.DrawString(Convert.ToString(CommonGlobals.Aries_Uchar), DFontArial7Reg, Brushes.Black, PtText);
                 // SRF1graphic.DrawString("V", DFontArial7Reg, Brushes.Black, PtText)
             }
 
-            string DString = Constants.vbNullString;
+            string DString = string.Empty;
 
             // Any body other than Sun
             if (BN < 64)
@@ -6350,49 +6350,49 @@ namespace CelestialTools
                     {
                         case "Mercury":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Mercury_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Mercury_Uchar);
                                 break;
                             }
 
                         case "Venus":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Venus_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Venus_Uchar);
                                 break;
                             }
 
                         case "Mars":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Mars_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Mars_Uchar);
                                 break;
                             }
 
                         case "Jupiter":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Jupiter_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Jupiter_Uchar);
                                 break;
                             }
 
                         case "Saturn":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Saturn_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Saturn_Uchar);
                                 break;
                             }
 
                         case "Neptune":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Neptune_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Neptune_Uchar);
                                 break;
                             }
 
                         case "Uranus":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Uranus_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Uranus_Uchar);
                                 break;
                             }
 
                         case "Pluto":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Pluto_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Pluto_Uchar);
                                 break;
                             }
 
@@ -6410,7 +6410,7 @@ namespace CelestialTools
                     {
                         case "Moon":
                             {
-                                DString = Conversions.ToString(CommonGlobals.Moon_FirstQtr_Uchar);
+                                DString = Convert.ToString(CommonGlobals.Moon_FirstQtr_Uchar);
                                 break;
                             }
 
@@ -7437,7 +7437,7 @@ namespace CelestialTools
         {
             // this subroutine is required because issuing a raw SendMsgBx call also trigger a Paint event for graphic box on form which cannot be handled properly in error conditions
             IssuingSendMsgBx = true;
-            string HdrStr = Constants.vbNullString;
+            string HdrStr = string.Empty;
             // HdrStr = IconType.ToString
             if (IconType == MessageBoxIcon.Error)
             {

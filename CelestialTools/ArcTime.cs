@@ -222,7 +222,7 @@ namespace CelestialTools
         private void txtDeg_KeyPress(object eventSender, KeyPressEventArgs eventArgs)
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):
@@ -284,7 +284,7 @@ namespace CelestialTools
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
             bool optHsDMS = false;
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):
@@ -378,7 +378,7 @@ namespace CelestialTools
         private void txtLoDeg_KeyPress(object eventSender, KeyPressEventArgs eventArgs)
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):
@@ -439,7 +439,7 @@ namespace CelestialTools
         private void txtLoMin_KeyPress(object eventSender, KeyPressEventArgs eventArgs)
         {
             short KeyAscii = (short)Strings.Asc(eventArgs.KeyChar);
-            string fnumeral = Constants.vbNullString;
+            string fnumeral = string.Empty;
             switch (KeyAscii)
             {
                 case var @case when Strings.Asc("0") <= @case && @case <= Strings.Asc("9"):

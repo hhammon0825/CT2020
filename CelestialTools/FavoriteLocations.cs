@@ -108,10 +108,10 @@ namespace CelestialTools
         public double SRFZn = 0d;
         public bool SRFSightUpd = false;
         private FavoriteLoc[] FavoriteLocArray;
-        private string SLFName = Constants.vbNullString;
+        private string SLFName = string.Empty;
         private string SLDir = "./FavoriteLocs/";
         // Private SLDefName As String = "FavoriteLoc" & Now.ToShortDateString.Replace("/", "").Replace("-", "") & Now.ToLongTimeString.Replace(":", "").Replace(" ", "") & ".txt"
-        private string SLOpenFName = Constants.vbNullString;
+        private string SLOpenFName = string.Empty;
         private int EntryIndex = 0;
         private bool FileUpdated = false;
         private FavoriteLoc CommonSE;
@@ -158,25 +158,25 @@ namespace CelestialTools
             {
                 var withBlock = SharedLocIn;
                 withBlock.EntryStatus = "Empty";
-                withBlock.SightNum = Constants.vbNullString;
-                withBlock.SLName = Constants.vbNullString;
-                withBlock.DRLat = Constants.vbNullString;
+                withBlock.SightNum = string.Empty;
+                withBlock.SLName = string.Empty;
+                withBlock.DRLat = string.Empty;
                 withBlock.DRLatDeg = 0;
                 withBlock.DRLatMin = 0d;
-                withBlock.DRLong = Constants.vbNullString;
+                withBlock.DRLong = string.Empty;
                 withBlock.DRLongDeg = 0;
                 withBlock.DRLongMin = 0d;
-                withBlock.ZD = Constants.vbNullString;
-                withBlock.DST = Constants.vbNullString;
-                withBlock.FromAZ = Conversions.ToInteger(Constants.vbNullString);
-                withBlock.ToAZ = Conversions.ToInteger(Constants.vbNullString);
-                withBlock.HorType = Constants.vbNullString;
+                withBlock.ZD = string.Empty;
+                withBlock.DST = string.Empty;
+                withBlock.FromAZ = Conversions.ToInteger(string.Empty);
+                withBlock.ToAZ = Conversions.ToInteger(string.Empty);
+                withBlock.HorType = string.Empty;
                 withBlock.HorDist = 0d;
-                withBlock.HorDistType = Constants.vbNullString;
+                withBlock.HorDistType = string.Empty;
                 withBlock.HE = 0d;
-                withBlock.HEType = Constants.vbNullString;
-                withBlock.ApprxBrg = Constants.vbNullString;
-                withBlock.hsIEFormat = Constants.vbNullString;
+                withBlock.HEType = string.Empty;
+                withBlock.ApprxBrg = string.Empty;
+                withBlock.hsIEFormat = string.Empty;
                 withBlock.ZDAutoSelect = false;
             }
 
@@ -351,7 +351,7 @@ namespace CelestialTools
         {
             System.IO.StreamReader myStream = null;
             var openFileDialog1 = new OpenFileDialog();
-            string rdline = Constants.vbNullString;
+            string rdline = string.Empty;
             openFileDialog1.InitialDirectory = SLDir;
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.Title = "Open Sight Log Text File";
@@ -384,7 +384,7 @@ namespace CelestialTools
                             if (!string.IsNullOrEmpty(rdline))
                             {
                                 ParseReadLine(rdline);
-                                rdline = Constants.vbNullString;
+                                rdline = string.Empty;
                                 if (ReadError == true)
                                 {
                                     goto LeaveReadLoop;
@@ -518,25 +518,25 @@ namespace CelestialTools
                     {
                         var withBlock = SharedLocUse;
                         withBlock.EntryStatus = "Empty";
-                        withBlock.SightNum = Constants.vbNullString;
-                        withBlock.SLName = Constants.vbNullString;
-                        withBlock.DRLat = Constants.vbNullString;
+                        withBlock.SightNum = string.Empty;
+                        withBlock.SLName = string.Empty;
+                        withBlock.DRLat = string.Empty;
                         withBlock.DRLatDeg = 0;
                         withBlock.DRLatMin = 0d;
-                        withBlock.DRLong = Constants.vbNullString;
+                        withBlock.DRLong = string.Empty;
                         withBlock.DRLongDeg = 0;
                         withBlock.DRLongMin = 0d;
-                        withBlock.ZD = Constants.vbNullString;
-                        withBlock.DST = Constants.vbNullString;
-                        withBlock.FromAZ = Conversions.ToInteger(Constants.vbNullString);
-                        withBlock.ToAZ = Conversions.ToInteger(Constants.vbNullString);
-                        withBlock.HorType = Constants.vbNullString;
+                        withBlock.ZD = string.Empty;
+                        withBlock.DST = string.Empty;
+                        withBlock.FromAZ = Conversions.ToInteger(string.Empty);
+                        withBlock.ToAZ = Conversions.ToInteger(string.Empty);
+                        withBlock.HorType = string.Empty;
                         withBlock.HorDist = 0d;
-                        withBlock.HorDistType = Constants.vbNullString;
+                        withBlock.HorDistType = string.Empty;
                         withBlock.HE = 0d;
-                        withBlock.HEType = Constants.vbNullString;
-                        withBlock.ApprxBrg = Constants.vbNullString;
-                        withBlock.hsIEFormat = Constants.vbNullString;
+                        withBlock.HEType = string.Empty;
+                        withBlock.ApprxBrg = string.Empty;
+                        withBlock.hsIEFormat = string.Empty;
                     }
                 }
                 else
@@ -654,7 +654,7 @@ namespace CelestialTools
 
         private string FormatSightForSave(FavoriteLoc SE)
         {
-            string SaveStr = Constants.vbNullString;
+            string SaveStr = string.Empty;
             string StrParm = ";";
             SaveStr = "No=" + SE.SightNum + StrParm + "Name=" + SE.SLName + StrParm + "DRLat=" + SE.DRLat + StrParm + "DRLong=" + SE.DRLong + StrParm + "ZD=" + SE.ZD + StrParm + "DST=" + SE.DST + StrParm + "HorType=" + SE.HorType + StrParm + "HorDist=" + SE.HorDist + StrParm + "HorDistType=" + SE.HorDistType + StrParm + "HE=" + SE.HE + StrParm + "ApprxBrg=" + SE.ApprxBrg + StrParm + "FromAZ=" + SE.FromAZ + StrParm + "ToAZ=" + SE.ToAZ + StrParm + "hsIEFmt=" + SE.hsIEFormat;
             return SaveStr;
@@ -713,7 +713,7 @@ namespace CelestialTools
         private string g_tab = "\t";
         private string FormatSightForPrint(FavoriteLoc SE)
         {
-            string SaveStr = Constants.vbNullString;
+            string SaveStr = string.Empty;
             string StrParm = g_tab;
             string SepLine = "__________________________________________________________________________________________";
             SaveStr = "Name = " + SE.SLName + StrParm + "No = " + SE.SightNum + StrParm + "DST = " + SE.DST + StrParm + "ZD = " + SE.ZD + StrParm + "DR Lat = " + SE.DRLat + StrParm + "DR Long = " + SE.DRLong + Environment.NewLine + "ApprxBrg=" + SE.ApprxBrg + StrParm + "HE = " + SE.HE + StrParm + "Horizon = " + SE.HorType + StrParm + "Dip Short = " + SE.HorDist + " " + SE.HorDistType + Environment.NewLine + "From AZ =" + SE.FromAZ + Environment.NewLine + "To AZ = " + SE.ToAZ + Environment.NewLine + "hsIEFmt =" + SE.hsIEFormat + Environment.NewLine + "Remarks = " + SE.Remarks + Environment.NewLine + SepLine.ToString() + Environment.NewLine;
@@ -782,7 +782,7 @@ namespace CelestialTools
             ParseArray = Strings.Split(rdline, ";");
             int i = 0;
             int Idx = 0;
-            string Param = Constants.vbNullString;
+            string Param = string.Empty;
             int DataSt = 0;
             int DataEnd = 0;
             var loopTo = Information.UBound(ParseArray);
@@ -942,14 +942,14 @@ namespace CelestialTools
         public double CnvtHSStrtoDouble(object HSStr)
         {
             double HSDbl = 0d;
-            int HSDegLoc = Strings.InStr(Conversions.ToString(HSStr), Conversions.ToString('°'));
-            int HSMinLoc = Strings.InStr(Conversions.ToString(HSStr), "'");
-            int HSSecLoc = Strings.InStr(Conversions.ToString(HSStr), Conversions.ToString('"'));
-            HSDbl = Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), 1, HSDegLoc - 1));
-            HSDbl += Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), HSDegLoc + 1, HSMinLoc - HSDegLoc - 1)) / 60d;
+            int HSDegLoc = Strings.InStr(Convert.ToString(HSStr), Convert.ToString('°'));
+            int HSMinLoc = Strings.InStr(Convert.ToString(HSStr), "'");
+            int HSSecLoc = Strings.InStr(Convert.ToString(HSStr), Convert.ToString('"'));
+            HSDbl = Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), 1, HSDegLoc - 1));
+            HSDbl += Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), HSDegLoc + 1, HSMinLoc - HSDegLoc - 1)) / 60d;
             if (HSSecLoc != 0)
             {
-                HSDbl += Convert.ToDouble(Strings.Mid(Conversions.ToString(HSStr), HSMinLoc + 1, HSSecLoc - HSMinLoc - 1)) / 3600d;
+                HSDbl += Convert.ToDouble(Strings.Mid(Convert.ToString(HSStr), HSMinLoc + 1, HSSecLoc - HSMinLoc - 1)) / 3600d;
             }
 
             return HSDbl;
@@ -1492,8 +1492,8 @@ namespace CelestialTools
             int n = SEDataGrid.CurrentRow.Index;
             // The order of these variable and the integer indexs contained in each MUST match the order of the fields in the data grid
 
-            txtName.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[SLNameCell].Value);
-            txtSightNum.Text = Conversions.ToString(SEDataGrid.Rows[n].Cells[SightNumCell].Value);
+            txtName.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[SLNameCell].Value);
+            txtSightNum.Text = Convert.ToString(SEDataGrid.Rows[n].Cells[SightNumCell].Value);
             // If there is a shared location and the sight number being selected is the shared location number then set check box to checked
             if (Conversions.ToBoolean(Operators.AndObject(SharedLocUse.EntryStatus == "Shared", Operators.ConditionalCompareObjectEqual(SharedLocUse.SightNum, SEDataGrid.Rows[n].Cells[SightNumCell].Value, false))))
             {
@@ -1944,7 +1944,7 @@ namespace CelestialTools
                     cell = new Rectangle(startX, startY, SEDataGrid.RowHeadersWidth, SEDataGrid.Rows[r].Height);
                     e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlLight), cell);
                     e.Graphics.DrawRectangle(Pens.Black, cell);
-                    e.Graphics.DrawString(Conversions.ToString(SEDataGrid.Rows[r].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                    e.Graphics.DrawString(Convert.ToString(SEDataGrid.Rows[r].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                     startY += SEDataGrid.Rows[r].Height;
                 }
 
@@ -1955,7 +1955,7 @@ namespace CelestialTools
                     cell = new Rectangle(startX, startY, SEDataGrid.Columns[c].Width, SEDataGrid.ColumnHeadersHeight);
                     e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlLight), cell);
                     e.Graphics.DrawRectangle(Pens.Black, cell);
-                    e.Graphics.DrawString(Conversions.ToString(SEDataGrid.Columns[c].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                    e.Graphics.DrawString(Convert.ToString(SEDataGrid.Columns[c].HeaderCell.Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                     startX += SEDataGrid.Columns[c].Width;
                 }
 
@@ -1967,7 +1967,7 @@ namespace CelestialTools
                     {
                         cell = new Rectangle(startX, startY, SEDataGrid.Columns[c].Width, SEDataGrid.Rows[r].Height);
                         e.Graphics.DrawRectangle(Pens.Black, cell);
-                        e.Graphics.DrawString(Conversions.ToString(SEDataGrid[c, r].Value), SEDataGrid.Font, Brushes.Black, cell, sf);
+                        e.Graphics.DrawString(Convert.ToString(SEDataGrid[c, r].Value), SEDataGrid.Font, Brushes.Black, cell, sf);
                         startX += SEDataGrid.Columns[c].Width;
                     }
 
@@ -2101,7 +2101,7 @@ namespace CelestialTools
                 }
                 else
                 {
-                    withBlock.DST = Constants.vbNullString;
+                    withBlock.DST = string.Empty;
                 }
 
                 withBlock.FromAZ = Convert.ToInt32(txtFromAZ.Text.ToString());
@@ -2438,27 +2438,27 @@ namespace CelestialTools
             {
                 var withBlock = SharedLocUse;
                 withBlock.EntryStatus = "Empty";
-                withBlock.SightNum = Constants.vbNullString;
-                withBlock.SLName = Constants.vbNullString;
-                withBlock.DRLat = Constants.vbNullString;
+                withBlock.SightNum = string.Empty;
+                withBlock.SLName = string.Empty;
+                withBlock.DRLat = string.Empty;
                 withBlock.DRLatDeg = 0;
                 withBlock.DRLatMin = 0d;
-                withBlock.DRLong = Constants.vbNullString;
+                withBlock.DRLong = string.Empty;
                 withBlock.DRLongDeg = 0;
                 withBlock.DRLongMin = 0d;
-                withBlock.ZD = Constants.vbNullString;
-                withBlock.ZDhr = Constants.vbNullString;
-                withBlock.ZDmin = Constants.vbNullString;
-                withBlock.DST = Constants.vbNullString;
-                withBlock.FromAZ = Conversions.ToInteger(Constants.vbNullString);
-                withBlock.ToAZ = Conversions.ToInteger(Constants.vbNullString);
-                withBlock.HorType = Constants.vbNullString;
+                withBlock.ZD = string.Empty;
+                withBlock.ZDhr = string.Empty;
+                withBlock.ZDmin = string.Empty;
+                withBlock.DST = string.Empty;
+                withBlock.FromAZ = Conversions.ToInteger(string.Empty);
+                withBlock.ToAZ = Conversions.ToInteger(string.Empty);
+                withBlock.HorType = string.Empty;
                 withBlock.HorDist = 0d;
-                withBlock.HorDistType = Constants.vbNullString;
+                withBlock.HorDistType = string.Empty;
                 withBlock.HE = 0d;
-                withBlock.HEType = Constants.vbNullString;
-                withBlock.ApprxBrg = Constants.vbNullString;
-                withBlock.hsIEFormat = Constants.vbNullString;
+                withBlock.HEType = string.Empty;
+                withBlock.ApprxBrg = string.Empty;
+                withBlock.hsIEFormat = string.Empty;
             }
 
             return;

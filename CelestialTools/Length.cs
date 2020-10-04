@@ -16,7 +16,7 @@ namespace CelestialTools
         private double LatIn, LatInRad, Pi;
         private string fnumeral;
         private bool FormLengthLoaded = false;
-        private string FileTextLine = Constants.vbNullString;
+        private string FileTextLine = string.Empty;
         private string g_tab = "\t";
 
         private void FormLength_Load(object sender, EventArgs e)

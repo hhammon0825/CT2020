@@ -113,7 +113,7 @@ namespace CelestialTools
         private string PlotLatNS;
         private double PlotLong;
         private string PlotLongEW;
-        private string PlotDRTime = Constants.vbNullString;
+        private string PlotDRTime = string.Empty;
         private double PlotEPLat;
         private string PlotEPLatNS;
         private double PlotEPLong;
@@ -1203,7 +1203,7 @@ namespace CelestialTools
         {
             // this subroutine is required because issuing a raw SendMsgBx call also trigger a Paint event for graphic box on form which cannot be handled properly in error conditions
             IssuingSendMsgBx = true;
-            string HdrStr = Constants.vbNullString;
+            string HdrStr = string.Empty;
             // HdrStr = IconType.ToString
             if (IconType == MessageBoxIcon.Error)
             {

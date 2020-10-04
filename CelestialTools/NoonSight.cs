@@ -226,7 +226,7 @@ namespace CelestialTools
 
         private void DisplayLongitudeByDTInput()
         {
-            LongitudeCalcTxtBx.Text = Constants.vbNullString;
+            LongitudeCalcTxtBx.Text = string.Empty;
             LongitudeCalcTxtBx.AppendText("Longitude from observed ZT of LAN " + VD.ToString("0") + '°' + VM.ToString("00.0") + "'" + EW);
         }
 
@@ -5210,7 +5210,7 @@ namespace CelestialTools
             int EqtMonth = SaveDate.Month;
             var EqTTemp = new DateTime(EqtYear, 1, 1, 11, 59, 0);
             int EqtLimit = 365;
-            string DegStr = Conversions.ToString('°');
+            string DegStr = Convert.ToString('°');
             double TmpLat = Convert.ToDouble(txtDRLDeg.Text) + Convert.ToDouble(txtDRLMin.Text) / 60d;
             string LatStr = TmpLat.ToString("00.00000") + cboDRL.Text.ToString().Trim();
             if ((cboDRL.Text.ToString().Trim() ?? "") == (CommonGlobals.g_LatS ?? ""))
@@ -5280,7 +5280,7 @@ namespace CelestialTools
         //    var EqTTemp = new DateTime(SaveDate.Year, SaveDate.Month, SaveDate.Day, ZTofLANHours, ZTofLANMinutes, ZTofLANSeconds);
         //    EqTTemp = EqTTemp.AddHours(-3);
         //    int EqtLimit = 26;
-        //    string DegStr = Conversions.ToString('°');
+        //    string DegStr = Convert.ToString('°');
         //    double TmpLat = Convert.ToDouble(txtDRLDeg.Text) + Convert.ToDouble(txtDRLMin.Text) / 60d;
         //    string LatStr = TmpLat.ToString("00.00000") + cboDRL.Text.ToString().Trim();
         //    if ((cboDRL.Text.ToString().Trim() ?? "") == (CommonGlobals.g_LatS ?? ""))
